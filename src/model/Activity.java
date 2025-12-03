@@ -4,10 +4,10 @@ import java.util.UUID;
 
 public abstract class Activity
 {
-  protected final String ID;
-  protected String title = "";
-  protected String description = "";
-  protected int points = 0;
+  private final String ID;
+  private String title = "";
+  private String description = "";
+  private int points = 0;
 
   public Activity(String title, String description, int points)
   {
@@ -20,6 +20,11 @@ public abstract class Activity
   public int getPoints()
   {
     return points;
+  }
+
+  public String getID()
+  {
+    return ID;
   }
 
   public void addPoints(int pointsToAdd)

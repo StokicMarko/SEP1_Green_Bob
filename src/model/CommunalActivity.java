@@ -20,7 +20,7 @@ public class CommunalActivity extends Activity
       isPointAssign = true;
       for (int i = 0; i < participants.size(); i++)
       {
-        participants.get(i).addPoints(points);
+        participants.get(i).addPoints(getPoints());
       }
     }
   }
