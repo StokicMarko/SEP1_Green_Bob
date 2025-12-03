@@ -1,8 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class ResidentList
+public class ResidentList implements Serializable
 {
   private ArrayList<Resident> residents = new ArrayList<Resident>();
 

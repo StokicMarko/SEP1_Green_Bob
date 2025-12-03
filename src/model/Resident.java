@@ -1,8 +1,9 @@
 package model;
 
 import java.util.UUID;
+import java.io.Serializable;
 
-public class Resident
+public class Resident implements Serializable
 {
   private final String ID;
   private String name = "";

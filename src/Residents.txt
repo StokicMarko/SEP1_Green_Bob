@@ -1,0 +1,10 @@
+1201,Mike,Tyson,0,Avenue Street
+1202,David,Johnson,0,45 Maple Lane
+1203,Sarah,Williams,0,88 Oak Drive
+1204,James,Brown,0,101 Elm Street
+1205,Emily,Davis,0,50 Willow Road
+1206,Michael,Garcia,0,22 Pine Street
+1207,Jessica,Miller,0,75 Birch Avenue
+1208,Christopher,Wilson,0,14 Poplar Court
+1209,Ashley,Moore,0,33 Cedar Blvd
+1210,Daniel,Taylor,0,60 Redwood Way
