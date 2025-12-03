@@ -70,4 +70,7 @@ public class Resident
     this.address = address;
   }
 
+  public String getID() {
+    return ID;
+  }
 }
