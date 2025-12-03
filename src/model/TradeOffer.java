@@ -2,7 +2,6 @@ package model;
 
 import myEnum.OfferStatus;
 import myEnum.OfferType;
-
 import java.util.UUID;
 
 public class TradeOffer
