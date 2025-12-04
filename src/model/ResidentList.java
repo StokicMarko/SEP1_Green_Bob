@@ -22,7 +22,7 @@ public class ResidentList implements Serializable
     return residents;
   }
 
-  public Resident findByID(String id)
+  public Resident findByID(int id)
   {
     return residents.stream()
         .filter(resident -> resident.getID().equals(id))

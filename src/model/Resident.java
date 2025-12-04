@@ -5,16 +5,16 @@ import java.io.Serializable;
 
 public class Resident implements Serializable
 {
-  private final String ID;
+  private  String ID;
   private String name = "";
   private  String lastname = "";
   private int personalPoints = 0;
   private String address ="";
 
-  public Resident(String name, String lastname, int personalPoints,
+  public Resident(String ID,String name, String lastname, int personalPoints,
       String address)
   {
-    ID = UUID.randomUUID().toString();
+    this.ID=ID;
     this.name = name;
     this.lastname = lastname;
     this.personalPoints = personalPoints;
@@ -41,7 +41,7 @@ public class Resident implements Serializable
     this.lastname = lastname;
   }
 
-  public int getPersonalPoints()
+  public double getPersonalPoints()
   {
     return personalPoints;
   }
