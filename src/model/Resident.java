@@ -3,7 +3,7 @@ package model;
 import java.util.UUID;
 import java.io.Serializable;
 
-public class Resident implements Serializable
+public class Resident
 {
   private  String ID;
   private String name = "";
@@ -73,5 +73,12 @@ public class Resident implements Serializable
 
   public String getID() {
     return ID;
+  }
+
+  @Override public String toString()
+  {
+    return "Resident{" + "ID='" + ID + '\'' + ", name='" + name + '\''
+        + ", lastname='" + lastname + '\'' + ", personalPoints="
+        + personalPoints + ", address='" + address + '\'' + '}';
   }
 }
