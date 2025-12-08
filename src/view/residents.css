@@ -1,0 +1,17 @@
+.table-view {
+    -fx-border-color: #cccccc;
+}
+
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-padding: 7px 14px;
+}
+
+.button:hover {
+    -fx-background-color: #45a049;
+}
+
+.text-field {
+    -fx-pref-width: 150;
+}

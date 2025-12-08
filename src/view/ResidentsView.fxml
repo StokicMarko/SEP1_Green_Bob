@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.ResidentsController"
+            fx:id="residentsView"
+            stylesheets="@residents.css">
+
+    <center>
+        <TableView fx:id="tableResidents" prefHeight="500">
+            <columns>
+                <TableColumn fx:id="colID"        text="ID"        prefWidth="240" />
+                <TableColumn fx:id="colName"      text="Name"      prefWidth="150" />
+                <TableColumn fx:id="colLastname"  text="Lastname"  prefWidth="150" />
+                <TableColumn fx:id="colPoints"    text="Points"    prefWidth="80" />
+                <TableColumn fx:id="colAddress"   text="Address"   prefWidth="200" />
+            </columns>
+        </TableView>
+    </center>
+
+    <bottom>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+
+            <HBox spacing="10">
+
+                <VBox spacing="5">
+                    <Label text="Name"/>
+                    <TextField fx:id="txtName"/>
+                </VBox>
+
+                <VBox spacing="5">
+                    <Label text="Lastname"/>
+                    <TextField fx:id="txtLastname"/>
+                </VBox>
+
+                <VBox spacing="5">
+                    <Label text="Points"/>
+                    <TextField fx:id="txtPoints"/>
+                </VBox>
+
+                <VBox spacing="5">
+                    <Label text="Address"/>
+                    <TextField fx:id="txtAddress"/>
+                </VBox>
+
+            </HBox>
+
+            <HBox spacing="10">
+                <Button text="New Resident" fx:id="btnNew"/>
+                <Button text="Save Changes" fx:id="btnSave"/>
+                <Button text="Reload JSON" fx:id="btnReload"/>
+            </HBox>
+
+        </VBox>
+    </bottom>
+
+
+</BorderPane>

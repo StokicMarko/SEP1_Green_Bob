@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.MainViewController"
+            prefWidth="800" prefHeight="600">
+
+    <center>
+        <TabPane fx:id="mainTabs">
+
+            <Tab text="Residents" closable="false">
+                <fx:include source="ResidentsView.fxml" fx:id="residentsView"/>
+            </Tab>
+
+            <!-- Add more tabs later -->
+            <Tab text="Other">
+                <Label text="More sections soon..."/>
+            </Tab>
+
+        </TabPane>
+    </center>
+
+</BorderPane>
