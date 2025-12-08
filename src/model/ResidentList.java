@@ -22,8 +22,11 @@ public class ResidentList
     return residents;
   }
 
-  public Resident findByID(int id)
-  {
+  public void setAll(ArrayList<Resident> list) {
+    residents = list;
+  }
+
+  public Resident findByID(String id) {
     return residents.stream()
         .filter(resident -> resident.getID().equals(id))
         .findFirst()

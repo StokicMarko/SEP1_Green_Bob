@@ -8,9 +8,30 @@
   },
   {
     "ID": "ee9cac89-383e-475f-8979-80ba47b697bc",
-    "name": "Test",
-    "lastname": "Test",
-    "personalPoints": 999,
-    "address": "Test"
+    "name": "Angel",
+    "lastname": "Rod",
+    "personalPoints": 100,
+    "address": "Pana"
+  },
+  {
+    "ID": "1a4fb47b-c8d0-4596-a76b-78182923a46a",
+    "name": "Alice",
+    "lastname": "Blue",
+    "personalPoints": 200,
+    "address": "Østerbrogade 45"
+  },
+  {
+    "ID": "d7fd46bb-fe9e-441d-972b-07d41dc8d990",
+    "name": "Jonh",
+    "lastname": "Doe",
+    "personalPoints": 67,
+    "address": "Fantasyland"
+  },
+  {
+    "ID": "985829ab-bb18-463e-93a3-e34429f2e553",
+    "name": "Jonh",
+    "lastname": "Double",
+    "personalPoints": 67,
+    "address": "Italy"
   }
 ]

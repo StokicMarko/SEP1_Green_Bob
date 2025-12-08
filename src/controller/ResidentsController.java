@@ -1,16 +1,13 @@
 package controller;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import logic.TownManager;
 import model.Resident;
-import utils.JsonFileHandler;
 
-import java.util.ArrayList;
-import java.util.List;
+public class ResidentsController {
 
-public class ResidentsController
-{
   @FXML private TableView<Resident> tableResidents;
   @FXML private TableColumn<Resident, String> colID;
   @FXML private TableColumn<Resident, String> colName;
@@ -28,105 +25,92 @@ public class ResidentsController
   @FXML private Button btnReload;
 
   private TownManager townManager;
-  private List<Resident> residentData = new ArrayList<>();
-
 
   @FXML
-  public void init(TownManager townManager)
-  {
+  public void init(TownManager townManager) {
     this.townManager = townManager;
 
     setupTable();
-    loadResidents();
+    refreshTable();
 
     tableResidents.setOnMouseClicked(e -> {
-      Resident r = tableResidents.getSelectionModel().getSelectedItem();
-      showResidentDetails(r);
+      Resident selectedResident = tableResidents.getSelectionModel().getSelectedItem();
+      showResident(selectedResident);
     });
 
-
-    btnSave.setOnAction(e -> saveResidentChanges());
-    btnNew.setOnAction(e -> createNewResident());
-    btnReload.setOnAction(e -> loadResidents());
+    btnSave.setOnAction(e -> onSave());
+    btnNew.setOnAction(e -> onNewResident());
+    btnReload.setOnAction(e -> onReload());
   }
 
-  private void setupTable()
-  {
-    colID.setCellValueFactory(cell ->
-        new javafx.beans.property.SimpleStringProperty(cell.getValue().getID()));
-
-    colName.setCellValueFactory(cell ->
-        new javafx.beans.property.SimpleStringProperty(cell.getValue().getName()));
-
-    colLastname.setCellValueFactory(cell ->
-        new javafx.beans.property.SimpleStringProperty(cell.getValue().getLastname()));
-
-    colPoints.setCellValueFactory(cell ->
-        new javafx.beans.property.SimpleIntegerProperty((int) cell.getValue().getPersonalPoints()));
-
-    colAddress.setCellValueFactory(cell ->
-        new javafx.beans.property.SimpleStringProperty(cell.getValue().getAddress()));
+  private void setupTable() {
+    colID.setCellValueFactory(c ->
+        new javafx.beans.property.SimpleStringProperty(c.getValue().getID()));
+    colName.setCellValueFactory(c ->
+        new javafx.beans.property.SimpleStringProperty(c.getValue().getName()));
+    colLastname.setCellValueFactory(c ->
+        new javafx.beans.property.SimpleStringProperty(c.getValue().getLastname()));
+    colPoints.setCellValueFactory(c ->
+        new javafx.beans.property.SimpleIntegerProperty((int)c.getValue().getPersonalPoints()));
+    colAddress.setCellValueFactory(c ->
+        new javafx.beans.property.SimpleStringProperty(c.getValue().getAddress()));
   }
 
   private void refreshTable() {
-    tableResidents.getItems().setAll(residentData);
+    tableResidents.getItems().setAll(townManager.getResidents());
   }
 
-
-  private void loadResidents()
-  {
-    residentData = townManager.getResidentsFromFile();
-    refreshTable();
-  }
-
-  private void showResidentDetails(Resident resident)
-  {
+  private void showResident(Resident resident) {
     if (resident == null) return;
 
     txtName.setText(resident.getName());
     txtLastname.setText(resident.getLastname());
-    txtPoints.setText(Integer.toString((int) resident.getPersonalPoints()));
+    txtPoints.setText("" + (int) resident.getPersonalPoints());
     txtAddress.setText(resident.getAddress());
   }
 
-  private void saveResidentChanges()
-  {
-    Resident selectedResident = tableResidents.getSelectionModel().getSelectedItem();
-    if (selectedResident == null) return;
+  @FXML
+  private void onSave() {
+    Resident selected = tableResidents.getSelectionModel().getSelectedItem();
+    if (selected == null) return;
 
-    selectedResident.setName(txtName.getText());
-    selectedResident.setLastname(txtLastname.getText());
-    selectedResident.setPersonalPoints(Integer.parseInt(txtPoints.getText()));
-    selectedResident.setAddress(txtAddress.getText());
-
-    saveToFile();
-    loadResidents();
-  }
-
-  private void createNewResident()
-  {
-    Resident r = new Resident(
-        java.util.UUID.randomUUID().toString(),
+    townManager.updateResident(
+        selected,
         txtName.getText(),
         txtLastname.getText(),
         Integer.parseInt(txtPoints.getText()),
         txtAddress.getText()
     );
 
-    residentData.add(r);
-    saveToFile();
+    refreshTable();
+    clearForm();
+  }
+
+  @FXML
+  private void onNewResident() {
+    townManager.createResident(
+        txtName.getText(),
+        txtLastname.getText(),
+        Integer.parseInt(txtPoints.getText()),
+        txtAddress.getText()
+    );
+
+    refreshTable();
+    clearForm();
+  }
+
+  @FXML
+  private void onReload() {
+    townManager.loadResidents();
     refreshTable();
   }
 
-  private void saveToFile()
-  {
-    try
-    {
-      JsonFileHandler.saveResidentsToJson("residents.json", new ArrayList<>(residentData));
-    }
-    catch (Exception e)
-    {
-      e.printStackTrace();
-    }
+  private void clearForm() {
+    txtName.clear();
+    txtLastname.clear();
+    txtPoints.clear();
+    txtAddress.clear();
+    tableResidents.getSelectionModel().clearSelection();
   }
+
 }
