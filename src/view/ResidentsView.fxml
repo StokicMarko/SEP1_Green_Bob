@@ -56,6 +56,7 @@
                 <Button text="New Resident" fx:id="btnNew"/>
                 <Button text="Save Changes" fx:id="btnSave"/>
                 <Button text="Reload JSON" fx:id="btnReload"/>
+                <Button text="Delete" fx:id="btnDelete"/>
             </HBox>
 
         </VBox>

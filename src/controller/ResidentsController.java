@@ -23,6 +23,7 @@ public class ResidentsController {
   @FXML private Button btnSave;
   @FXML private Button btnNew;
   @FXML private Button btnReload;
+  @FXML private Button btnDelete;
 
   private TownManager townManager;
 
@@ -41,6 +42,7 @@ public class ResidentsController {
     btnSave.setOnAction(e -> onSave());
     btnNew.setOnAction(e -> onNewResident());
     btnReload.setOnAction(e -> onReload());
+    btnDelete.setOnAction(e -> onDelete());
   }
 
   private void setupTable() {
@@ -113,4 +115,21 @@ public class ResidentsController {
     tableResidents.getSelectionModel().clearSelection();
   }
 
+  private void onDelete()
+  {
+    Resident selectedResident = tableResidents.getSelectionModel().getSelectedItem();
+
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Delete Resident");
+    alert.setHeaderText("Are you sure you want to delete this resident?");
+    alert.setContentText(selectedResident.getName() + " " + selectedResident.getLastname());
+
+    alert.showAndWait().ifPresent(response -> {
+      if (response == ButtonType.OK) {
+        townManager.removeResident(selectedResident);
+        refreshTable();
+        clearForm();
+      }
+    });
+  }
 }

@@ -1,12 +1,5 @@
 [
   {
-    "ID": "abc2",
-    "name": "Bob",
-    "lastname": "White",
-    "personalPoints": 150,
-    "address": "NoExist"
-  },
-  {
     "ID": "ee9cac89-383e-475f-8979-80ba47b697bc",
     "name": "Angel",
     "lastname": "Rod",

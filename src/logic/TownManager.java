@@ -50,7 +50,8 @@ public class TownManager
     return resident;
   }
 
-  public void updateResident(Resident resident, String name, String lastname, int points, String address) {
+  public void updateResident(Resident resident, String name, String lastname, int points, String address)
+  {
     resident.setName(name);
     resident.setLastname(lastname);
     resident.setPersonalPoints(points);
@@ -67,5 +68,11 @@ public class TownManager
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  public void removeResident(Resident residentToRemove)
+  {
+    residentList.remove(residentToRemove);
+    saveToFile();
   }
 }
