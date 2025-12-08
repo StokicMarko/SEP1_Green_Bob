@@ -26,6 +26,16 @@ public class ResidentList
     residents = list;
   }
 
+  public void updateResidentByID(String id, Resident newData) {
+    Resident existing = findByID(id);
+    if (existing == null) return;
+
+    existing.setName(newData.getName());
+    existing.setLastname(newData.getLastname());
+    existing.setPersonalPoints(newData.getPersonalPoints());
+    existing.setAddress(newData.getAddress());
+  }
+
   public Resident findByID(String id) {
     return residents.stream()
         .filter(resident -> resident.getID().equals(id))

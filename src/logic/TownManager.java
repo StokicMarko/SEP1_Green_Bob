@@ -18,54 +18,60 @@ public class TownManager
 
   private static final String RESIDENTS_JSON = "residents.json";
 
-
-  public TownManager() {
+  public TownManager()
+  {
     loadResidents();
   }
 
-  public void loadResidents() {
-    try {
-      ArrayList<Resident> loaded = JsonFileHandler.readResidentsFromJson(RESIDENTS_JSON);
+  public void loadResidents()
+  {
+    try
+    {
+      ArrayList<Resident> loaded = JsonFileHandler.readResidentsFromJson(
+          RESIDENTS_JSON);
       residentList.setAll(loaded);
-    } catch (Exception e) {
+    }
+    catch (Exception e)
+    {
       residentList.setAll(new ArrayList<>());
     }
   }
 
-  public ArrayList<Resident> getResidents() {
+  public ArrayList<Resident> getResidents()
+  {
     return residentList.getAllResidents();
   }
 
-  public Resident createResident(String name, String lastname, int points, String address) {
-    Resident resident = new Resident(
-        UUID.randomUUID().toString(),
-        name,
-        lastname,
-        points,
-        address
+  public void createResident(String name, String lastname, int points, String address)
+  {
+    residentList.add(
+        new Resident(
+            UUID.randomUUID().toString(),
+            name,
+            lastname,
+            points,
+            address
+        )
     );
 
-    residentList.add(resident);
     saveToFile();
-    return resident;
   }
 
-  public void updateResident(Resident resident, String name, String lastname, int points, String address)
+  public void updateResident(String id, Resident newData)
   {
-    resident.setName(name);
-    resident.setLastname(lastname);
-    resident.setPersonalPoints(points);
-    resident.setAddress(address);
+    residentList.updateResidentByID(id, newData);
     saveToFile();
   }
 
-  private void saveToFile() {
-    try {
-      JsonFileHandler.saveResidentsToJson(
-          RESIDENTS_JSON,
-          residentList.getAllResidents()
-      );
-    } catch (Exception e) {
+  private void saveToFile()
+  {
+    try
+    {
+      JsonFileHandler.saveResidentsToJson(RESIDENTS_JSON,
+          residentList.getAllResidents());
+    }
+    catch (Exception e)
+    {
       e.printStackTrace();
     }
   }

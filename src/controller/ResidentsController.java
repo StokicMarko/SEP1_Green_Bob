@@ -77,11 +77,14 @@ public class ResidentsController {
     if (selected == null) return;
 
     townManager.updateResident(
-        selected,
-        txtName.getText(),
-        txtLastname.getText(),
-        Integer.parseInt(txtPoints.getText()),
-        txtAddress.getText()
+        selected.getID(),
+        new Resident(
+            "",
+            txtName.getText(),
+            txtLastname.getText(),
+            Integer.parseInt(txtPoints.getText()),
+            txtAddress.getText()
+        )
     );
 
     refreshTable();

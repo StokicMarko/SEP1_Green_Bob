@@ -41,7 +41,7 @@ public class Resident
     this.lastname = lastname;
   }
 
-  public double getPersonalPoints()
+  public int getPersonalPoints()
   {
     return personalPoints;
   }
