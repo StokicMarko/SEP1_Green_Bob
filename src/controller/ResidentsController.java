@@ -8,7 +8,6 @@ import model.Resident;
 public class ResidentsController {
 
   @FXML private TableView<Resident> tableResidents;
-  @FXML private TableColumn<Resident, String> colID;
   @FXML private TableColumn<Resident, String> colName;
   @FXML private TableColumn<Resident, String> colLastname;
   @FXML private TableColumn<Resident, Number> colPoints;
@@ -21,8 +20,9 @@ public class ResidentsController {
 
   @FXML private Button btnSave;
   @FXML private Button btnNew;
-  @FXML private Button btnReload;
   @FXML private Button btnDelete;
+  @FXML private Button btnClear;
+
 
   private TownManager townManager;
 
@@ -33,20 +33,28 @@ public class ResidentsController {
     setupTable();
     refreshTable();
 
-    tableResidents.setOnMouseClicked(e -> {
-      Resident selectedResident = tableResidents.getSelectionModel().getSelectedItem();
-      showResident(selectedResident);
+    btnSave.setDisable(true);
+    btnDelete.setDisable(true);
+
+    tableResidents.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
+      boolean hasSelection = newSel != null;
+
+      btnSave.setDisable(!hasSelection);
+      btnDelete.setDisable(!hasSelection);
+
+      showResident(newSel);
     });
+
+    tableResidents.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     btnSave.setOnAction(e -> onSave());
     btnNew.setOnAction(e -> onNewResident());
-    btnReload.setOnAction(e -> onReload());
     btnDelete.setOnAction(e -> onDelete());
+    btnClear.setOnAction(e -> onClearSelection());
+
   }
 
   private void setupTable() {
-    colID.setCellValueFactory(c ->
-        new javafx.beans.property.SimpleStringProperty(c.getValue().getID()));
     colName.setCellValueFactory(c ->
         new javafx.beans.property.SimpleStringProperty(c.getValue().getName()));
     colLastname.setCellValueFactory(c ->
@@ -133,4 +141,11 @@ public class ResidentsController {
       }
     });
   }
+
+  @FXML
+  private void onClearSelection() {
+    tableResidents.getSelectionModel().clearSelection();
+    clearForm();
+  }
+
 }

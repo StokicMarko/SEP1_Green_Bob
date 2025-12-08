@@ -1,12 +1,5 @@
 [
   {
-    "ID": "ee9cac89-383e-475f-8979-80ba47b697bc",
-    "name": "Angel",
-    "lastname": "Angel",
-    "personalPoints": 99,
-    "address": "Pana"
-  },
-  {
     "ID": "1a4fb47b-c8d0-4596-a76b-78182923a46a",
     "name": "Alice",
     "lastname": "Blue",
@@ -26,5 +19,19 @@
     "lastname": "Double",
     "personalPoints": 12,
     "address": "Italy"
+  },
+  {
+    "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
+    "name": "Kika",
+    "lastname": "Kika",
+    "personalPoints": 1200,
+    "address": "Kamjact"
+  },
+  {
+    "ID": "0bef1f10-e8ba-4435-aa78-2f3a7e92babf",
+    "name": "Alice",
+    "lastname": "Blue",
+    "personalPoints": 200,
+    "address": "Østerbrogade 45"
   }
 ]
