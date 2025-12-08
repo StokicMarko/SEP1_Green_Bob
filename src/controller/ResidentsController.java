@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import logic.TownManager;
@@ -124,12 +123,11 @@ public class ResidentsController {
 
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Delete Resident");
-    alert.setHeaderText("Are you sure you want to delete this resident?");
-    alert.setContentText(selectedResident.getName() + " " + selectedResident.getLastname());
+    alert.setHeaderText("Are you sure you want to delete " + selectedResident.getName() + " " + selectedResident.getLastname() + "?");
 
     alert.showAndWait().ifPresent(response -> {
       if (response == ButtonType.OK) {
-        townManager.removeResident(selectedResident);
+        townManager.removeResidentByID(selectedResident.getID());
         refreshTable();
         clearForm();
       }

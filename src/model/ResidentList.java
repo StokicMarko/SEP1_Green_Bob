@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.io.Serializable;
 
 public class ResidentList
 {
@@ -12,9 +11,12 @@ public class ResidentList
     residents.add(resident);
   }
 
-  public void remove(Resident resident)
+  public void removeByID(String id)
   {
-    residents.remove(resident);
+    Resident toRemove = findByID(id);
+    if (toRemove != null) {
+      residents.remove(toRemove);
+    }
   }
 
   public ArrayList<Resident> getAllResidents()
@@ -26,7 +28,7 @@ public class ResidentList
     residents = list;
   }
 
-  public void updateResidentByID(String id, Resident newData) {
+  public void updateByID(String id, Resident newData) {
     Resident existing = findByID(id);
     if (existing == null) return;
 

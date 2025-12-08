@@ -12,11 +12,16 @@ import java.util.UUID;
 public class TownManager
 {
   private int greenPointsPool = 0;
-  private ActivityList activityList = new ActivityList();
-  private TradeOfferList tradeOfferList = new TradeOfferList();
+
   private ResidentList residentList = new ResidentList();
+  private TradeOfferList tradeOfferList = new TradeOfferList();
+  private ActivityList greenActivityList = new ActivityList();
+  private ActivityList communalActivityList = new ActivityList();
 
   private static final String RESIDENTS_JSON = "residents.json";
+  private static final String TRADE_OFFER_JSON = "tradeOffer.json";
+  private static final String GREEN_ACTIVITIES_JSON = "greenActivities.json";
+  private static final String COMMUNAL_ACTIVITIES_JSON = "communalActivities.json";
 
   public TownManager()
   {
@@ -54,16 +59,16 @@ public class TownManager
         )
     );
 
-    saveToFile();
+    saveResidentsToFile();
   }
 
   public void updateResident(String id, Resident newData)
   {
-    residentList.updateResidentByID(id, newData);
-    saveToFile();
+    residentList.updateByID(id, newData);
+    saveResidentsToFile();
   }
 
-  private void saveToFile()
+  private void saveResidentsToFile()
   {
     try
     {
@@ -76,9 +81,9 @@ public class TownManager
     }
   }
 
-  public void removeResident(Resident residentToRemove)
+  public void removeResidentByID(String id)
   {
-    residentList.remove(residentToRemove);
-    saveToFile();
+    residentList.removeByID(id);
+    saveResidentsToFile();
   }
 }
