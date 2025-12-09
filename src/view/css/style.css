@@ -1,0 +1,50 @@
+
+.top-bar {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 12;
+    -fx-padding: 10 15;
+    -fx-spacing: 10;
+}
+
+
+.top-bar-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.table-container {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 12;
+    -fx-padding: 5;
+}
+
+.editBox {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 12;
+    -fx-padding: 15;
+    -fx-spacing: 10;
+}
+
+.editBox Label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+/* TEXTFIELDS */
+.editBox TextField {
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #dcded5;
+    -fx-padding: 8 10;
+    -fx-font-size: 13px;
+}
+
+.editBox TextField:hover {
+    -fx-border-color: #8aa883;
+}
+
+.editBox TextField:focused {
+    -fx-border-color: #8aa883;
+}

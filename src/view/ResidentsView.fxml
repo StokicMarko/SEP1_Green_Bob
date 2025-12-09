@@ -8,7 +8,8 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controller.ResidentsController"
             fx:id="residentsView"
-            stylesheets="@residents.css">
+            stylesheets="style.css residents.css"
+>
 
     <top>
         <HBox styleClass="top-bar" spacing="10" alignment="CENTER_LEFT">

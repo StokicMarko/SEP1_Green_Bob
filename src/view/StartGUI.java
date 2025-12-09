@@ -13,6 +13,12 @@ public class StartGUI extends Application
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("MainView.fxml"));
     Scene scene = new Scene(loader.load());
+
+    scene.getStylesheets().add(getClass().getResource("../view/css/style.css").toExternalForm());
+    scene.getStylesheets().add(getClass().getResource("../view/css/residents.css").toExternalForm());
+    scene.getStylesheets().add(getClass().getResource("../view/css/table.css").toExternalForm());
+    scene.getStylesheets().add(getClass().getResource("../view/css/button.css").toExternalForm());
+
     window.setScene(scene);
     window.show();
   }

@@ -1,0 +1,31 @@
+/* BUTTON STYLING */
+.button {
+    -fx-background-color: #8aa883;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+}
+
+.button:hover {
+    -fx-background-color: #7a9773;
+}
+
+.button:pressed {
+    -fx-background-color: #6b8765;
+}
+
+#btnDelete {
+    -fx-background-color: #e74c3c; /* red */
+    -fx-text-fill: white;
+}
+
+#btnDelete:hover {
+    -fx-background-color: #c0392b;
+}
+
+#btnDelete:pressed {
+    -fx-background-color: #a93226;
+}
