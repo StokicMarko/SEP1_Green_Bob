@@ -8,7 +8,7 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controller.ResidentsController"
             fx:id="residentsView"
-            stylesheets="style.css residents.css"
+            stylesheets="@css/residents.css"
 >
 
     <top>

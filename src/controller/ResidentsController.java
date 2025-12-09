@@ -36,7 +36,8 @@ public class ResidentsController {
     btnSave.setDisable(true);
     btnDelete.setDisable(true);
 
-    tableResidents.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
+    tableResidents.getSelectionModel().selectedItemProperty()
+        .addListener((obs, oldSel, newSel) -> {
       boolean hasSelection = newSel != null;
 
       btnSave.setDisable(!hasSelection);

@@ -15,7 +15,6 @@ public class StartGUI extends Application
     Scene scene = new Scene(loader.load());
 
     scene.getStylesheets().add(getClass().getResource("../view/css/style.css").toExternalForm());
-    scene.getStylesheets().add(getClass().getResource("../view/css/residents.css").toExternalForm());
     scene.getStylesheets().add(getClass().getResource("../view/css/table.css").toExternalForm());
     scene.getStylesheets().add(getClass().getResource("../view/css/button.css").toExternalForm());
 
