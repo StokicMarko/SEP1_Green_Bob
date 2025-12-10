@@ -3,6 +3,7 @@ package logic;
 import model.ActivityList;
 import model.Resident;
 import model.ResidentList;
+import model.TradeOffer;
 import model.TradeOfferList;
 import utils.JsonFileHandler;
 

@@ -3,6 +3,8 @@ package utils;
 
 import model.Resident;
 import model.ResidentList;
+import model.TradeOffer;
+import model.TradeOfferList;
 import parser.ParserException;
 import parser.XmlJsonParser;
 
@@ -24,5 +26,16 @@ public class JsonFileHandler
   {
     Resident[] residentArray = parser.fromJsonFile(fileName, Resident[].class);
     return new ArrayList<>(Arrays.asList(residentArray));
+  }
+  public static void saveTradeOfferToJson(String filename, ArrayList<TradeOffer> tradeoffers)
+    throws ParserException
+  {
+    parser.toJsonFile(tradeoffers,filename);
+  }
+  public static ArrayList<TradeOffer> readTradeoffersFromJson(String filename)
+    throws ParserException
+  {
+    TradeOffer [] tradeofferArray= parser.fromJsonFile(filename,TradeOffer[].class);
+    return new ArrayList<>(Arrays.asList(tradeofferArray));
   }
 }

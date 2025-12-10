@@ -1,6 +1,7 @@
 package model;
+import java.lang.Comparable;
 
-public class Date
+public class Date implements Comparable<Date>
 {
   private int day;
   private int month;
@@ -11,6 +12,15 @@ public class Date
     this.day = day;
     this.month = month;
     this.year = year;
+  }
+  public int compareTo(Date other){
+    if(this.year!=other.year){
+      return this.year-other.year;
+    }
+    else if(this.day!= other.day){
+      return this.day-other.day;
+    }
+    return this.month-other.month;
   }
 
   @Override public String toString()

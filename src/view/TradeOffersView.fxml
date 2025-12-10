@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.TradeOfferController"
+            fx:id="tradeoffersView"
+
+>
+
+    <top>
+        <HBox styleClass="top-bar" spacing="10" alignment="CENTER_LEFT">
+            <BorderPane.margin>
+                <Insets bottom="15"/>
+            </BorderPane.margin>
+
+            <Label text="Trade offers" styleClass="top-bar-title"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button text="Delete" fx:id="btnDelete"/>
+            <Button text="Clear" fx:id="btnClear"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox styleClass="table-container" spacing="0">
+            <BorderPane.margin>
+                <Insets right="15"/>
+            </BorderPane.margin>
+
+            <TableView fx:id="tableResidents" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colName"      text="Name"       />
+                    <TableColumn fx:id="colLastname"  text="Lastname"   />
+                    <TableColumn fx:id="colPoints"    text="Points"     />
+                    <TableColumn fx:id="colAddress"   text="Address"    />
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <right>
+        <VBox spacing="15" styleClass="editBox" prefWidth="260">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+
+            <Label text="Resident Editor"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+            <VBox spacing="5">
+                <Label text="Name"/>
+                <TextField fx:id="txtName"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Lastname"/>
+                <TextField fx:id="txtLastname"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Points"/>
+                <TextField fx:id="txtPoints"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Address"/>
+                <TextField fx:id="txtAddress"/>
+            </VBox>
+
+            <!-- BUTTONS AT BOTTOM -->
+            <HBox spacing="10">
+                <Button text="Save" fx:id="btnSave" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                <Button text="New" fx:id="btnNew" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+        </VBox>
+    </right>
+
+</BorderPane>
