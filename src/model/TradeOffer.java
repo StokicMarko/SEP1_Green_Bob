@@ -15,10 +15,10 @@ public class TradeOffer
   private OfferStatus status = OfferStatus.AVAILABLE;
   private Resident offerBy;
   private Resident assignedTo;
-  private Date date;
+  private Date createDate;
 
   public TradeOffer(String title, String description, OfferType type,
-      int pointCost, Resident offerBy,Date date)
+      int pointCost, Resident offerBy,Date createDate)
   {
     if (offerBy.getPersonalPoints() < pointCost) {
       throw new IllegalArgumentException(
@@ -32,7 +32,7 @@ public class TradeOffer
     this.type = type;
     this.pointCost = pointCost;
     this.offerBy = offerBy;
-    this.date= date;
+    this.createDate = createDate;
   }
 
   public String getID() {
@@ -88,12 +88,15 @@ public class TradeOffer
     offerBy.addPoints(pointCost);
     status = OfferStatus.CANCELLED;
   }
-  public void setDate(Date date){
-    this.date=date;
+
+  public void setCreateDate(Date createDate){
+    this.createDate = createDate;
 }
-  public Date getDate(){
-     return date;
+
+  public Date getCreateDate(){
+     return createDate;
   }
+
   public void setStatusToAvailable()
   {
     status = OfferStatus.AVAILABLE;
@@ -144,7 +147,7 @@ public class TradeOffer
         ", status=" + status +
         ", offerBy=" + (offerBy != null ? offerBy : "null") +
         ", assignedTo=" + (assignedTo != null ? assignedTo : "null") +
-        ", date=" + (date != null ? date : "null") +
+        ", date=" + (createDate != null ? createDate : "null") +
         '}';
   }
 

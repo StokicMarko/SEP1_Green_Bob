@@ -1,10 +1,9 @@
 package model;
-import javax.xml.crypto.dsig.TransformService;
 import java.util.ArrayList;
 import java.util.Comparator;
 
 import myEnum.OfferStatus;
-import myEnum.OfferType;
+
 public class TradeOfferList
 {
   private ArrayList<TradeOffer> tradeOffers = new ArrayList<>();
@@ -38,7 +37,7 @@ public class TradeOfferList
 
   public ArrayList<TradeOffer> getSortedByDate()
   {
-    tradeOffers.sort(Comparator.comparing(TradeOffer::getDate));
+    tradeOffers.sort(Comparator.comparing(TradeOffer::getCreateDate));
     return tradeOffers;
   }
 

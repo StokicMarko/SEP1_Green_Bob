@@ -8,13 +8,15 @@ public abstract class Activity
   private String title = "";
   private String description = "";
   private int points = 0;
+  private Date eventDate;
 
-  public Activity(String title, String description, int points)
+  public Activity(String title, String description, int points, Date eventDate)
   {
     ID = UUID.randomUUID().toString();
     this.title = title;
     this.description = description;
     this.points = points;
+    this.eventDate = eventDate;
   }
 
   public int getPoints()
@@ -55,5 +57,15 @@ public abstract class Activity
   public void setDescription(String description)
   {
     this.description = description;
+  }
+
+  public void setEventDate(Date eventDate)
+  {
+    this.eventDate = eventDate;
+  }
+
+  public Date getEventDate()
+  {
+    return eventDate;
   }
 }
