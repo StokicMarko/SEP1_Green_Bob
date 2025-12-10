@@ -87,7 +87,6 @@ public class ResidentsController {
     townManager.updateResident(
         selected.getID(),
         new Resident(
-            "",
             txtName.getText(),
             txtLastname.getText(),
             Integer.parseInt(txtPoints.getText()),

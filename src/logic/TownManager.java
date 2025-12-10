@@ -52,7 +52,6 @@ public class TownManager
   {
     residentList.add(
         new Resident(
-            UUID.randomUUID().toString(),
             name,
             lastname,
             points,

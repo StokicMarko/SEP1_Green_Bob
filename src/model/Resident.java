@@ -11,10 +11,10 @@ public class Resident
   private int personalPoints = 0;
   private String address ="";
 
-  public Resident(String ID,String name, String lastname, int personalPoints,
+  public Resident(String name, String lastname, int personalPoints,
       String address)
   {
-    this.ID=ID;
+    this.ID= UUID.randomUUID().toString();
     this.name = name;
     this.lastname = lastname;
     this.personalPoints = personalPoints;
