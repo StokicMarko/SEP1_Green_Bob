@@ -5,8 +5,8 @@ import java.util.UUID;
 public class GreenActivity extends Activity
 {
 
-  public GreenActivity(String title, String description, int points)
+  public GreenActivity(String title, String description, int points, Date eventDate)
   {
-    super(title, description, points);
+    super(title, description, points,eventDate);
   }
 }
