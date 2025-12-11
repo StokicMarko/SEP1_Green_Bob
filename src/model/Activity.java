@@ -19,6 +19,13 @@ public abstract class Activity
     this.eventDate = eventDate;
   }
 
+  public Activity(String title, String description, int points)
+  {
+    this.title=title;
+    this.description=description;
+    this.points=points;
+  }
+
   public int getPoints()
   {
     return points;
@@ -29,7 +36,7 @@ public abstract class Activity
     return ID;
   }
 
-  public void addPoints(int pointsToAdd)
+  public void addPoints(double pointsToAdd)
   {
     points += pointsToAdd;
   }
