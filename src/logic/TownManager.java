@@ -5,8 +5,11 @@ import model.Resident;
 import model.ResidentList;
 import model.TradeOffer;
 import model.TradeOfferList;
+import myEnum.OfferStatus;
+import parser.ParserException;
 import utils.JsonFileHandler;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -20,13 +23,14 @@ public class TownManager
   private ActivityList communalActivityList = new ActivityList();
 
   private static final String RESIDENTS_JSON = "residents.json";
-  private static final String TRADE_OFFER_JSON = "tradeOffer.json";
+  private static final String TRADE_OFFER_JSON = "tradeoffers.json";
   private static final String GREEN_ACTIVITIES_JSON = "greenActivities.json";
   private static final String COMMUNAL_ACTIVITIES_JSON = "communalActivities.json";
 
   public TownManager()
   {
     loadResidents();
+    loadTradeOffers();
   }
 
   public void loadResidents()
@@ -85,5 +89,65 @@ public class TownManager
   {
     residentList.removeByID(id);
     saveResidentsToFile();
+  }
+  public void loadTradeOffers(){
+    try{
+      ArrayList<TradeOffer> offer= JsonFileHandler.readTradeoffersFromJson("tradeoffers.json");
+      for(TradeOffer t:offer){
+        tradeOfferList.add(t);
+      }
+    }
+    catch(ParserException e){
+      System.out.println("Unable to read from json file");
+    }
+
+  }
+  private void saveTradeOfferToFile(){
+     try{
+       JsonFileHandler.saveTradeOfferToJson("tradeoffers.json",tradeOfferList.getTradeOffers());
+     }
+     catch(ParserException e){
+       System.out.println("Couldnot save to given file");
+     }
+  }
+  public ArrayList<TradeOffer> getTradeoffers(){
+    return tradeOfferList.getTradeOffers();
+  }
+  public void addTradeOffer(TradeOffer o){
+      tradeOfferList.add(o);
+      saveTradeOfferToFile();
+  }
+  public void removeTradeOffer(String id){
+     tradeOfferList.removeByID(id);
+     saveTradeOfferToFile();
+  }
+  public void changeTradeOfferStatus(String id, OfferStatus status,Resident r){
+     TradeOffer t= tradeOfferList.findByID(id);
+     if(t==null){
+       System.out.println(" Trade offer with given id could not be found ");
+     }
+     switch (status)
+     {
+       case AVAILABLE :
+         t.setStatusToAvailable();
+         break;
+       case TAKEN:
+         t.setStatusToTaken(r);
+         break;
+       case CANCELLED:
+         t.setStatusToCancelled();
+         break;
+       case COMPLETED:
+         t.setStatusToCompleted();
+         break;
+       default:
+         System.out.println("Wrong status");
+      saveTradeOfferToFile();
+     }
+  }
+  public void updateTradeOffer(String id, TradeOffer newoffer)
+  {
+    tradeOfferList.updateByID(id, newoffer);
+    saveTradeOfferToFile();
   }
 }

@@ -6,6 +6,7 @@ import logic.TownManager;
 public class MainViewController
 {
   @FXML private ResidentsController residentsViewController;
+  @FXML private TradeOfferController tradeoffersViewController;
 
   private TownManager townManager;
 
@@ -14,5 +15,6 @@ public class MainViewController
     townManager = new TownManager();
 
     residentsViewController.init(townManager);
+    tradeoffersViewController.init(townManager);
   }
 }

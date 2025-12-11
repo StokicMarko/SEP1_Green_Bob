@@ -10,7 +10,7 @@ public abstract class Activity
   private int points = 0;
   private Date eventDate;
 
-  public Activity(String title, String description, int points, Date eventDate)
+  public Activity(String title, String description, int points)
   {
     ID = UUID.randomUUID().toString();
     this.title = title;

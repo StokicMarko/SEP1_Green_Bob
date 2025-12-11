@@ -15,8 +15,8 @@
             </Tab>
 
             <!-- Add more tabs later -->
-            <Tab text="Other">
-                <Label text="More sections soon..."/>
+            <Tab text="TradeOffers" closable="false">
+               <fx:include source="TradeOffersView.fxml" fx:id="tradeoffersView"/>
             </Tab>
 
         </TabPane>
