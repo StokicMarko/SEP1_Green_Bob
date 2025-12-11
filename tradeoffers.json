@@ -2,31 +2,37 @@
   {
     "ID": "11111111-1111-1111-1111-111111111111",
     "title": "Gardening Help",
-    "type": "TASK",
-    "description": "I will mow your lawn and water plants",
-    "pointCost": 50,
-    "status": "AVAILABLE",
+    "type": "GOOD",
+    "description": "I will mmmow your lawn and water plants",
+    "pointCost": 10,
+    "status": "COMPLETED",
     "offerBy": {
-      "ID": "1a4fb47b-c8d0-4596-a76b-78182923a46a",
-      "name": "Alice",
-      "lastname": "Blue",
-      "personalPoints": 200,
-      "address": "Østerbrogade 45"
+      "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
+      "name": "Kika",
+      "lastname": "Kika",
+      "personalPoints": 1200,
+      "address": "Kamjact"
     },
-    "assignedTo": null,
-    "date": {
-      "day": 5,
-      "month": 12,
+    "assignedTo": {
+      "ID": "985829ab-bb18-463e-93a3-e34429f2e553",
+      "name": "Single",
+      "lastname": "Double",
+      "personalPoints": 276,
+      "address": "Italy"
+    },
+    "createDate": {
+      "day": 11,
+      "month": 11,
       "year": 2025
     }
   },
   {
     "ID": "22222222-2222-2222-2222-222222222222",
-    "title": "Bake Cookies",
-    "type": "TASK",
+    "title": "Bake Cookiese",
+    "type": "GOOD",
     "description": "I will bake cookies for anyone who wants",
-    "pointCost": 30,
-    "status": "TAKEN",
+    "pointCost": 101,
+    "status": "COMPLETED",
     "offerBy": {
       "ID": "d7fd46bb-fe9e-441d-972b-07d41dc8d990",
       "name": "Jonh",
@@ -35,24 +41,19 @@
       "address": "Fantasyland"
     },
     "assignedTo": {
-      "ID": "985829ab-bb18-463e-93a3-e34429f2e553",
-      "name": "Single",
-      "lastname": "Double",
-      "personalPoints": 12,
-      "address": "Italy"
-    },
-    "date": {
-      "day": 7,
-      "month": 12,
-      "year": 2025
+      "ID": "0bef1f10-e8ba-4435-aa78-2f3a7e92babf",
+      "name": "Alice",
+      "lastname": "Blue",
+      "personalPoints": 220,
+      "address": "Østerbrogade 45"
     }
   },
   {
     "ID": "33333333-3333-3333-3333-333333333333",
     "title": "Dog Walking",
-    "type": "TASK",
+    "type": "SERVICE",
     "description": "I will walk your dog for 30 minutes",
-    "pointCost": 40,
+    "pointCost": 1,
     "status": "AVAILABLE",
     "offerBy": {
       "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
@@ -61,11 +62,64 @@
       "personalPoints": 1200,
       "address": "Kamjact"
     },
-    "assignedTo": null,
-    "date": {
-      "day": 6,
+    "createDate": {
+      "day": 11,
+      "month": 11,
+      "year": 1004
+    }
+  },
+  {
+    "ID": "4b207d0d-a820-4fcd-9a18-fad8aa0c4953",
+    "title": "r",
+    "type": "GOOD",
+    "description": "rrrrrr",
+    "pointCost": 10,
+    "status": "COMPLETED",
+    "offerBy": {
+      "ID": "1a4fb47b-c8d0-4596-a76b-78182923a46a",
+      "name": "Alice",
+      "lastname": "Blue",
+      "personalPoints": 144,
+      "address": "Østerbrogade 45"
+    },
+    "assignedTo": {
+      "ID": "985829ab-bb18-463e-93a3-e34429f2e553",
+      "name": "Single",
+      "lastname": "Double",
+      "personalPoints": 276,
+      "address": "Italy"
+    },
+    "createDate": {
+      "day": 10,
       "month": 12,
-      "year": 2025
+      "year": 2004
+    }
+  },
+  {
+    "ID": "9756baf6-7a49-4c68-a741-aac3c5d78071",
+    "title": "jd",
+    "type": "SERVICE",
+    "description": "hello1",
+    "pointCost": 10,
+    "status": "TAKEN",
+    "offerBy": {
+      "ID": "0bef1f10-e8ba-4435-aa78-2f3a7e92babf",
+      "name": "Alice",
+      "lastname": "Blue",
+      "personalPoints": 200,
+      "address": "Østerbrogade 45"
+    },
+    "assignedTo": {
+      "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
+      "name": "Kika",
+      "lastname": "Kika",
+      "personalPoints": 1199,
+      "address": "Kamjact"
+    },
+    "createDate": {
+      "day": 11,
+      "month": 11,
+      "year": 1111
     }
   }
 ]

@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import myEnum.OfferStatus;
+import model.Resident;
 
 public class TradeOfferList
 {
@@ -34,6 +35,9 @@ public class TradeOfferList
     }
     return Offers;
   }
+  public ArrayList<TradeOffer> getTradeOffers(){
+    return tradeOffers;
+  }
 
   public ArrayList<TradeOffer> getSortedByDate()
   {
@@ -50,11 +54,20 @@ public class TradeOfferList
     return str;
   }
 
+  public void updateByID(String id, TradeOffer newOffer) {
+    TradeOffer existing = findByID(id);
+    if (existing == null) return;
 
+    existing.setTitle(newOffer.getTitle());
+    existing.setType(newOffer.getType());
+    existing.setDescription(newOffer.getDescription());
+    existing.setPointCost(newOffer.getPointCost());
+    existing.setGeneralStatus(existing,newOffer.getStatus(),newOffer.getAssignedTo());
+    existing.setOfferBy(newOffer.getOfferBy());
+    existing.setAssignedTo(newOffer.getAssignedTo());
+    existing.setCreateDate(newOffer.getCreateDate());
 
-
-
-
+  }
   public TradeOffer findByID(String id) {
     return tradeOffers.stream()
         .filter(tradeOffer -> tradeOffer.getID().equals(id))

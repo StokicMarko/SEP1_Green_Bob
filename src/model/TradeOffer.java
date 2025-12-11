@@ -12,32 +12,35 @@ public class TradeOffer
   private OfferType type;
   private String description = "";
   private int pointCost = 0;
-  private OfferStatus status = OfferStatus.AVAILABLE;
+  private OfferStatus status;
   private Resident offerBy;
   private Resident assignedTo;
   private Date createDate;
 
-  public TradeOffer(String title, String description, OfferType type,
-      int pointCost, Resident offerBy,Date createDate)
+  public TradeOffer(String title, OfferType type,String description,
+      int pointCost, Resident offerBy,Date createDate )
   {
     if (offerBy.getPersonalPoints() < pointCost) {
       throw new IllegalArgumentException(
           "Resident does not have enough points to create this TradeOffer."
       );
     }
-
     ID = UUID.randomUUID().toString();
     this.title = title;
     this.description = description;
     this.type = type;
     this.pointCost = pointCost;
     this.offerBy = offerBy;
+    status=OfferStatus.AVAILABLE;
+    assignedTo=null;
     this.createDate = createDate;
+    offerBy.removePoints(pointCost);
   }
 
   public String getID() {
     return ID;
   }
+
   public String getTitle()
   {
     return title;
@@ -115,6 +118,25 @@ public class TradeOffer
       assignedTo.addPoints(pointCost);
       status = OfferStatus.COMPLETED;
     }
+  }
+  public void setGeneralStatus(TradeOffer newOffer, OfferStatus status,Resident r){
+    switch(status){
+      case AVAILABLE :
+        newOffer.setStatusToAvailable();
+        break;
+      case TAKEN:
+        newOffer.setStatusToTaken(r);
+        break;
+      case CANCELLED:
+        newOffer.setStatusToCancelled();
+        break;
+      case COMPLETED:
+        newOffer.setStatusToCompleted();
+        break;
+      default:
+        System.out.println("Wrong status");
+    }
+
   }
 
   public Resident getOfferBy()
