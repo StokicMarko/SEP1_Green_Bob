@@ -16,15 +16,10 @@ public abstract class Activity
     this.title = title;
     this.description = description;
     this.points = points;
-    this.eventDate = eventDate;
+    this.eventDate = null;
   }
 
-  public Activity(String title, String description, int points)
-  {
-    this.title=title;
-    this.description=description;
-    this.points=points;
-  }
+
 
   public int getPoints()
   {
@@ -36,9 +31,9 @@ public abstract class Activity
     return ID;
   }
 
-  public void addPoints(double pointsToAdd)
+  public void addPoints(int pointsToAdd)
   {
-    points += pointsToAdd;
+    points +=  pointsToAdd;
   }
 
   public void removePoints(int pointsToRemove)

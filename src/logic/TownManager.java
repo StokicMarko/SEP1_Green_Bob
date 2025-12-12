@@ -1,10 +1,6 @@
 package logic;
 
-import model.ActivityList;
-import model.Resident;
-import model.ResidentList;
-import model.TradeOffer;
-import model.TradeOfferList;
+import model.*;
 import myEnum.OfferStatus;
 import parser.ParserException;
 import utils.JsonFileHandler;
@@ -107,7 +103,7 @@ public class TownManager
        JsonFileHandler.saveTradeOfferToJson("tradeoffers.json",tradeOfferList.getTradeOffers());
      }
      catch(ParserException e){
-       System.out.println("Couldnot save to given file");
+       System.out.println("Could not save to given file");
      }
   }
   public ArrayList<TradeOffer> getTradeoffers(){
@@ -150,4 +146,57 @@ public class TownManager
     tradeOfferList.updateByID(id, newoffer);
     saveTradeOfferToFile();
   }
+
+  public void loadGreenActivities()
+  {
+  try
+  {
+    ArrayList<GreenActivity> loaded = JsonFileHandler.readGreenActivitiesFromJson("greenactivities.json");
+    for(GreenActivity g:loaded)
+    {
+      greenActivityList.add(g);
+    }
+  }
+  catch (ParserException e)
+  {
+    System.out.println("Unable to read from json file");
+  }
+}
+
+  private void saveGreenActivityToFile()
+  {
+  try
+  {
+    ArrayList<GreenActivity> greens = greenActivityList.getGreenActivities();
+    JsonFileHandler.saveGreenActivityToJson("greenactivities.json", greenActivityList.getGreenActivities());
+  }
+  catch (ParserException e)
+  {
+    System.out.println("Could not save to given file");
+  }
+}
+
+  public ArrayList<GreenActivity> getGreenActivities()
+  {
+    ArrayList<GreenActivity> greens = new ArrayList<>();
+
+    for (Activity a : greenActivityList.getAll()) {
+      if (a instanceof GreenActivity) {
+        greens.add((GreenActivity) a);
+      }
+    }
+    return greens;  }
+
+  public void addGreenActivity(GreenActivity a)
+  {
+    greenActivityList.add(a);
+    saveGreenActivityToFile();
+  }
+
+  public void removeGreenActivity(String id)
+  {
+    greenActivityList.removeById(id);
+    saveGreenActivityToFile();
+  }
+
 }

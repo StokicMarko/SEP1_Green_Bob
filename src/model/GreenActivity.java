@@ -1,21 +1,30 @@
 package model;
-import java.util.UUID;
 
-  public class GreenActivity extends Activity
+import java.time.LocalDate;
+
+public class GreenActivity extends Activity
   {
-    private String ID;
-    private String title;
-    private String description;
-    private double greenPoints;
+    private int greenPoints;
+    private Date eventDate;
 
 
-    public GreenActivity(String title, String description, double points)
+    public GreenActivity( String title, String description,int greenPoints,
+        LocalDate eventDate)
     {
-      super(title,description,(int)points);
-      this.ID=ID;
-      this.title=title;
-      this.description=description;
+      super(title,description,0);
       this.greenPoints=greenPoints;
+      this.eventDate=eventDate;
+    }
+
+
+    public Date getEventDate()
+    {
+      return eventDate;
+    }
+
+    public void setEventDate(Date eventDate)
+    {
+      this.eventDate = eventDate;
     }
 
     public double getGreenPoints()
@@ -24,37 +33,41 @@ import java.util.UUID;
     }
     public String getID()
     {
-    return ID;
+    return super.getID();
     }
 
     public String getTitle()
     {
-      return title;
+      return super.getTitle();
     }
 
     public void setTitle(String title)
     {
-      this.title = title;
+      super.setTitle(title);
     }
 
     public String getDescription()
     {
-      return description;
+      return super.getDescription();
     }
 
     public void setDescription(String description)
     {
-      this.description = description;
+      super.setDescription(description);
     }
 
-    public void addPoints(double pointsToAdd)
+    public void addPoints(int pointsToAdd)
     {
-      super.addPoints(pointsToAdd);
+      greenPoints += pointsToAdd;
     }
 
     public void removePoints(int pointsToRemove)
     {
-      super.removePoints(pointsToRemove);
+      greenPoints -= pointsToRemove;
+      if(greenPoints < 0 )
+      {
+        greenPoints=0;
+      }
     }
   }
 

@@ -30,4 +30,16 @@ public class ActivityList
     return activities;
   }
 
+  // Return only green activities
+  public ArrayList<GreenActivity> getGreenActivities() {
+    ArrayList<GreenActivity> greens = new ArrayList<>();
+
+    for (Activity a : activities) {
+      if (a instanceof GreenActivity) {
+        greens.add((GreenActivity) a);
+      }
+    }
+
+    return greens;
+  }
 }
