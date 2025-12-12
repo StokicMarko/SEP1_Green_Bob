@@ -7,6 +7,7 @@ public class MainViewController
 {
   @FXML private ResidentsController residentsViewController;
   @FXML private TradeOfferController tradeoffersViewController;
+  @FXML private GreenActivityController greenActivityViewController;
 
   private TownManager townManager;
 
@@ -16,5 +17,6 @@ public class MainViewController
 
     residentsViewController.init(townManager);
     tradeoffersViewController.init(townManager);
+    greenActivityViewController.init(townManager);
   }
 }

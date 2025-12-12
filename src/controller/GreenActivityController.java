@@ -4,10 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import logic.TownManager;
+import model.Date;
 import model.GreenActivity;
 
 import javax.swing.*;
-import java.time.LocalDate;
 
 public class GreenActivityController
 {
@@ -40,9 +40,9 @@ public class GreenActivityController
   private AbstractButton pointsField;
   private AbstractButton descriptionField;
 
-  @FXML public void initialize()
+  @FXML public void init(TownManager townManager)
   {
-    TownManager townManager = new TownManager();   // or receive injected instance
+    this.townManager = townManager;
     townManager.loadGreenActivities();
     loadListView();
   }
@@ -65,7 +65,7 @@ public class GreenActivityController
     String title = titleField.getText();
     String description = descriptionField.getText();
     String pointsText = pointsField.getText();
-    LocalDate date = datePicker.getValue();
+    Date date = new Date(datePicker.getValue());
 
     // Validation
     if (title.isEmpty() || description.isEmpty() || pointsText.isEmpty() || date == null) {

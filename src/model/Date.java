@@ -1,5 +1,6 @@
 package model;
 import java.lang.Comparable;
+import java.time.LocalDate;
 
 public class Date implements Comparable<Date>
 {
@@ -13,6 +14,13 @@ public class Date implements Comparable<Date>
     this.month = month;
     this.year = year;
   }
+
+  public Date(LocalDate localDate) {
+    this.day = localDate.getDayOfMonth();
+    this.month = localDate.getMonthValue();
+    this.year = localDate.getYear();
+  }
+
   public int compareTo(Date other){
     if(this.year!=other.year){
       return this.year-other.year;

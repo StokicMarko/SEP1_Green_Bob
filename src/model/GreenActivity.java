@@ -1,6 +1,5 @@
 package model;
 
-import java.time.LocalDate;
 
 public class GreenActivity extends Activity
   {
@@ -9,11 +8,10 @@ public class GreenActivity extends Activity
 
 
     public GreenActivity( String title, String description,int greenPoints,
-        LocalDate eventDate)
+        Date eventDate)
     {
-      super(title,description,0);
+      super(title,description,greenPoints, eventDate);
       this.greenPoints=greenPoints;
-      this.eventDate=eventDate;
     }
 
 
