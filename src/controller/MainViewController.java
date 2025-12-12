@@ -17,6 +17,6 @@ public class MainViewController
 
     residentsViewController.init(townManager);
     tradeoffersViewController.init(townManager);
-    greenActivityViewController.init(townManager);
+    // greenActivityViewController.init(townManager);
   }
 }
