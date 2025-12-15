@@ -12,6 +12,7 @@ public class CommunalActivity extends Activity
   public CommunalActivity(String title, String description, int points, Date eventDate)
   {
     super(title, description, points, eventDate);
+    participants = new ArrayList<Resident>();
     isPointAssign = false;
   }
 
@@ -33,10 +34,14 @@ public class CommunalActivity extends Activity
     return participants;
   }
 
-  public void addParticipant(Resident r) {
-    if (!participants.contains(r)) {
-      participants.add(r);
+  public void addParticipant(Resident resident) {
+    if (!participants.contains(resident)) {
+      participants.add(resident);
     }
   }
 
+  @Override public String toString()
+  {
+    return "CommunalActivity{" + "participants=" + participants + '}';
+  }
 }

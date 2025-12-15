@@ -1,8 +1,6 @@
 package controller;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -12,8 +10,6 @@ import model.Date;
 import model.Resident;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CommunalActivityController {
 
@@ -36,12 +32,13 @@ public class CommunalActivityController {
 
   @FXML private ListView<String> listResidents;
 
-  private final TownManager townManager = new TownManager();
+  private TownManager townManager;
   private CommunalActivity selectedActivity;
 
   @FXML
-  public void initialize() {
-    townManager.loadCommunalActivities();
+  public void init(TownManager townManager) {
+    this.townManager = townManager;
+    this.townManager.loadCommunalActivities();
 
     // Table columns
     colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -91,9 +88,11 @@ public class CommunalActivityController {
     btnDelete.setDisable(true); // initially disabled
   }
 
-  private void loadResidents() {
+  public void loadResidents() {
     listResidents.getItems().clear();
+    System.out.println("-----");
     for (Resident r : townManager.getResidents()) {
+      System.out.println(r.toString());
       listResidents.getItems().add(formatResident(r));
     }
   }
@@ -156,10 +155,15 @@ public class CommunalActivityController {
       btnSave.setDisable(true);
 
     } catch (Exception e) {
-      showError("Invalid input. Use format DD-MM-YYYY");
+
+      showError(e.toString());
     }
   }
 
+  @FXML
+  private void onCompleteEvent() {
+
+  }
   @FXML
   private void onDelete() {
     if (selectedActivity == null) return;
@@ -202,18 +206,19 @@ public class CommunalActivityController {
       for (String display : listResidents.getSelectionModel().getSelectedItems()) {
         for (Resident r : townManager.getResidents()) {
           if (formatResident(r).equals(display)) {
+            System.out.print(r.toString());
             activity.addParticipant(r);
             break;
           }
         }
       }
 
-      townManager.addCommunalActivity(activity); // ✅ SAVE TO JSON
+      townManager.addCommunalActivity(activity);
       refreshTable();
       clearForm();
 
     } catch (Exception e) {
-      showError("Invalid input. Use format DD-MM-YYYY");
+      showError("Error on creating new Communal Activity");
     }
   }
 

@@ -214,6 +214,7 @@ public class TownManager
   // Add communal activity and save to JSON
   public void addCommunalActivity(CommunalActivity a)
   {
+    System.out.println(a.toString());
     communalActivityList.add(a);
     saveCommunalActivitiesToFile();
   }
