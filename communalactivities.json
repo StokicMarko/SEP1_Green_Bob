@@ -1,0 +1,26 @@
+[
+  {
+    "isPointAssign": false,
+    "ID": "637fb024-6fa1-4ffd-a4d4-a6c6e3326680",
+    "title": "gewgwefewfew",
+    "description": "few",
+    "points": 20,
+    "eventDate": {
+      "day": 21,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "isPointAssign": false,
+    "ID": "43100b73-f17b-42cf-bb05-b91a187c1d4a",
+    "title": "ververvre",
+    "description": "re",
+    "points": 200,
+    "eventDate": {
+      "day": 23,
+      "month": 12,
+      "year": 2025
+    }
+  }
+]

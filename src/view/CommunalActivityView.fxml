@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane fx:id="communalActivityView" prefHeight="700.0" prefWidth="1200.0"
+            xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.CommunalActivityController">
+
+    <!-- TOP BAR -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="top-bar">
+            <BorderPane.margin>
+                <Insets bottom="15"/>
+            </BorderPane.margin>
+
+            <Label styleClass="top-bar-title" text="Communal Activities"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button fx:id="btnDelete" text="Delete"/>
+            <Button fx:id="btnClear" text="Clear"/>
+        </HBox>
+    </top>
+
+    <!-- CENTER TABLE -->
+    <center>
+        <VBox spacing="0" styleClass="table-container">
+            <BorderPane.margin>
+                <Insets right="15"/>
+            </BorderPane.margin>
+
+            <TableView fx:id="tableCommunalActivities" prefHeight="594.0" prefWidth="920.0">
+                <columns>
+                    <TableColumn fx:id="colTitle" text="Title"/>
+                    <TableColumn fx:id="colDescription" text="Description" prefWidth="200"/>
+                    <TableColumn fx:id="colPersonalPoints" text="Points"/>
+                    <TableColumn fx:id="colEventDate" text="Date"/>
+                    <TableColumn fx:id="colParticipants" text="Participants" prefWidth="250"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <!-- RIGHT EDIT PANEL -->
+    <right>
+        <VBox fillWidth="false" spacing="10.0" styleClass="editBox">
+            <padding>
+                <Insets top="15" bottom="15" left="15" right="15"/>
+            </padding>
+
+            <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Communal Activity Editor"/>
+
+            <VBox spacing="5">
+                <Label text="Title"/>
+                <TextField fx:id="txtTitle" prefHeight="25.0" prefWidth="250.0"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Description"/>
+                <TextField fx:id="txtDescription" prefHeight="75.0" prefWidth="250.0"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Points"/>
+                <TextField fx:id="txtPersonalPoints" prefHeight="25.0" prefWidth="250.0"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Date (DD-MM-YYYY)"/>
+                <TextField fx:id="txtEventDate" prefHeight="25.0" prefWidth="250.0"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Participants"/>
+                <ListView fx:id="listResidents" prefHeight="150"/>
+            </VBox>
+
+            <!-- BUTTONS -->
+            <HBox spacing="10">
+                <Button fx:id="btnSave" text="Save" HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnNew" text="New" HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+        </VBox>
+    </right>
+
+</BorderPane>
