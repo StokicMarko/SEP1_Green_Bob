@@ -107,11 +107,11 @@ public class TradeOfferController
     txtTitle.setText(offer.getTitle());
     txtDescription.setText(offer.getDescription());
     txtPointCost.setText(String.valueOf(offer.getPointCost()));
-    txtDate.setText(offer.getCreateDate()!=null?offer.getCreateDate().toString():"Null");
+    txtDate.setText(offer.getCreateDate()!=null?offer.getCreateDate().toString():"NO DATE");
     txtType.setText(offer.getType().toString());
     txtStatus.setText(offer.getStatus().toString());
-    txtOfferBy.setText(offer.getOfferBy() != null ? offer.getOfferBy().getName() : "Null");
-    txtAssignedTo.setText(offer.getAssignedTo() != null ? offer.getAssignedTo().getName() : "Null");
+    txtOfferBy.setText(offer.getOfferBy() != null ? offer.getOfferBy().getName() : "NOBODY");
+    txtAssignedTo.setText(offer.getAssignedTo() != null ? offer.getAssignedTo().getName() : "NOBODY");
 
     comboType.getSelectionModel().select(offer.getType());
     comboStatus.getSelectionModel().select(offer.getStatus());

@@ -75,6 +75,11 @@ public class Resident
     return ID;
   }
 
+  public String getFullName()
+  {
+    return name + " " + lastname;
+  }
+
   @Override public String toString()
   {
     return "Resident{" + "ID='" + ID + '\'' + ", name='" + name + '\''

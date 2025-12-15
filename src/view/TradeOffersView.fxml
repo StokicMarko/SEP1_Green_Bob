@@ -12,10 +12,13 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="tradeoffersView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TradeOfferController">
+<BorderPane fx:id="tradeoffersView"
+            xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.TradeOfferController">
 
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="top-bar">
+        <HBox styleClass="top-bar" spacing="10" alignment="CENTER_LEFT">
             <BorderPane.margin>
                 <Insets bottom="15" />
             </BorderPane.margin>
@@ -35,16 +38,16 @@
                 <Insets right="15" />
             </BorderPane.margin>
 
-            <TableView fx:id="tableOffers" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="594.0" prefWidth="920.0">
+            <TableView fx:id="tableOffers" VBox.vgrow="ALWAYS">
                 <columns>
                     <TableColumn fx:id="colTitle" text="Title" />
                     <TableColumn fx:id="colType" text="Type" />
-                    <TableColumn fx:id="colDescription" prefWidth="180.00001525878906" text="Description" />
-                    <TableColumn fx:id="colPointCost" prefWidth="72.66668701171875" text="PointCost" />
-               <TableColumn fx:id="colStatus" prefWidth="118.66659545898438" text="Status" />
-               <TableColumn fx:id="colOfferBy" prefWidth="119.3333740234375" text="OfferBy" />
-               <TableColumn fx:id="colAssignedTo" prefWidth="150.66668701171875" text="Assigned to" />
-               <TableColumn fx:id="colDate" prefWidth="120.0" text="Date" />
+                    <TableColumn fx:id="colDescription" prefWidth="180" text="Description" />
+                    <TableColumn fx:id="colPointCost" prefWidth="72" text="PointCost" />
+               <TableColumn fx:id="colStatus" prefWidth="118" text="Status" />
+               <TableColumn fx:id="colOfferBy" prefWidth="119" text="OfferBy" />
+               <TableColumn fx:id="colAssignedTo" prefWidth="150" text="Assigned to" />
+               <TableColumn fx:id="colDate" prefWidth="120" text="Date" />
                 </columns>
             </TableView>
         </VBox>
