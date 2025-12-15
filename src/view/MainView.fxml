@@ -23,6 +23,10 @@
                <fx:include source="GreenActivityView.fxml" fx:id="greenActivityView"/>
             </Tab>
 
+            <Tab text="Communal Activities" closable="false">
+                <fx:include source="CommunalActivityView.fxml" fx:id="communalActivityView"/>
+            </Tab>
+
         </TabPane>
     </center>
 

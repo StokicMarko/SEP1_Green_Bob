@@ -20,8 +20,8 @@ public class TownManager
 
   private static final String RESIDENTS_JSON = "residents.json";
   private static final String TRADE_OFFER_JSON = "tradeoffers.json";
-  private static final String GREEN_ACTIVITIES_JSON = "greenActivities.json";
-  private static final String COMMUNAL_ACTIVITIES_JSON = "communalActivities.json";
+  private static final String GREEN_ACTIVITIES_JSON = "greenactivities.json";
+  private static final String COMMUNAL_ACTIVITIES_JSON = "communalactivities.json";
 
   public TownManager()
   {
@@ -198,5 +198,61 @@ public class TownManager
     greenActivityList.removeById(id);
     saveGreenActivityToFile();
   }
+
+  // ---------------- Communal Activities ----------------
+  public ArrayList<CommunalActivity> getCommunalActivities()
+  {
+    ArrayList<CommunalActivity> list = new ArrayList<>();
+    for(Activity a : communalActivityList.getAll()) {
+      if(a instanceof CommunalActivity)
+        list.add((CommunalActivity)a);
+    }
+    return list;
+  }
+
+  // Add communal activity and save to JSON
+  public void addCommunalActivity(CommunalActivity a)
+  {
+    communalActivityList.add(a);
+    saveCommunalActivitiesToFile();
+  }
+
+  // Remove communal activity by ID and save to JSON
+  public void removeCommunalActivity(String id)
+  {
+    communalActivityList.removeById(id);
+    saveCommunalActivitiesToFile();
+  }
+
+  // Load communal activities from JSON
+  public void loadCommunalActivities()
+  {
+    try
+    {
+      ArrayList<CommunalActivity> loaded =
+          JsonFileHandler.readCommunalActivitiesFromJson(COMMUNAL_ACTIVITIES_JSON);
+      communalActivityList.getAll().clear();
+      communalActivityList.getAll().addAll(loaded);
+    }
+    catch(Exception e)
+    {
+      communalActivityList.getAll().clear();
+    }
+  }
+
+  // Save communal activities to JSON
+  private void saveCommunalActivitiesToFile()
+  {
+    try
+    {
+      ArrayList<CommunalActivity> list = getCommunalActivities();
+      JsonFileHandler.saveCommunalActivitiesToJson(COMMUNAL_ACTIVITIES_JSON, list);
+    }
+    catch(Exception e)
+    {
+      e.printStackTrace();
+    }
+  }
+
 
 }

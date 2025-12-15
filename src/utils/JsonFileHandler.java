@@ -48,4 +48,18 @@ public class JsonFileHandler
   {
     parser.toJsonFile(greenActivities, filename);
   }
+
+  // Add to JsonFileHandler.java
+
+  public static ArrayList<CommunalActivity> readCommunalActivitiesFromJson(String filename) throws ParserException
+  {
+    CommunalActivity[] array = parser.fromJsonFile(filename, CommunalActivity[].class);
+    return new ArrayList<>(Arrays.asList(array));
+  }
+
+  public static void saveCommunalActivitiesToJson(String filename, ArrayList<CommunalActivity> activities) throws ParserException
+  {
+    parser.toJsonFile(activities, filename);
+  }
+
 }

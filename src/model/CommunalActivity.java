@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class CommunalActivity extends Activity
@@ -22,6 +23,19 @@ public class CommunalActivity extends Activity
       {
         participants.get(i).addPoints(getPoints());
       }
+    }
+  }
+
+  public void setParticipants(List<Resident> participants) {
+    this.participants = new ArrayList<>(participants);
+  }
+  public List<Resident> getParticipants() {
+    return participants;
+  }
+
+  public void addParticipant(Resident r) {
+    if (!participants.contains(r)) {
+      participants.add(r);
     }
   }
 

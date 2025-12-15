@@ -20,10 +20,15 @@ public class ActivityList
   {
     for (int i = 0; i < activities.size(); i++)
     {
-      if (activities.get(0).getID() == id)
+      if (activities.get(i).getID().equals(id)) // use i and equals
+      {
         activities.remove(i);
+        return; // stop after removing
+      }
     }
   }
+
+
 
   public ArrayList<Activity> getAll()
   {

@@ -33,5 +33,12 @@
     "lastname": "Blue",
     "personalPoints": 200,
     "address": "Østerbrogade 45"
+  },
+  {
+    "ID": "ae63f79a-8022-4f26-9f65-9371415ac890",
+    "name": "Bob",
+    "lastname": "Jamason",
+    "personalPoints": 20000,
+    "address": "Billundvej 73"
   }
 ]
