@@ -3,6 +3,7 @@ package logic;
 import model.*;
 import myEnum.OfferStatus;
 import parser.ParserException;
+import utils.InputValidation;
 import utils.JsonFileHandler;
 
 import java.lang.reflect.Array;
