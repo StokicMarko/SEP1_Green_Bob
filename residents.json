@@ -17,7 +17,7 @@
     "ID": "985829ab-bb18-463e-93a3-e34429f2e553",
     "name": "Single",
     "lastname": "Double",
-    "personalPoints": 12,
+    "personalPoints": 7,
     "address": "Italy"
   },
   {
@@ -26,12 +26,5 @@
     "lastname": "Kika",
     "personalPoints": 1200,
     "address": "Kamjact"
-  },
-  {
-    "ID": "0bef1f10-e8ba-4435-aa78-2f3a7e92babf",
-    "name": "Alice",
-    "lastname": "Blue",
-    "personalPoints": 200,
-    "address": "Østerbrogade 45"
   }
 ]

@@ -51,8 +51,11 @@ public class TradeOfferController
     updateResidentBox(comboAssignedTo);
     StatusBox();
     TypeBox();
+    txtDate.setPromptText("dd-mm-yyyy or dd/mm/yyyy");
     btnSave.setDisable(true);
     btnDelete.setDisable(true);
+    txtAssignedTo.setDisable(true);
+    txtStatus.setDisable(true);
 
     comboStatus.setDisable(true);
     comboAssignedTo.setDisable(true);
@@ -118,6 +121,8 @@ public class TradeOfferController
     // now we  select from those two boxes
     comboStatus.setDisable(false);
     comboAssignedTo.setDisable(false);
+    txtStatus.setDisable(false);
+    txtAssignedTo.setDisable(false);
   }
 
   @FXML
@@ -184,6 +189,8 @@ public class TradeOfferController
     comboOfferBy.getSelectionModel().clearSelection();
     comboAssignedTo.setDisable(true);
     comboStatus.setDisable(true);
+    txtStatus.setDisable(true);
+    txtAssignedTo.setDisable(true);
     tableOffers.getSelectionModel().clearSelection();
 
   }
@@ -258,13 +265,21 @@ private void TypeBox()
  }
   private Date parseDate(String textDate) {
     try {
-      String[] dateFromTxt = textDate.split("-");
+      String[] dateFromTxt = textDate.split("[-/]");
+      if(dateFromTxt.length!=3){
+        throw new IllegalArgumentException();
+      }
       int day = Integer.parseInt(dateFromTxt[0]);
       int month = Integer.parseInt(dateFromTxt[1]);
       int year = Integer.parseInt(dateFromTxt[2]);
       return new Date(day, month, year);
     } catch (Exception e) {
-      throw new IllegalArgumentException("Invalid date format. Use 'dd-mm-yyyy'");
+      Alert alert = new Alert(
+          Alert.AlertType.ERROR,
+          "Invalid date format.\nUse: dd-mm-yyyy or dd/mm/yyyy"
+      );
+      alert.show();
+      return null;
     }
   }
   @FXML
@@ -292,12 +307,6 @@ private void TypeBox()
       if(resident!=null){
         txtAssignedTo.setText(resident.getName());
       }
-    }
-    else{
-      txtStatus.setEditable(false);
-      txtType.setEditable(false);
-      txtOfferBy.setEditable(false);
-      txtAssignedTo.setEditable(false);
     }
   }
  }

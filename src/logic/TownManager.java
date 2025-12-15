@@ -112,6 +112,7 @@ public class TownManager
   public void addTradeOffer(TradeOffer o){
       tradeOfferList.add(o);
       saveTradeOfferToFile();
+      saveResidentsToFile();
   }
   public void removeTradeOffer(String id){
      tradeOfferList.removeByID(id);
