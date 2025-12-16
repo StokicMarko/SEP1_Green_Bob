@@ -1,15 +1,15 @@
 package controller;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import logic.TownManager;
 import model.*;
 import myEnum.*;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 
-public class TradeOfferController
-{
+public class TradeOfferController {
+
   @FXML private TableView<TradeOffer> tableOffers;
   @FXML private TableColumn<TradeOffer, String> colTitle;
   @FXML private TableColumn<TradeOffer, OfferType> colType;
@@ -21,13 +21,9 @@ public class TradeOfferController
   @FXML private TableColumn<TradeOffer, Date> colDate;
 
   @FXML private TextField txtTitle;
-  @FXML private TextField txtType;
   @FXML private TextField txtDescription;
   @FXML private TextField txtPointCost;
-  @FXML private TextField txtStatus;
-  @FXML private TextField txtOfferBy;
-  @FXML private TextField txtAssignedTo;
-  @FXML private TextField txtDate;
+  @FXML private DatePicker datePicker;
 
   @FXML private Button btnSave;
   @FXML private Button btnNew;
@@ -39,164 +35,171 @@ public class TradeOfferController
   @FXML private ComboBox<Resident> comboOfferBy;
   @FXML private ComboBox<Resident> comboAssignedTo;
 
-  private TownManager manager;
-
-  @FXML public void init(TownManager manager)
-  {
-    this.manager = manager;
-
-    setupTable();
-    refreshTable();
-    updateResidentBox(comboOfferBy);
-    updateResidentBox(comboAssignedTo);
-    StatusBox();
-    TypeBox();
-    txtDate.setPromptText("dd-mm-yyyy or dd/mm/yyyy");
-    btnSave.setDisable(true);
-    btnDelete.setDisable(true);
-    txtAssignedTo.setDisable(true);
-    txtStatus.setDisable(true);
-
-    comboStatus.setDisable(true);
-    comboAssignedTo.setDisable(true);
-
-    tableOffers.getSelectionModel().selectedItemProperty()
-        .addListener((obs, oldSel, newSel) -> {
-          boolean hasSelection = newSel != null;
-
-          btnSave.setDisable(!hasSelection);
-          btnDelete.setDisable(!hasSelection);
-
-          showTradeOffer(newSel);
-
-        });
-    tableOffers.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-    btnSave.setOnAction(e -> onSave());
-    btnNew.setOnAction(e -> onNewTradeOffer());
-    btnDelete.setOnAction(e -> onDelete());
-    btnClear.setOnAction(e -> onClearSelection());
-
-  }
-
-  private void setupTable(){
-    colTitle.setCellValueFactory(c ->
-        new javafx.beans.property.SimpleStringProperty(c.getValue().getTitle()));
-    colType.setCellValueFactory(c ->
-        new javafx.beans.property.SimpleObjectProperty(c.getValue().getType()));
-    colDescription.setCellValueFactory(c ->
-        new javafx.beans.property.SimpleStringProperty(c.getValue().getDescription()));
-    colPointCost.setCellValueFactory(c ->
-        new javafx.beans.property.SimpleIntegerProperty((int)c.getValue().getPointCost()));
-    colStatus.setCellValueFactory(c ->
-        new javafx.beans.property.SimpleObjectProperty(c.getValue().getStatus()));
-    colOfferBy.setCellValueFactory(c ->
-        new javafx.beans.property.SimpleStringProperty(c.getValue().getOfferBy()!=null?
-            c.getValue().getOfferBy().getName():"Null"));
-    colAssignedTo.setCellValueFactory(c ->
-        new javafx.beans.property.SimpleStringProperty(c.getValue().getAssignedTo()!=null?
-            c.getValue().getAssignedTo().getName():"Null"));
-    colDate.setCellValueFactory(c ->
-        new javafx.beans.property.SimpleObjectProperty(c.getValue().getCreateDate()));
-  }
-  private void refreshTable() {
-    tableOffers.getItems().setAll(manager.getTradeoffers());
-  }
-  private void showTradeOffer(TradeOffer offer) {
-    if (offer == null) return;
-    txtTitle.setText(offer.getTitle());
-    txtDescription.setText(offer.getDescription());
-    txtPointCost.setText(String.valueOf(offer.getPointCost()));
-    txtDate.setText(offer.getCreateDate()!=null?offer.getCreateDate().toString():"NO DATE");
-    txtType.setText(offer.getType().toString());
-    txtStatus.setText(offer.getStatus().toString());
-    txtOfferBy.setText(offer.getOfferBy() != null ? offer.getOfferBy().getName() : "NOBODY");
-    txtAssignedTo.setText(offer.getAssignedTo() != null ? offer.getAssignedTo().getName() : "NOBODY");
-
-    comboType.getSelectionModel().select(offer.getType());
-    comboStatus.getSelectionModel().select(offer.getStatus());
-    comboOfferBy.getSelectionModel().select(offer.getOfferBy());
-    comboAssignedTo.getSelectionModel().select(offer.getAssignedTo());
-
-    // now we  select from those two boxes
-    comboStatus.setDisable(false);
-    comboAssignedTo.setDisable(false);
-    txtStatus.setDisable(false);
-    txtAssignedTo.setDisable(false);
-  }
+  private TownManager townManager;
 
   @FXML
-  private void onSave() {
+  public void init(TownManager townManager) {
+    this.townManager = townManager;
 
-    TradeOffer selected = tableOffers.getSelectionModel().getSelectedItem();
-    if (selected == null) return;
-    selected.setTitle(txtTitle.getText());
-    selected.setType(comboType.getValue());
-    selected.setDescription(txtDescription.getText());
-    selected.setPointCost(Integer.parseInt(txtPointCost.getText()));
-    selected.setOfferBy(comboOfferBy.getValue());
-    selected.setAssignedTo(comboAssignedTo.getValue());
-    selected.setCreateDate(parseDate(txtDate.getText()));
-    selected.setGeneralStatus(selected, comboStatus.getValue(), comboAssignedTo.getValue());
-    manager.updateTradeOffer(selected.getID(), selected);
+    setupTable();
+    setupComboBoxes();
+    setupDatePicker();
+    setupButtonActions();
+    setupSelectionListener();
 
     refreshTable();
     clearForm();
   }
-  @FXML
-  private void onNewTradeOffer() {
 
-    if(!isallTextFilled()) return;
-    manager.addTradeOffer( new TradeOffer(
+  private void setupTable() {
+    colTitle.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getTitle()));
+    colType.setCellValueFactory(c -> new javafx.beans.property.SimpleObjectProperty<>(c.getValue().getType()));
+    colDescription.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getDescription()));
+    colPointCost.setCellValueFactory(c -> new javafx.beans.property.SimpleIntegerProperty((int) c.getValue().getPointCost()));
+    colStatus.setCellValueFactory(c -> new javafx.beans.property.SimpleObjectProperty<>(c.getValue().getStatus()));
+    colOfferBy.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(
+        c.getValue().getOfferBy() != null ? c.getValue().getOfferBy().getName() : "Null"));
+    colAssignedTo.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(
+        c.getValue().getAssignedTo() != null ? c.getValue().getAssignedTo().getName() : "Nobody"));
+    colDate.setCellValueFactory(c -> new javafx.beans.property.SimpleObjectProperty<>(c.getValue().getCreateDate()));
+
+    tableOffers.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+  }
+
+  private void setupComboBoxes() {
+    comboType.getItems().setAll(OfferType.values());
+    comboStatus.getItems().setAll(OfferStatus.values());
+    updateResidentBox(comboOfferBy);
+    updateResidentBox(comboAssignedTo);
+
+    comboAssignedTo.getItems().add(0, null);
+    comboAssignedTo.setPromptText("Nobody");
+
+    comboStatus.setDisable(true);
+  }
+
+  private void setupDatePicker() {
+    datePicker.setValue(LocalDate.now());
+    datePicker.setEditable(false);
+  }
+
+
+  private void setupButtonActions() {
+    btnSave.setOnAction(e -> onSave());
+    btnNew.setOnAction(e -> onNewTradeOffer());
+    btnDelete.setOnAction(e -> onDelete());
+    btnClear.setOnAction(e -> onClearSelection());
+  }
+
+  private void setupSelectionListener() {
+    tableOffers.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
+      boolean hasSelection = newSel != null;
+      btnSave.setDisable(!hasSelection);
+      btnDelete.setDisable(!hasSelection);
+      showTradeOffer(newSel);
+    });
+  }
+
+  private void refreshTable() {
+    tableOffers.getItems().setAll(townManager.getTradeoffers());
+  }
+
+  private void showTradeOffer(TradeOffer offer) {
+    if (offer == null) return;
+
+    txtTitle.setText(offer.getTitle());
+    txtDescription.setText(offer.getDescription());
+    txtPointCost.setText(String.valueOf(offer.getPointCost()));
+    datePicker.setValue(offer.getCreateDate() != null
+        ? LocalDate.of(offer.getCreateDate().getYear(), offer.getCreateDate().getMonth(), offer.getCreateDate().getDay())
+        : LocalDate.now());
+
+    comboType.setValue(offer.getType());
+    comboStatus.setValue(offer.getStatus());
+    comboOfferBy.setValue(offer.getOfferBy());
+    comboAssignedTo.setValue(offer.getAssignedTo());
+    comboStatus.setDisable(false);
+  }
+
+  private void onSave() {
+    TradeOffer selected = tableOffers.getSelectionModel().getSelectedItem();
+    if (selected == null || !validateRequiredFields()) return;
+
+    selected.setTitle(txtTitle.getText());
+    selected.setType(comboType.getValue());
+    selected.setDescription(txtDescription.getText() == null ? "" : txtDescription.getText());
+    selected.setPointCost(Integer.parseInt(txtPointCost.getText()));
+    selected.setOfferBy(comboOfferBy.getValue());
+    selected.setAssignedTo(comboAssignedTo.getValue());
+
+    LocalDate pickedDate = datePicker.getValue();
+    if (pickedDate == null) {
+      showDateError();
+      return;
+    }
+    selected.setCreateDate(new Date(pickedDate));
+
+    selected.setGeneralStatus(selected, comboStatus.getValue(), comboAssignedTo.getValue());
+
+    townManager.updateTradeOffer(selected.getID(), selected);
+    refreshTable();
+    clearForm();
+  }
+
+  private void onNewTradeOffer() {
+    if (!validateRequiredFields()) return;
+
+    TradeOffer offer = new TradeOffer(
         txtTitle.getText(),
         comboType.getValue(),
         txtDescription.getText(),
         Integer.parseInt(txtPointCost.getText()),
         comboOfferBy.getValue(),
-        parseDate(txtDate.getText())
-        )
-
+        new Date(datePicker.getValue())
     );
+    offer.setAssignedTo(comboAssignedTo.getValue());
+    offer.setGeneralStatus(offer, OfferStatus.AVAILABLE, comboAssignedTo.getValue());
+
+    townManager.addTradeOffer(offer);
     comboStatus.setDisable(true);
-    comboAssignedTo.setDisable(true);
     refreshTable();
     clearForm();
   }
-  private boolean isallTextFilled(){
-    if(txtTitle.getText().isEmpty() || comboType.getValue()==null||
-        txtDescription.getText().isEmpty() || txtPointCost.getText().isEmpty() ||
-        comboOfferBy.getValue()==null || txtDate.getText().isEmpty()
-    )
-    {
-     Alert alert= new Alert(Alert.AlertType.ERROR,"Please fill all the fields");
-     alert.show();
-     return false;
+
+  private boolean validateRequiredFields() {
+    if (txtTitle.getText().isEmpty()
+        || comboType.getValue() == null
+        || txtPointCost.getText().isEmpty()
+        || comboOfferBy.getValue() == null
+        || datePicker.getValue() == null) {
+      new Alert(Alert.AlertType.ERROR, "Please fill all required fields").show();
+      return false;
     }
     return true;
   }
-  @FXML
-  private void onReload() {
-    manager.loadTradeOffers();
-    refreshTable();
-  }
 
   private void clearForm() {
-    txtTitle.clear();  txtType.clear();
-    txtDescription.clear();   txtPointCost.clear();
-    txtStatus.clear();    txtOfferBy.clear();
-    txtAssignedTo.clear();     txtDate.clear();
-    comboType.getSelectionModel().clearSelection();
-    comboOfferBy.getSelectionModel().clearSelection();
-    comboAssignedTo.setDisable(true);
+    txtTitle.clear();
+    txtDescription.clear();
+    txtPointCost.clear();
+    datePicker.setValue(LocalDate.now());
+
+    if (!comboType.getItems().isEmpty()) comboType.getSelectionModel().select(0);
+    if (!comboOfferBy.getItems().isEmpty()) comboOfferBy.getSelectionModel().select(0);
+
+    comboStatus.getSelectionModel().select(OfferStatus.AVAILABLE);
     comboStatus.setDisable(true);
-    txtStatus.setDisable(true);
-    txtAssignedTo.setDisable(true);
+
+    comboAssignedTo.getSelectionModel().select(null);
     tableOffers.getSelectionModel().clearSelection();
 
+    btnSave.setDisable(true);
+    btnDelete.setDisable(true);
   }
-  private void onDelete()
-  {
+
+  private void onDelete() {
     TradeOffer selectedOffer = tableOffers.getSelectionModel().getSelectedItem();
+    if (selectedOffer == null) return;
 
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Delete offer");
@@ -204,7 +207,7 @@ public class TradeOfferController
 
     alert.showAndWait().ifPresent(response -> {
       if (response == ButtonType.OK) {
-        manager.removeTradeOffer(selectedOffer.getID());
+        townManager.removeTradeOffer(selectedOffer.getID());
         refreshTable();
         clearForm();
       }
@@ -214,101 +217,23 @@ public class TradeOfferController
   @FXML
   private void onClearSelection() {
     tableOffers.getSelectionModel().clearSelection();
-    comboAssignedTo.setDisable(true);
     comboStatus.setDisable(true);
     clearForm();
   }
 
+  private void updateResidentBox(ComboBox<Resident> comboBox) {
+    int currentIndex = comboBox.getSelectionModel().getSelectedIndex();
+    comboBox.getItems().clear();
+    comboBox.getItems().addAll(townManager.getResidents());
 
-
-private void TypeBox()
-  {
-    int currentIndex= comboType.getSelectionModel().getSelectedIndex();
-    comboType.getItems().clear();
-    comboType.getItems().setAll(OfferType.values());
-    if(currentIndex==-1 && comboType.getItems().size()>0){
-      comboType.getSelectionModel().select(0);
-    }
-    else{
-      comboType.getSelectionModel().select(currentIndex);
-    }
-
-  }
- private void StatusBox(){
-    int currentIndex= comboStatus.getSelectionModel().getSelectedIndex();
-    comboStatus.getItems().setAll(OfferStatus.values());
-    if(currentIndex==-1 && comboStatus.getItems().size()>0){
-      comboStatus.getSelectionModel().select(0);
-    }
-    else{
-      comboStatus.getSelectionModel().select(currentIndex);
-    }
- }
- private void updateResidentBox(ComboBox<Resident> comboBox){
-   int currentIndex = comboBox.getSelectionModel().getSelectedIndex();
-
-   comboBox.getItems().clear();
-   ArrayList<Resident> residents = manager.getResidents();
-   for (int i = 0; i < residents.size(); i++)
-   {
-     comboBox.getItems().add(residents.get(i));
-   }
-
-   if (currentIndex == -1 && comboBox.getItems().size() > 0)
-   {
-     comboBox.getSelectionModel().select(0);
-   }
-   else
-   {
-     comboBox.getSelectionModel().select(currentIndex);
-   }
- }
-  private Date parseDate(String textDate) {
-    try {
-      String[] dateFromTxt = textDate.split("[-/]");
-      if(dateFromTxt.length!=3){
-        throw new IllegalArgumentException();
-      }
-      int day = Integer.parseInt(dateFromTxt[0]);
-      int month = Integer.parseInt(dateFromTxt[1]);
-      int year = Integer.parseInt(dateFromTxt[2]);
-      return new Date(day, month, year);
-    } catch (Exception e) {
-      Alert alert = new Alert(
-          Alert.AlertType.ERROR,
-          "Invalid date format.\nUse: dd-mm-yyyy or dd/mm/yyyy"
-      );
-      alert.show();
-      return null;
+    if (currentIndex >= 0 && currentIndex < comboBox.getItems().size()) {
+      comboBox.getSelectionModel().select(currentIndex);
+    } else {
+      comboBox.getSelectionModel().clearSelection();
     }
   }
-  @FXML
-  private void handleActions(ActionEvent e){
-    if(e.getSource()==comboType){
-      OfferType type= comboType.getSelectionModel().getSelectedItem();
-      if(type!=null){
-        txtType.setText(type.toString());
-      }
-    }
-    else if(e.getSource()==comboStatus){
-     OfferStatus status= comboStatus.getSelectionModel().getSelectedItem();
-     if(status!=null){
-       txtStatus.setText(status.toString());
-     }
-    }
-    else if(e.getSource()==comboOfferBy){
-      Resident resident= comboOfferBy.getSelectionModel().getSelectedItem();
-      if(resident!=null){
-        txtOfferBy.setText(resident.getName());
-      }
-    }
-    else if(e.getSource()==comboAssignedTo){
-      Resident resident= comboAssignedTo.getSelectionModel().getSelectedItem();
-      if(resident!=null){
-        txtAssignedTo.setText(resident.getName());
-      }
-    }
+
+  private void showDateError() {
+    new Alert(Alert.AlertType.ERROR, "Please select a valid date from the calendar.").show();
   }
- }
-
-
+}

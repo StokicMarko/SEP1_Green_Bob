@@ -84,7 +84,7 @@
       "ID": "1a4fb47b-c8d0-4596-a76b-78182923a46a",
       "name": "Alice",
       "lastname": "Blue",
-      "personalPoints": 144,
+      "personalPoints": 134,
       "address": "Østerbrogade 45"
     },
     "assignedTo": {
@@ -158,6 +158,66 @@
       "day": 26,
       "month": 4,
       "year": 2004
+    }
+  },
+  {
+    "ID": "06b3842c-e949-4a7c-bd0d-278c6b73b094",
+    "title": "Windows cleaner",
+    "type": "SERVICE",
+    "description": "",
+    "pointCost": 50,
+    "status": "AVAILABLE",
+    "offerBy": {
+      "ID": "424c6ca5-2e66-4519-b2c6-f4e2b750ea84",
+      "name": "Marko",
+      "lastname": "Stokic",
+      "personalPoints": 50,
+      "address": "Kamj"
+    },
+    "createDate": {
+      "day": 21,
+      "month": 12,
+      "year": 2027
+    }
+  },
+  {
+    "ID": "a2cba480-4002-48d1-99a4-635b6ca988ae",
+    "title": "Manage stuff",
+    "type": "SERVICE",
+    "description": "",
+    "pointCost": 1000,
+    "status": "AVAILABLE",
+    "offerBy": {
+      "ID": "ae63f79a-8022-4f26-9f65-9371415ac890",
+      "name": "Bob",
+      "lastname": "Green",
+      "personalPoints": 19000,
+      "address": "Billundvej 73"
+    },
+    "createDate": {
+      "day": 31,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "ID": "73a97b66-5184-4b38-96cb-f0ac68b37baa",
+    "title": "Hello",
+    "type": "SERVICE",
+    "description": "Only a test",
+    "pointCost": 1000,
+    "status": "AVAILABLE",
+    "offerBy": {
+      "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
+      "name": "Kika",
+      "lastname": "Kika",
+      "personalPoints": 110,
+      "address": "Kamjact"
+    },
+    "createDate": {
+      "day": 16,
+      "month": 12,
+      "year": 2025
     }
   }
 ]

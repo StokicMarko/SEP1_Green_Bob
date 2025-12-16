@@ -47,5 +47,40 @@
       "month": 12,
       "year": 2025
     }
+  },
+  {
+    "participants": [
+      {
+        "ID": "985829ab-bb18-463e-93a3-e34429f2e553",
+        "name": "Single",
+        "lastname": "Double",
+        "personalPoints": 12,
+        "address": "Italy"
+      },
+      {
+        "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
+        "name": "Kika",
+        "lastname": "Kika",
+        "personalPoints": 1200,
+        "address": "Kamjact"
+      },
+      {
+        "ID": "1a4fb47b-c8d0-4596-a76b-78182923a46a",
+        "name": "Alice",
+        "lastname": "Blue",
+        "personalPoints": 200,
+        "address": "Østerbrogade 45"
+      }
+    ],
+    "isPointAssign": false,
+    "ID": "fa28ddaa-2fab-4bb5-84aa-ddeeb48e1a5f",
+    "title": "Test",
+    "description": "",
+    "points": 1000,
+    "eventDate": {
+      "day": 12,
+      "month": 12,
+      "year": 2027
+    }
   }
 ]

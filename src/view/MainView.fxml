@@ -16,7 +16,7 @@
 
             <!-- Add more tabs later -->
             <Tab text="Trade Offers" closable="false">
-               <fx:include source="TradeOffersView.fxml" fx:id="tradeoffersView"/>
+               <fx:include source="TradeOffersView.fxml" fx:id="tradeOffersView"/>
             </Tab>
 
             <Tab text="Green Actions" closable="false">

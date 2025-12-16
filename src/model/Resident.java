@@ -82,8 +82,6 @@ public class Resident
 
   @Override public String toString()
   {
-    return "Resident{" + "ID='" + ID + '\'' + ", name='" + name + '\''
-        + ", lastname='" + lastname + '\'' + ", personalPoints="
-        + personalPoints + ", address='" + address + '\'' + '}';
+    return name + " " + lastname;
   }
 }

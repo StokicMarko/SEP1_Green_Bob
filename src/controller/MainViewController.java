@@ -7,7 +7,7 @@ import logic.TownManager;
 public class MainViewController
 {
   @FXML private ResidentsController residentsViewController;
-  @FXML private TradeOfferController tradeoffersViewController;
+  @FXML private TradeOfferController tradeOffersViewController;
   @FXML private GreenActivityController greenActivityViewController;
   @FXML private CommunalActivityController communalActivityViewController;
 
@@ -20,13 +20,12 @@ public class MainViewController
     townManager = new TownManager();
 
     residentsViewController.init(townManager);
-    tradeoffersViewController.init(townManager);
+    tradeOffersViewController.init(townManager);
     // greenActivityViewController.init(townManager);
     communalActivityViewController.init(townManager);
 
     communalTab.setOnSelectionChanged(event -> {
       if (communalTab.isSelected()) {
-        System.out.print("AA");
         communalActivityViewController.loadResidents();
       }
     });

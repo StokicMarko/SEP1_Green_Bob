@@ -17,6 +17,9 @@ public class StartGUI extends Application
     scene.getStylesheets().add(getClass().getResource("../view/css/style.css").toExternalForm());
     scene.getStylesheets().add(getClass().getResource("../view/css/table.css").toExternalForm());
     scene.getStylesheets().add(getClass().getResource("../view/css/button.css").toExternalForm());
+    scene.getStylesheets().add(getClass().getResource("../view/css/combo-box.css").toExternalForm());
+    scene.getStylesheets().add(getClass().getResource("../view/css/date-picker.css").toExternalForm());
+
 
     window.setScene(scene);
     window.show();
