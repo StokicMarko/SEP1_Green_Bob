@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -11,106 +12,107 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
 
-<?import javafx.scene.control.DatePicker?>
-<BorderPane fx:id="tradeOffersView"
-            xmlns="http://javafx.com/javafx/24.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.TradeOfferController"
-            stylesheets="@css/trade-offer.css"
->
+
+<BorderPane fx:id="tradeOffersView" stylesheets="@css/trade-offer.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TradeOfferController">
 
     <!-- TOP BAR -->
     <top>
-        <HBox styleClass="top-bar" spacing="10" alignment="CENTER_LEFT">
+        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="top-bar">
             <BorderPane.margin>
-                <Insets bottom="15"/>
+                <Insets bottom="15" />
             </BorderPane.margin>
 
-            <Label styleClass="top-bar-title" text="Trade offers"/>
+            <Label styleClass="top-bar-title" text="Trade offers" />
 
-            <Region HBox.hgrow="ALWAYS"/>
+            <Region HBox.hgrow="ALWAYS" />
 
-            <Button fx:id="btnDelete" text="Delete"/>
-            <Button fx:id="btnClear" text="Clear"/>
+            <Button fx:id="btnDelete" text="Delete" />
+            <Button fx:id="btnClear" text="Clear" />
         </HBox>
     </top>
 
     <center>
         <VBox spacing="0" styleClass="table-container">
             <BorderPane.margin>
-                <Insets right="15"/>
+                <Insets right="15" />
             </BorderPane.margin>
 
             <TableView fx:id="tableOffers" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn fx:id="colTitle" text="Title"/>
-                    <TableColumn fx:id="colType" text="Type"/>
-                    <TableColumn fx:id="colDescription" prefWidth="180" text="Description"/>
-                    <TableColumn fx:id="colPointCost" prefWidth="72" text="Point Cost"/>
-                    <TableColumn fx:id="colStatus" prefWidth="118" text="Status"/>
-                    <TableColumn fx:id="colOfferBy" prefWidth="119" text="Offer By"/>
-                    <TableColumn fx:id="colAssignedTo" prefWidth="150" text="Assigned To"/>
-                    <TableColumn fx:id="colDate" prefWidth="120" text="Date"/>
+                    <TableColumn fx:id="colTitle" text="Title" />
+                    <TableColumn fx:id="colType" text="Type" />
+                    <TableColumn fx:id="colDescription" prefWidth="180" text="Description" />
+                    <TableColumn fx:id="colPointCost" prefWidth="72" text="Point Cost" />
+                    <TableColumn fx:id="colStatus" prefWidth="118" text="Status" />
+                    <TableColumn fx:id="colOfferBy" prefWidth="119" text="Offer By" />
+                    <TableColumn fx:id="colAssignedTo" prefWidth="150" text="Assigned To" />
+                    <TableColumn fx:id="colDate" prefWidth="120" text="Date" />
                 </columns>
             </TableView>
         </VBox>
     </center>
 
     <right>
-        <VBox prefWidth="263" spacing="10" styleClass="editBox">
-            <padding>
-                <Insets top="15" right="15" bottom="15" left="15"/>
-            </padding>
+        <ScrollPane fitToWidth="true" prefWidth="266.0">
+            <content>
+                <VBox prefWidth="266.0" spacing="10" styleClass="editBox">
+                    <padding>
+                        <Insets bottom="15" left="15" right="15" top="15" />
+                    </padding>
 
-            <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="TradeOffer Editor"/>
+                    <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="TradeOffer Editor" />
 
-            <VBox spacing="5">
-                <Label text="Title"/>
-                <TextField fx:id="txtTitle"/>
-            </VBox>
+                    <VBox spacing="5">
+                        <Label text="Title" />
+                        <TextField fx:id="txtTitle" />
+                    </VBox>
 
-            <VBox spacing="5">
-                <Label text="Type"/>
-                <ComboBox fx:id="comboType" maxWidth="Infinity"/>
-            </VBox>
+                    <VBox spacing="5">
+                        <Label text="Type" />
+                        <ComboBox fx:id="comboType" maxWidth="Infinity" />
+                    </VBox>
 
-            <VBox spacing="5">
-                <Label text="Description"/>
-                <TextField fx:id="txtDescription" prefHeight="75"/>
-            </VBox>
+                    <VBox spacing="5">
+                        <Label text="Description" />
+                        <TextField fx:id="txtDescription" prefHeight="52.0" prefWidth="235.0" />
+                    </VBox>
 
-            <VBox spacing="5">
-                <Label text="Point Cost"/>
-                <TextField fx:id="txtPointCost"/>
-            </VBox>
+                    <VBox spacing="5">
+                        <Label text="Point Cost" />
+                        <TextField fx:id="txtPointCost" />
+                    </VBox>
 
-            <VBox spacing="5">
-                <Label text="Status"/>
-                <ComboBox fx:id="comboStatus" maxWidth="Infinity"/>
-            </VBox>
+                    <VBox spacing="5">
+                        <Label text="Status" />
+                        <ComboBox fx:id="comboStatus" maxWidth="Infinity" />
+                    </VBox>
 
-            <VBox spacing="5">
-                <Label text="Offer By"/>
-                <ComboBox fx:id="comboOfferBy" maxWidth="Infinity"/>
-            </VBox>
+                    <VBox spacing="5">
+                        <Label text="Offer By" />
+                        <ComboBox fx:id="comboOfferBy" maxWidth="Infinity" />
+                    </VBox>
 
-            <VBox spacing="5">
-                <Label text="Assigned To"/>
-                <ComboBox fx:id="comboAssignedTo" maxWidth="Infinity"/>
-            </VBox>
+                    <VBox spacing="5">
+                        <Label text="Assigned To" />
+                        <ComboBox fx:id="comboAssignedTo" maxWidth="Infinity" />
+                    </VBox>
 
-            <VBox spacing="5">
-                <Label text="Date"/>
-                <DatePicker fx:id="datePicker" maxWidth="Infinity"/>
-            </VBox>
+                    <VBox spacing="5">
+                        <Label text="Date" />
+                        <DatePicker fx:id="datePicker" maxWidth="Infinity" />
+                    </VBox>
 
-            <HBox spacing="10">
-                <Button fx:id="btnSave" text="Save" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
-                <Button fx:id="btnNew" text="New" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
-            </HBox>
+                    <HBox spacing="10">
+                        <Button fx:id="btnSave" maxWidth="Infinity" text="Save" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="btnNew" maxWidth="Infinity" text="New" HBox.hgrow="ALWAYS" />
+                    </HBox>
 
-        </VBox>
+                </VBox>
+            </content>
+        </ScrollPane>
     </right>
+
 
 </BorderPane>

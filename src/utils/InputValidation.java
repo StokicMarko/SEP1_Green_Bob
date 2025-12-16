@@ -1,4 +1,5 @@
 package utils;
+import model.*;
 
 public class InputValidation
 {
@@ -19,5 +20,32 @@ public class InputValidation
       return false;
 
     return true;
+  }
+  public static String transferPoints(TradeOffer selected, Resident newOfferBy,int newPointCost){
+    Resident oldOfferBy= selected.getOfferBy();
+    int oldPointCost= selected.getPointCost();
+
+    if(!(oldOfferBy.getID().equals(newOfferBy.getID()))){
+      oldOfferBy.addPoints(oldPointCost);
+
+      if(newOfferBy.getPersonalPoints()<newPointCost){
+        return newOfferBy.getFullName()+" "+"doesnot have enough points for trade offer";
+      }
+      newOfferBy.removePoints(newPointCost);
+    }
+
+    else if(oldPointCost!=newPointCost){
+      int difference= newPointCost- oldPointCost;
+      if(difference<0){
+        oldOfferBy.addPoints(-difference);
+      }
+      else{
+        if(oldOfferBy.getPersonalPoints()<difference){
+          return oldOfferBy.getFullName()+" "+"couldnot exceed the original points";
+        }
+        oldOfferBy.removePoints(difference);
+      }
+    }
+    return null;
   }
 }

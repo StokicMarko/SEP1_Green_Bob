@@ -5,8 +5,11 @@ import javafx.scene.control.*;
 import logic.TownManager;
 import model.*;
 import myEnum.*;
+import utils.*;
 
 import java.time.LocalDate;
+
+import static utils.InputValidation.transferPoints;
 
 public class TradeOfferController {
 
@@ -124,6 +127,13 @@ public class TradeOfferController {
   private void onSave() {
     TradeOffer selected = tableOffers.getSelectionModel().getSelectedItem();
     if (selected == null || !validateRequiredFields()) return;
+     int newPointCost= Integer.parseInt(txtPointCost.getText());
+    String error= transferPoints(selected,comboOfferBy.getValue(),newPointCost);
+    if(error!=null){
+      Alert alert = new Alert(Alert.AlertType.ERROR, error);
+      alert.show();
+      return;
+    }
 
     selected.setTitle(txtTitle.getText());
     selected.setType(comboType.getValue());
@@ -148,22 +158,26 @@ public class TradeOfferController {
 
   private void onNewTradeOffer() {
     if (!validateRequiredFields()) return;
+   try
+   {
+     TradeOffer offer = new TradeOffer(txtTitle.getText(), comboType.getValue(),
+         txtDescription.getText(), Integer.parseInt(txtPointCost.getText()),
+         comboOfferBy.getValue(), new Date(datePicker.getValue()));
+     offer.setAssignedTo(comboAssignedTo.getValue());
+     Resident assignedTo = comboAssignedTo.getValue();
+     if (assignedTo != null)
+     {
+       offer.setStatusToTaken(assignedTo);
+     }
+     townManager.addTradeOffer(offer);
+     comboStatus.setDisable(true);
+     refreshTable();
+     clearForm();
+   } catch(IllegalArgumentException e){
+     Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+     alert.show();
+   }
 
-    TradeOffer offer = new TradeOffer(
-        txtTitle.getText(),
-        comboType.getValue(),
-        txtDescription.getText(),
-        Integer.parseInt(txtPointCost.getText()),
-        comboOfferBy.getValue(),
-        new Date(datePicker.getValue())
-    );
-    offer.setAssignedTo(comboAssignedTo.getValue());
-    offer.setGeneralStatus(offer, OfferStatus.AVAILABLE, comboAssignedTo.getValue());
-
-    townManager.addTradeOffer(offer);
-    comboStatus.setDisable(true);
-    refreshTable();
-    clearForm();
   }
 
   private boolean validateRequiredFields() {
