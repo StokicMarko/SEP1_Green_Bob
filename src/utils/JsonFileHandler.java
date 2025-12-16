@@ -43,7 +43,7 @@ public class JsonFileHandler
     return new ArrayList<>(Arrays.asList(greenActivityArray));
   }
 
-  public static void saveGreenActivityToJson(String filename, ArrayList<GreenActivity> greenActivities)
+  public static void saveActivityToJson(String filename, ArrayList<Activity> greenActivities)
       throws ParserException
   {
     parser.toJsonFile(greenActivities, filename);

@@ -28,23 +28,25 @@ public class ActivityList
     }
   }
 
-
-
   public ArrayList<Activity> getAll()
   {
     return activities;
   }
 
-  // Return only green activities
-  public ArrayList<GreenActivity> getGreenActivities() {
-    ArrayList<GreenActivity> greens = new ArrayList<>();
+  public void updateByID(String id, Activity newData)
+  {
+    Activity existing = findByID(id);
+    if (existing == null) return;
 
-    for (Activity a : activities) {
-      if (a instanceof GreenActivity) {
-        greens.add((GreenActivity) a);
-      }
-    }
+    existing.setTitle(newData.getTitle());
+    existing.setDescription(newData.getDescription());
+    existing.setEventDate(newData.getEventDate());
+  }
 
-    return greens;
+  public Activity findByID(String id) {
+    return activities.stream()
+        .filter(activity -> activity.getID().equals(id))
+        .findFirst()
+        .orElse(null);
   }
 }

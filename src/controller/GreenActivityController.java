@@ -2,125 +2,163 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
 import logic.TownManager;
 import model.Date;
 import model.GreenActivity;
-
-import javax.swing.*;
+import java.time.LocalDate;
 
 public class GreenActivityController
 {
-  @FXML public BorderPane greenActivityView;
 
-  @FXML public TextField txtDescription;
-  @FXML public TextField txtGreenPoints;
-  @FXML public TextField txtEventDate;
-  @FXML public TextField txtTitle;
+  @FXML private TableView<GreenActivity> tableGreenActivities;
+  @FXML private TableColumn<GreenActivity, String> colTitle;
+  @FXML private TableColumn<GreenActivity, String> colDescription;
+  @FXML private TableColumn<GreenActivity, Number> colGreenPoints;
+  @FXML private TableColumn<GreenActivity, Date> colEventDate;
 
-  @FXML public Button btnSave;
-  @FXML public Button btnNew;
-  @FXML public Button btnDelete;
-  @FXML public Button btnClear;
+  @FXML private TextField txtDescription;
+  @FXML private TextField txtGreenPoints;
+  @FXML private TextField txtTitle;
+  @FXML private DatePicker datePicker;
 
-  @FXML public TableView<GreenActivity> tableGreenActivities;
-  @FXML public TableColumn<GreenActivity, String> colTitle;
-  @FXML public TableColumn<GreenActivity, String> colDescription;
-  @FXML public TableColumn<GreenActivity, Integer> colGreenPoints;
-  @FXML public TableColumn<GreenActivity, String> colEventDate;
-  @FXML public TableColumn<GreenActivity, String> colID;
+  @FXML private Label lblTotalPoints;
 
-  @FXML
-  private DatePicker datePicker;
+  @FXML private Button btnSave;
+  @FXML private Button btnNew;
+  @FXML private Button btnDelete;
+  @FXML private Button btnClear;
+
 
   @FXML
-  private ListView<String> greenActivityList;
   private TownManager townManager;
-  private AbstractButton titleField;
-  private AbstractButton pointsField;
-  private AbstractButton descriptionField;
 
   @FXML public void init(TownManager townManager)
   {
     this.townManager = townManager;
     townManager.loadGreenActivities();
-    loadListView();
+
+    setupTable();
+    setupDatePicker();
+    setupButtonActions();
+    setupSelectionListener();
+
+    refreshTable();
+    clearForm();
   }
-  // --- LOAD LIST INTO UI ---
-  private void loadListView()
+
+  private void refreshTable()
   {
-    greenActivityList.getItems().clear();
-
-    for (GreenActivity g : townManager.getGreenActivities())
-    {
-      greenActivityList.getItems().add(
-          g.getID() + " | " + g.getTitle() + " | " + g.getPoints() + " pts");
-    }
+    tableGreenActivities.getItems().setAll(townManager.getGreenActivities());
+    updateTotalPoints();
   }
 
-  // --- ADD GREEN ACTIVITY ---
+  private void setupDatePicker()
+  {
+    datePicker.setValue(LocalDate.now());
+    datePicker.setEditable(false);
+  }
+
+  private void setupSelectionListener() {
+    tableGreenActivities.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
+      boolean hasSelection = newSel != null;
+      btnSave.setDisable(!hasSelection);
+      btnDelete.setDisable(!hasSelection);
+      showGreenActivity(newSel);
+    });
+  }
+
+  private void showGreenActivity(GreenActivity greenActivity)
+  {
+    if (greenActivity == null) return;
+
+    txtTitle.setText(greenActivity.getTitle());
+    txtDescription.setText(greenActivity.getDescription());
+    txtGreenPoints.setText(String.valueOf(greenActivity.getPoints()));
+    datePicker.setValue(greenActivity.getEventDate() != null
+        ? LocalDate.of(greenActivity.getEventDate().getYear(), greenActivity.getEventDate().getMonth(), greenActivity.getEventDate().getDay())
+        : LocalDate.now());
+  }
+
+  private void setupButtonActions() {
+    btnSave.setOnAction(e -> onSave());
+    btnNew.setOnAction(e -> onNewGreenActivity());
+    btnDelete.setOnAction(e -> onDelete());
+    btnClear.setOnAction(e -> onClearSelection());
+  }
+
+  private void onSave()
+  {
+    GreenActivity selected = tableGreenActivities.getSelectionModel().getSelectedItem();
+    if (selected == null || !validateRequiredFields()) return;
+
+    selected.setTitle(txtTitle.getText());
+    selected.setPoints(Integer.parseInt(txtGreenPoints.getText()));
+    selected.setDescription(txtDescription.getText() == null ? "" : txtDescription.getText());
+    selected.setEventDate(new Date(datePicker.getValue()));
+
+    townManager.updateGreenActivity(selected.getID(), selected);
+    refreshTable();
+    clearForm();
+  }
+
+  private boolean validateRequiredFields() {
+    if (txtTitle.getText().isEmpty()
+        || Integer.parseInt(txtGreenPoints.getText()) < 0
+        || txtGreenPoints.getText().isEmpty()
+        || datePicker.getValue() == null) {
+      new Alert(Alert.AlertType.ERROR, "Please fill all required fields").show();
+      return false;
+    }
+    return true;
+  }
+
   @FXML
-  private void handleAddGreenActivity() {
+  private void onNewGreenActivity() {
 
-    String title = titleField.getText();
-    String description = descriptionField.getText();
-    String pointsText = pointsField.getText();
-    Date date = new Date(datePicker.getValue());
+    GreenActivity greenActivity =
+        new GreenActivity(
+          txtTitle.getText(),
+          txtDescription.getText(),
+          Integer.parseInt(txtGreenPoints.getText()),
+          new Date(datePicker.getValue()
+        )
+    );
 
-    // Validation
-    if (title.isEmpty() || description.isEmpty() || pointsText.isEmpty() || date == null) {
+    if (greenActivity.getTitle().isEmpty() || greenActivity.getPoints() < 0 || greenActivity.getEventDate() == null) {
       showAlert("Please fill in all fields.");
       return;
     }
 
-    int points;
-    try {
-      points = Integer.parseInt(pointsText);
-    }
-    catch (NumberFormatException e) {
-      showAlert("Points must be an integer.");
-      return;
-    }
-
-
-    // --- Create activity using YOUR EXACT CONSTRUCTOR ---
-    GreenActivity activity = new GreenActivity(
-        title,
-        description,
-        points,
-        date
-    );
-
-    townManager.addGreenActivity(activity);
-    loadListView();
-    clearFields();
+    townManager.addGreenActivity(greenActivity);
+    refreshTable();
+    clearForm();
   }
 
 
-  // --- REMOVE GREEN ACTIVITY ---
   @FXML
-  private void handleRemoveGreenActivity() {
+  private void onDelete() {
 
-    String selected = greenActivityList.getSelectionModel().getSelectedItem();
+    GreenActivity selected = tableGreenActivities.getSelectionModel().getSelectedItem();
     if (selected == null) {
       showAlert("Please select an activity to remove.");
       return;
     }
 
-    // ID is before the "|" separator
-    String id = selected.split("\\|")[0].trim();
-
-    townManager.removeGreenActivity(id);
-    loadListView();
+    townManager.removeGreenActivity(selected.getID());
+    refreshTable();
+    clearForm();
   }
 
-
-  // --- HELPER METHODS ---
-  private void clearFields() {
+  private void clearForm() {
     txtTitle.clear();
     txtDescription.clear();
     txtGreenPoints.clear();
-    txtEventDate.clear();
+    datePicker.setValue(LocalDate.now());
+
+    tableGreenActivities.getSelectionModel().clearSelection();
+
+    btnSave.setDisable(true);
+    btnDelete.setDisable(true);
   }
 
   private void showAlert(String msg) {
@@ -131,6 +169,33 @@ public class GreenActivityController
     alert.showAndWait();
   }
 
+  @FXML
+  private void onClearSelection() {
+    tableGreenActivities.getSelectionModel().clearSelection();
+    clearForm();
+  }
+
+
+  private void setupTable() {
+    colTitle.setCellValueFactory( c ->
+        new javafx.beans.property.SimpleStringProperty(c.getValue().getTitle()));
+    colDescription.setCellValueFactory(c ->
+        new javafx.beans.property.SimpleStringProperty(c.getValue().getDescription()));
+    colGreenPoints.setCellValueFactory(c->
+        new javafx.beans.property.SimpleIntegerProperty( c.getValue().getPoints()));
+    colEventDate.setCellValueFactory(c ->
+        new javafx.beans.property.SimpleObjectProperty<Date>(c.getValue().getEventDate()));
+    tableGreenActivities.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+  }
+
+  private void updateTotalPoints() {
+    int total = townManager.getGreenActivities()
+        .stream()
+        .mapToInt(GreenActivity::getPoints)
+        .sum();
+
+    lblTotalPoints.setText("Total Points: " + total);
+  }
 
 }
 

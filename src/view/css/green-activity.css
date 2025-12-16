@@ -1,0 +1,19 @@
+#greenActivityView{
+    -fx-padding: 20;
+}
+
+.points-pill {
+    -fx-background-color: #f1f3f4;
+    -fx-background-radius: 18;
+    -fx-border-radius: 18;
+    -fx-border-color: #d0d7de;
+
+    -fx-padding: 6 14 6 14;
+
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e7d32;
+
+    -fx-min-height: 28;
+    -fx-alignment: center;
+}

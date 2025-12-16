@@ -3,12 +3,9 @@ package logic;
 import model.*;
 import myEnum.OfferStatus;
 import parser.ParserException;
-import utils.InputValidation;
 import utils.JsonFileHandler;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class TownManager
 {
@@ -169,8 +166,7 @@ public class TownManager
   {
   try
   {
-    ArrayList<GreenActivity> greens = greenActivityList.getGreenActivities();
-    JsonFileHandler.saveGreenActivityToJson("greenactivities.json", greenActivityList.getGreenActivities());
+    JsonFileHandler.saveActivityToJson("greenactivities.json", greenActivityList.getAll());
   }
   catch (ParserException e)
   {
@@ -195,13 +191,18 @@ public class TownManager
     saveGreenActivityToFile();
   }
 
+  public void updateGreenActivity(String id, GreenActivity newData)
+  {
+      greenActivityList.updateByID(id, newData);
+      saveGreenActivityToFile();
+  }
+
   public void removeGreenActivity(String id)
   {
     greenActivityList.removeById(id);
     saveGreenActivityToFile();
   }
 
-  // ---------------- Communal Activities ----------------
   public ArrayList<CommunalActivity> getCommunalActivities()
   {
     ArrayList<CommunalActivity> list = new ArrayList<>();
@@ -212,22 +213,19 @@ public class TownManager
     return list;
   }
 
-  // Add communal activity and save to JSON
-  public void addCommunalActivity(CommunalActivity a)
+  public void addCommunalActivity(CommunalActivity communalActivity)
   {
-    System.out.println(a.toString());
-    communalActivityList.add(a);
+    System.out.println(communalActivity.toString());
+    communalActivityList.add(communalActivity);
     saveCommunalActivitiesToFile();
   }
 
-  // Remove communal activity by ID and save to JSON
   public void removeCommunalActivity(String id)
   {
     communalActivityList.removeById(id);
     saveCommunalActivitiesToFile();
   }
 
-  // Load communal activities from JSON
   public void loadCommunalActivities()
   {
     try
@@ -243,7 +241,6 @@ public class TownManager
     }
   }
 
-  // Save communal activities to JSON
   private void saveCommunalActivitiesToFile()
   {
     try

@@ -1,4 +1,3 @@
-/* TABLE STYLING */
 .table-view {
     -fx-background-color: transparent;
     -fx-padding: 10;
@@ -37,4 +36,8 @@
     -fx-font-size: 13px;
     -fx-font-weight: bold;
     -fx-padding: 10 4 10 4;
+}
+
+.table-view .table-cell {
+    -fx-alignment: CENTER;
 }

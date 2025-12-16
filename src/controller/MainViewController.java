@@ -21,7 +21,7 @@ public class MainViewController
 
     residentsViewController.init(townManager);
     tradeOffersViewController.init(townManager);
-    // greenActivityViewController.init(townManager);
+    greenActivityViewController.init(townManager);
     communalActivityViewController.init(townManager);
 
     communalTab.setOnSelectionChanged(event -> {

@@ -26,6 +26,11 @@ public abstract class Activity
     return points;
   }
 
+  public void setPoints(int points)
+  {
+    this.points = points;
+  }
+
   public String getID()
   {
     return ID;
@@ -69,5 +74,12 @@ public abstract class Activity
   public Date getEventDate()
   {
     return eventDate;
+  }
+
+  @Override public String toString()
+  {
+    return "Activity{" + "ID='" + ID + '\'' + ", title='" + title + '\''
+        + ", description='" + description + '\'' + ", points=" + points
+        + ", eventDate=" + eventDate + '}';
   }
 }
