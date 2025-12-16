@@ -28,6 +28,11 @@ public class ResidentList
     residents = list;
   }
 
+  public void resetPersonalPoints()
+  {
+    residents.forEach(resident -> resident.setPersonalPoints(0));
+  }
+
   public void updateByID(String id, Resident newData) {
     Resident existing = findByID(id);
     if (existing == null) return;

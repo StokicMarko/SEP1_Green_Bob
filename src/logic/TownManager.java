@@ -254,5 +254,9 @@ public class TownManager
     }
   }
 
-
+  public void resetPersonalPoints()
+  {
+    residentList.resetPersonalPoints();
+    saveResidentsToFile();
+  }
 }

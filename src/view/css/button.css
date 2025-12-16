@@ -26,6 +26,20 @@
     -fx-background-color: #c0392b;
 }
 
+#btnReset {
+    -fx-background-color: #a3b18a;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+#btnReset:hover {
+    -fx-background-color: #8aa883;
+}
+
+#btnReset:pressed {
+    -fx-background-color: #7a9773;
+}
+
 #btnDelete:pressed {
     -fx-background-color: #a93226;
 }

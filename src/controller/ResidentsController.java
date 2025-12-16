@@ -22,6 +22,7 @@ public class ResidentsController {
   @FXML private Button btnNew;
   @FXML private Button btnDelete;
   @FXML private Button btnClear;
+  @FXML private Button btnReset;
 
 
   private TownManager townManager;
@@ -50,6 +51,7 @@ public class ResidentsController {
 
     btnSave.setOnAction(e -> onSave());
     btnNew.setOnAction(e -> onNewResident());
+    btnReset.setOnAction(e -> onReset());
     btnDelete.setOnAction(e -> onDelete());
     btnClear.setOnAction(e -> onClearSelection());
 
@@ -148,4 +150,18 @@ public class ResidentsController {
     clearForm();
   }
 
+  private void onReset()
+  {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Reset personal points");
+    alert.setHeaderText("Are you sure you want to reset ALL personal points?");
+
+    alert.showAndWait().ifPresent(response -> {
+      if (response == ButtonType.OK) {
+        townManager.resetPersonalPoints();
+        refreshTable();
+        clearForm();
+      }
+    });
+  }
 }

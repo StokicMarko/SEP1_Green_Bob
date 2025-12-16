@@ -21,6 +21,7 @@
 
             <Region HBox.hgrow="ALWAYS"/>
 
+            <Button text="Reset Points" fx:id="btnReset"/>
             <Button text="Delete" fx:id="btnDelete"/>
             <Button text="Clear" fx:id="btnClear"/>
         </HBox>
