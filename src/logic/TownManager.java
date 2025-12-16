@@ -191,7 +191,7 @@ public class TownManager
     saveGreenActivityToFile();
   }
 
-  public void updateGreenActivity(String id, GreenActivity newData)
+  public void updateActivity(String id, GreenActivity newData)
   {
       greenActivityList.updateByID(id, newData);
       saveGreenActivityToFile();
@@ -259,4 +259,28 @@ public class TownManager
     residentList.resetPersonalPoints();
     saveResidentsToFile();
   }
+
+  public void updateCommunalActivity(String id, CommunalActivity selectedActivity)
+  {
+    communalActivityList.updateByID(id, selectedActivity);
+    saveCommunalActivitiesToFile();
+  }
+
+  public void assignPointFromCommunal(CommunalActivity selectedActivity)
+  {
+    selectedActivity.getParticipants().forEach(participant -> {
+      residentList.updateByID(participant.getID(), new Resident(
+          participant.getName(),
+          participant.getLastname(),
+          participant.getPersonalPoints() + selectedActivity.getPoints(),
+          participant.getAddress()
+      ));
+    });
+
+    selectedActivity.setPointAssign(true);
+
+    saveCommunalActivitiesToFile();
+    saveResidentsToFile();
+  }
+
 }

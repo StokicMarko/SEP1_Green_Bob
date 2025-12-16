@@ -7,7 +7,9 @@
 <BorderPane fx:id="communalActivityView" prefHeight="700.0" prefWidth="1200.0"
             xmlns="http://javafx.com/javafx/24.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.CommunalActivityController">
+            fx:controller="controller.CommunalActivityController"
+            stylesheets="@css/communal-activity.css"
+>
 
     <!-- TOP BAR -->
     <top>
@@ -39,6 +41,7 @@
                     <TableColumn fx:id="colPersonalPoints" text="Points"/>
                     <TableColumn fx:id="colEventDate" text="Date"/>
                     <TableColumn fx:id="colParticipants" text="Participants" prefWidth="250"/>
+                    <TableColumn fx:id="colPointsAssigned" text="Points Assigned" prefWidth="120"/>
                 </columns>
             </TableView>
         </VBox>
@@ -69,8 +72,8 @@
             </VBox>
 
             <VBox spacing="5">
-                <Label text="Date (DD-MM-YYYY)"/>
-                <TextField fx:id="txtEventDate" prefHeight="25.0" prefWidth="250.0"/>
+                <Label text="Date"/>
+                <DatePicker fx:id="datePicker" maxWidth="Infinity"/>
             </VBox>
 
             <VBox spacing="5">
@@ -80,6 +83,7 @@
 
             <!-- BUTTONS -->
             <HBox spacing="10">
+                <Button fx:id="btnAssignPoints" text="Assign Points" maxWidth="Infinity"/>
                 <Button fx:id="btnSave" text="Save" HBox.hgrow="ALWAYS"/>
                 <Button fx:id="btnNew" text="New" HBox.hgrow="ALWAYS"/>
             </HBox>

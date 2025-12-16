@@ -10,17 +10,16 @@
     <center>
         <TabPane fx:id="mainTabs">
 
-            <Tab text="Residents" closable="false">
+            <Tab text="Residents" closable="false" fx:id="residentsTab">
                 <fx:include source="ResidentsView.fxml" fx:id="residentsView"/>
             </Tab>
 
-            <!-- Add more tabs later -->
-            <Tab text="Trade Offers" closable="false">
-               <fx:include source="TradeOffersView.fxml" fx:id="tradeOffersView"/>
+            <Tab text="Trade Offers" closable="false" fx:id="tradeOfferTab">
+                <fx:include source="TradeOffersView.fxml" fx:id="tradeOffersView"/>
             </Tab>
 
-            <Tab text="Green Actions" closable="false">
-               <fx:include source="GreenActivityView.fxml" fx:id="greenActivityView"/>
+            <Tab text="Green Actions" closable="false" fx:id="greenTab">
+                <fx:include source="GreenActivityView.fxml" fx:id="greenActivityView"/>
             </Tab>
 
             <Tab text="Communal Activities" closable="false" fx:id="communalTab">

@@ -16,20 +16,20 @@ public class CommunalActivity extends Activity
     isPointAssign = false;
   }
 
-  public void assignPointsToParticipants() {
-    if(!isPointAssign)
-    {
-      isPointAssign = true;
-      for (int i = 0; i < participants.size(); i++)
-      {
-        participants.get(i).addPoints(getPoints());
-      }
-    }
+  public boolean isPointsAssigned() {
+    return isPointAssign;
   }
 
-  public void setParticipants(List<Resident> participants) {
+  public void setPointAssign(boolean value)
+  {
+    this.isPointAssign = value;
+  }
+
+  public void setParticipants(List<Resident> participants)
+  {
     this.participants = new ArrayList<>(participants);
   }
+
   public List<Resident> getParticipants() {
     return participants;
   }

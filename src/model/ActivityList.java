@@ -41,6 +41,10 @@ public class ActivityList
     existing.setTitle(newData.getTitle());
     existing.setDescription(newData.getDescription());
     existing.setEventDate(newData.getEventDate());
+
+    if (existing instanceof CommunalActivity && newData instanceof CommunalActivity) {
+      ((CommunalActivity) existing).setParticipants(((CommunalActivity) newData).getParticipants());
+    }
   }
 
   public Activity findByID(String id) {

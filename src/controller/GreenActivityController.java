@@ -96,7 +96,7 @@ public class GreenActivityController
     selected.setDescription(txtDescription.getText() == null ? "" : txtDescription.getText());
     selected.setEventDate(new Date(datePicker.getValue()));
 
-    townManager.updateGreenActivity(selected.getID(), selected);
+    townManager.updateActivity(selected.getID(), selected);
     refreshTable();
     clearForm();
   }

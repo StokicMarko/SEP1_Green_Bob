@@ -5,39 +5,39 @@
         "ID": "1a4fb47b-c8d0-4596-a76b-78182923a46a",
         "name": "Alice",
         "lastname": "Blue",
-        "personalPoints": 200,
+        "personalPoints": 400,
         "address": "Østerbrogade 45"
       },
       {
         "ID": "d7fd46bb-fe9e-441d-972b-07d41dc8d990",
         "name": "Jonh",
         "lastname": "Doe",
-        "personalPoints": 67,
+        "personalPoints": 267,
         "address": "Fantasyland"
       },
       {
         "ID": "985829ab-bb18-463e-93a3-e34429f2e553",
         "name": "Single",
         "lastname": "Double",
-        "personalPoints": 12,
+        "personalPoints": 212,
         "address": "Italy"
       },
       {
         "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
         "name": "Kika",
         "lastname": "Kika",
-        "personalPoints": 1200,
+        "personalPoints": 1400,
         "address": "Kamjact"
       },
       {
         "ID": "ae63f79a-8022-4f26-9f65-9371415ac890",
         "name": "Bob",
         "lastname": "Jamason",
-        "personalPoints": 20000,
+        "personalPoints": 20200,
         "address": "Billundvej 73"
       }
     ],
-    "isPointAssign": false,
+    "isPointAssign": true,
     "ID": "eb60b818-ded0-4b53-ae89-5552f46e0767",
     "title": "ververvre",
     "description": "",
@@ -51,36 +51,189 @@
   {
     "participants": [
       {
+        "ID": "1a4fb47b-c8d0-4596-a76b-78182923a46a",
+        "name": "Alice",
+        "lastname": "Blue",
+        "personalPoints": 100,
+        "address": "Østerbrogade 45"
+      },
+      {
+        "ID": "d7fd46bb-fe9e-441d-972b-07d41dc8d990",
+        "name": "Jonh",
+        "lastname": "Jon",
+        "personalPoints": 100,
+        "address": "Fantasyland"
+      },
+      {
         "ID": "985829ab-bb18-463e-93a3-e34429f2e553",
         "name": "Single",
         "lastname": "Double",
-        "personalPoints": 12,
+        "personalPoints": 100,
         "address": "Italy"
       },
       {
         "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
         "name": "Kika",
         "lastname": "Kika",
-        "personalPoints": 1200,
+        "personalPoints": 100,
         "address": "Kamjact"
       },
+      {
+        "ID": "0bef1f10-e8ba-4435-aa78-2f3a7e92babf",
+        "name": "Alice",
+        "lastname": "Blue",
+        "personalPoints": 100,
+        "address": "Østerbrogade 45"
+      }
+    ],
+    "isPointAssign": true,
+    "ID": "912b1fcb-336c-4ec8-894b-3586ac9ebc96",
+    "title": "Pizza party",
+    "description": "A lot of pizza",
+    "points": 100,
+    "eventDate": {
+      "day": 16,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "participants": [
+      {
+        "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
+        "name": "Kika",
+        "lastname": "Kika",
+        "personalPoints": 100,
+        "address": "Kamjact"
+      },
+      {
+        "ID": "ae63f79a-8022-4f26-9f65-9371415ac890",
+        "name": "Bob",
+        "lastname": "Green",
+        "personalPoints": 100,
+        "address": "Billundvej 73"
+      }
+    ],
+    "isPointAssign": true,
+    "ID": "83ecfaa4-335e-4d7c-b44d-5a441cf1c17a",
+    "title": "Gadering",
+    "description": "",
+    "points": 99,
+    "eventDate": {
+      "day": 16,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "participants": [
+      {
+        "ID": "d7fd46bb-fe9e-441d-972b-07d41dc8d990",
+        "name": "Jonh",
+        "lastname": "Jon",
+        "personalPoints": 100,
+        "address": "Fantasyland"
+      },
+      {
+        "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
+        "name": "Kika",
+        "lastname": "Kika",
+        "personalPoints": 100,
+        "address": "Kamjact"
+      },
+      {
+        "ID": "ae63f79a-8022-4f26-9f65-9371415ac890",
+        "name": "Bob",
+        "lastname": "Green",
+        "personalPoints": 100,
+        "address": "Billundvej 73"
+      }
+    ],
+    "isPointAssign": true,
+    "ID": "65b42d43-b93c-49b5-8caf-232605b92579",
+    "title": "Test",
+    "description": "",
+    "points": 100,
+    "eventDate": {
+      "day": 16,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "participants": [
+      {
+        "ID": "d7fd46bb-fe9e-441d-972b-07d41dc8d990",
+        "name": "Jonh",
+        "lastname": "Jon",
+        "personalPoints": 200,
+        "address": "Fantasyland"
+      },
+      {
+        "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
+        "name": "Kika",
+        "lastname": "Kika",
+        "personalPoints": 200,
+        "address": "Kamjact"
+      },
+      {
+        "ID": "ae63f79a-8022-4f26-9f65-9371415ac890",
+        "name": "Bob",
+        "lastname": "Green",
+        "personalPoints": 200,
+        "address": "Billundvej 73"
+      }
+    ],
+    "isPointAssign": true,
+    "ID": "eef44319-a8fd-4f86-8b4e-456a6de8c765",
+    "title": "Test",
+    "description": "",
+    "points": 100,
+    "eventDate": {
+      "day": 16,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "participants": [
       {
         "ID": "1a4fb47b-c8d0-4596-a76b-78182923a46a",
         "name": "Alice",
         "lastname": "Blue",
-        "personalPoints": 200,
+        "personalPoints": 0,
         "address": "Østerbrogade 45"
+      },
+      {
+        "ID": "d7fd46bb-fe9e-441d-972b-07d41dc8d990",
+        "name": "Jonh",
+        "lastname": "Jon",
+        "personalPoints": 200,
+        "address": "Fantasyland"
       }
     ],
+    "isPointAssign": true,
+    "ID": "b3be231b-12f0-4431-9ce6-03dc28a152b0",
+    "title": "a",
+    "description": "",
+    "points": 9,
+    "eventDate": {
+      "day": 16,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "participants": [],
     "isPointAssign": false,
-    "ID": "fa28ddaa-2fab-4bb5-84aa-ddeeb48e1a5f",
+    "ID": "f921aa49-9fd3-4cec-86c3-108414ef5b85",
     "title": "Test",
     "description": "",
-    "points": 1000,
+    "points": 100,
     "eventDate": {
-      "day": 12,
+      "day": 16,
       "month": 12,
-      "year": 2027
+      "year": 2025
     }
   }
 ]

@@ -3,7 +3,6 @@ package controller;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import logic.TownManager;
 import model.CommunalActivity;
 import model.Date;
@@ -16,21 +15,23 @@ public class CommunalActivityController {
   @FXML private TableView<CommunalActivity> tableCommunalActivities;
   @FXML private TableColumn<CommunalActivity, String> colTitle;
   @FXML private TableColumn<CommunalActivity, String> colDescription;
-  @FXML private TableColumn<CommunalActivity, Integer> colPersonalPoints;
-  @FXML private TableColumn<CommunalActivity, String> colEventDate;
+  @FXML private TableColumn<CommunalActivity, Number> colPersonalPoints;
+  @FXML private TableColumn<CommunalActivity, Date> colEventDate;
   @FXML private TableColumn<CommunalActivity, String> colParticipants;
+  @FXML private TableColumn<CommunalActivity, String> colPointsAssigned;
+
 
   @FXML private TextField txtTitle;
   @FXML private TextField txtDescription;
   @FXML private TextField txtPersonalPoints;
-  @FXML private TextField txtEventDate;
+  @FXML private DatePicker datePicker;
+  @FXML private ListView<Resident> listResidents;
 
   @FXML private Button btnDelete;
   @FXML private Button btnSave;
+  @FXML private Button btnAssignPoints;
   @FXML private Button btnNew;
   @FXML private Button btnClear;
-
-  @FXML private ListView<String> listResidents;
 
   private TownManager townManager;
   private CommunalActivity selectedActivity;
@@ -40,210 +41,160 @@ public class CommunalActivityController {
     this.townManager = townManager;
     this.townManager.loadCommunalActivities();
 
-    // Table columns
-    colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
-    colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-    colPersonalPoints.setCellValueFactory(new PropertyValueFactory<>("points"));
-    colEventDate.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEventDate().toString()));
+    setupTable();
+    setupDatePicker();
+    setupButtonActions();
+    setupSelectionListener();
+    setupResidentList();
 
-    // Table selection listener
-    tableCommunalActivities.getSelectionModel().selectedItemProperty()
-        .addListener((obs, oldVal, newVal) -> {
-          fillForm(newVal);
+    refreshTable();
+    clearForm();
+  }
 
-          boolean selected = newVal != null;
-          btnSave.setDisable(!selected);
-          btnDelete.setDisable(!selected);
-        });
+  private void setupDatePicker() {
+    datePicker.setValue(LocalDate.now());
+    datePicker.setEditable(false);
+  }
 
-    colParticipants.setCellValueFactory(data -> {
-      CommunalActivity activity = data.getValue();
-
-      if (activity.getParticipants() == null || activity.getParticipants().isEmpty()) {
-        return new SimpleStringProperty("");
-      }
-
-      String names = activity.getParticipants().stream()
-          .map(r -> r.getName() + " " + r.getLastname())
-          .reduce((a, b) -> a + ", " + b)
-          .orElse("");
-
-      return new SimpleStringProperty(names);
+  private void setupSelectionListener() {
+    tableCommunalActivities.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
+      boolean hasSelection = newSel != null;
+      btnSave.setDisable(!hasSelection);
+      btnDelete.setDisable(!hasSelection);
+      showCommunalActivity(newSel);
     });
+  }
 
-    // Initialize buttons
-    btnDelete.setOnAction(e -> onDelete());
+  private void setupButtonActions() {
     btnSave.setOnAction(e -> onSave());
     btnNew.setOnAction(e -> onCreateNew());
-    btnClear.setOnAction(e -> onClear());
+    btnDelete.setOnAction(e -> onDelete());
+    btnClear.setOnAction(e -> onClearSelection());
+    btnAssignPoints.setOnAction(e -> onAssignPoints());
 
-    // Load residents into list and allow multiple selection
-    listResidents.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-    loadResidents();
-
-    // Refresh table
-    refreshTable();
-
-    btnSave.setDisable(true); // initially disabled
-    btnDelete.setDisable(true); // initially disabled
   }
 
-  public void loadResidents() {
-    listResidents.getItems().clear();
-    System.out.println("-----");
-    for (Resident r : townManager.getResidents()) {
-      System.out.println(r.toString());
-      listResidents.getItems().add(formatResident(r));
-    }
+  private void showCommunalActivity(CommunalActivity activity) {
+    if (activity == null) return;
+    selectedActivity = activity;
+
+    txtTitle.setText(activity.getTitle());
+    txtDescription.setText(activity.getDescription());
+    txtPersonalPoints.setText(String.valueOf(activity.getPoints()));
+    datePicker.setValue(activity.getEventDate() != null
+        ? LocalDate.of(activity.getEventDate().getYear(), activity.getEventDate().getMonth(), activity.getEventDate().getDay())
+        : LocalDate.now());
+    btnAssignPoints.setDisable(activity.isPointsAssigned());
+
   }
 
-  private String formatResident(Resident r) {
-    return r.getName() + " " + r.getLastname() + " | " + r.getAddress();
-  }
-
-  private void fillForm(CommunalActivity a) {
-    if (a == null) {
-      clearForm();
-      return;
-    }
-    selectedActivity = a;
-    txtTitle.setText(a.getTitle());
-    txtDescription.setText(a.getDescription());
-    txtPersonalPoints.setText(String.valueOf(a.getPoints()));
-    txtEventDate.setText(a.getEventDate().toString());
-
-    // Select participants in ListView
-    listResidents.getSelectionModel().clearSelection();
-    if (a.getParticipants() != null) {
-      for (Resident r : a.getParticipants()) {
-        String display = formatResident(r);
-        int index = listResidents.getItems().indexOf(display);
-        if (index >= 0) listResidents.getSelectionModel().select(index);
-      }
-    }
-  }
-
-  @FXML
   private void onSave() {
-    if (selectedActivity == null) {
-      showError("Select an activity to update");
+    if (selectedActivity == null || !validateFields()) return;
+
+    selectedActivity.setTitle(txtTitle.getText());
+    selectedActivity.setDescription(txtDescription.getText());
+    selectedActivity.setPoints(Integer.parseInt(txtPersonalPoints.getText()));
+    selectedActivity.setEventDate(new Date(datePicker.getValue()));
+    selectedActivity.setParticipants(listResidents.getSelectionModel().getSelectedItems());
+
+    townManager.updateCommunalActivity(selectedActivity.getID(), selectedActivity);
+    refreshTable();
+    clearForm();
+  }
+
+  private void onCreateNew() {
+    if (!validateFields()) return;
+
+    CommunalActivity activity = new CommunalActivity(
+        txtTitle.getText(),
+        txtDescription.getText(),
+        Integer.parseInt(txtPersonalPoints.getText()),
+        new Date(datePicker.getValue())
+    );
+
+    activity.setParticipants(listResidents.getSelectionModel().getSelectedItems());
+
+    townManager.addCommunalActivity(activity);
+    refreshTable();
+    clearForm();
+  }
+
+  private boolean validateFields() {
+    if (txtTitle.getText().isEmpty() ||
+        txtPersonalPoints.getText().isEmpty() ||
+        Integer.parseInt(txtPersonalPoints.getText()) < 0 ||
+        datePicker.getValue() == null) {
+      new Alert(Alert.AlertType.ERROR, "Please fill all required fields").show();
+      return false;
+    }
+    return true;
+  }
+
+  private void onAssignPoints()
+  {
+    if (selectedActivity != null && !selectedActivity.isPointsAssigned()) {
+      townManager.assignPointFromCommunal(selectedActivity);
+      refreshTable();
+      btnAssignPoints.setDisable(true);
+    }
+  }
+
+  private void onDelete() {
+    CommunalActivity selected = tableCommunalActivities.getSelectionModel().getSelectedItem();
+    if (selected == null) {
+      new Alert(Alert.AlertType.WARNING, "Please select an activity to remove.").show();
       return;
     }
-
-    try {
-      String title = txtTitle.getText().trim();
-      String desc = txtDescription.getText().trim();
-      int points = Integer.parseInt(txtPersonalPoints.getText().trim());
-      Date date = parseDate(txtEventDate.getText().trim());
-
-      CommunalActivity updated = new CommunalActivity(title, desc, points, date);
-
-      for (String display : listResidents.getSelectionModel().getSelectedItems()) {
-        for (Resident r : townManager.getResidents()) {
-          if (formatResident(r).equals(display)) {
-            updated.addParticipant(r);
-            break;
-          }
-        }
-      }
-
-      townManager.removeCommunalActivity(selectedActivity.getID());
-      townManager.addCommunalActivity(updated);
-
-      refreshTable();
-      clearForm();
-      btnSave.setDisable(true);
-
-    } catch (Exception e) {
-
-      showError(e.toString());
-    }
+    townManager.removeCommunalActivity(selected.getID());
+    refreshTable();
+    clearForm();
   }
 
-  @FXML
-  private void onCompleteEvent() {
-
-  }
-  @FXML
-  private void onDelete() {
-    if (selectedActivity == null) return;
-
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-        "Delete selected communal activity?", ButtonType.YES, ButtonType.NO);
-
-    if (alert.showAndWait().orElse(ButtonType.NO) == ButtonType.YES) {
-      townManager.removeCommunalActivity(selectedActivity.getID());
-      refreshTable();
-      clearForm();
-      btnSave.setDisable(true);
-    }
+  private void onClearSelection() {
+    tableCommunalActivities.getSelectionModel().clearSelection();
+    clearForm();
   }
 
-  @FXML
-  private void onClear() { clearForm(); }
+  private void clearForm() {
+    txtTitle.clear();
+    txtDescription.clear();
+    txtPersonalPoints.clear();
+    datePicker.setValue(LocalDate.now());
+    tableCommunalActivities.getSelectionModel().clearSelection();
 
-  @FXML
-  private void onCreateNew() {
-    try {
-      String title = txtTitle.getText().trim();
-      String desc = txtDescription.getText().trim();
-      int points = Integer.parseInt(txtPersonalPoints.getText().trim());
-      Date date = parseDate(txtEventDate.getText().trim());
-
-      Date today = new Date(LocalDate.now());
-      if (date.compareTo(today) < 0) {
-        showError("Date cannot be in the past");
-        return;
-      }
-      if (points < 0) {
-        showError("Points cannot be negative");
-        return;
-      }
-
-      CommunalActivity activity = new CommunalActivity(title, desc, points, date);
-
-      // add selected participants
-      for (String display : listResidents.getSelectionModel().getSelectedItems()) {
-        for (Resident r : townManager.getResidents()) {
-          if (formatResident(r).equals(display)) {
-            System.out.print(r.toString());
-            activity.addParticipant(r);
-            break;
-          }
-        }
-      }
-
-      townManager.addCommunalActivity(activity);
-      refreshTable();
-      clearForm();
-
-    } catch (Exception e) {
-      showError("Error on creating new Communal Activity");
-    }
+    btnSave.setDisable(true);
+    btnDelete.setDisable(true);
+    selectedActivity = null;
   }
 
+  private void setupTable() {
+    colTitle.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getTitle()));
+    colDescription.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getDescription()));
+    colPersonalPoints.setCellValueFactory(c -> new javafx.beans.property.SimpleIntegerProperty(c.getValue().getPoints()));
+    colEventDate.setCellValueFactory(c -> new javafx.beans.property.SimpleObjectProperty<>(c.getValue().getEventDate()));
+    colParticipants.setCellValueFactory(c -> new SimpleStringProperty(
+        c.getValue().getParticipants().stream()
+            .map(r -> r.getName() + " " + r.getLastname())
+            .reduce((a, b) -> a + ", " + b).orElse("")
+    ));
+    colPointsAssigned.setCellValueFactory(c ->
+        new SimpleStringProperty(c.getValue().isPointsAssigned() ? "Yes" : "No")
+    );
+
+    tableCommunalActivities.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+  }
 
   private void refreshTable() {
     tableCommunalActivities.getItems().setAll(townManager.getCommunalActivities());
   }
 
-  private void clearForm() {
-    selectedActivity = null;
-    txtTitle.clear();
-    txtDescription.clear();
-    txtPersonalPoints.clear();
-    txtEventDate.clear();
-    listResidents.getSelectionModel().clearSelection();
-    tableCommunalActivities.getSelectionModel().clearSelection();
+  private void setupResidentList()
+  {
+    listResidents.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    refresh();
   }
-
-  private Date parseDate(String text) {
-    String[] parts = text.split("-");
-    if (parts.length != 3) throw new IllegalArgumentException("Invalid date format");
-    return new Date(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
-  }
-
-  private void showError(String msg) {
-    new Alert(Alert.AlertType.ERROR, msg).showAndWait();
+  public void refresh()
+  {
+    listResidents.getItems().setAll(townManager.getResidents());
   }
 }

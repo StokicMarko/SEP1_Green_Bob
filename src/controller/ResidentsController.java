@@ -68,7 +68,7 @@ public class ResidentsController {
         new javafx.beans.property.SimpleStringProperty(c.getValue().getAddress()));
   }
 
-  private void refreshTable() {
+  public void refreshTable() {
     tableResidents.getItems().setAll(townManager.getResidents());
   }
 
