@@ -128,12 +128,13 @@ public class TradeOfferController {
     TradeOffer selected = tableOffers.getSelectionModel().getSelectedItem();
     if (selected == null || !validateRequiredFields()) return;
      int newPointCost= Integer.parseInt(txtPointCost.getText());
-    String error= transferPoints(selected,comboOfferBy.getValue(),newPointCost);
+    String error= transferPoints(selected,comboOfferBy.getValue(),newPointCost,townManager);
     if(error!=null){
       Alert alert = new Alert(Alert.AlertType.ERROR, error);
       alert.show();
       return;
     }
+
 
     selected.setTitle(txtTitle.getText());
     selected.setType(comboType.getValue());

@@ -4,20 +4,20 @@
     "title": "Gardening Help",
     "type": "GOOD",
     "description": "I will mmmow your lawn and water plants",
-    "pointCost": 700,
+    "pointCost": 50,
     "status": "COMPLETED",
     "offerBy": {
       "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
       "name": "Kika",
       "lastname": "Kika",
-      "personalPoints": 1200,
+      "personalPoints": 140,
       "address": "Kamjact"
     },
     "assignedTo": {
       "ID": "985829ab-bb18-463e-93a3-e34429f2e553",
       "name": "Single",
       "lastname": "Double",
-      "personalPoints": 1676,
+      "personalPoints": 3176,
       "address": "Italy"
     },
     "createDate": {
@@ -31,20 +31,20 @@
     "title": "Bake Cookiese",
     "type": "GOOD",
     "description": "I will bake cookies for anyone who wants",
-    "pointCost": 101,
+    "pointCost": 140,
     "status": "COMPLETED",
     "offerBy": {
       "ID": "d7fd46bb-fe9e-441d-972b-07d41dc8d990",
       "name": "Jonh",
       "lastname": "Doe",
-      "personalPoints": 67,
+      "personalPoints": 28,
       "address": "Fantasyland"
     },
     "assignedTo": {
       "ID": "0bef1f10-e8ba-4435-aa78-2f3a7e92babf",
       "name": "Alice",
       "lastname": "Blue",
-      "personalPoints": 826,
+      "personalPoints": 1106,
       "address": "Østerbrogade 45"
     },
     "createDate": {
@@ -58,14 +58,14 @@
     "title": "Dog Walking",
     "type": "SERVICE",
     "description": "I will walk your dog for 30 minutes",
-    "pointCost": 2,
+    "pointCost": 50,
     "status": "AVAILABLE",
     "offerBy": {
-      "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
-      "name": "Kika",
-      "lastname": "Kika",
-      "personalPoints": 1200,
-      "address": "Kamjact"
+      "ID": "0bef1f10-e8ba-4435-aa78-2f3a7e92babf",
+      "name": "Alice",
+      "lastname": "Blue",
+      "personalPoints": 650,
+      "address": "Østerbrogade 45"
     },
     "createDate": {
       "day": 15,
@@ -81,11 +81,11 @@
     "pointCost": 10,
     "status": "TAKEN",
     "offerBy": {
-      "ID": "1a4fb47b-c8d0-4596-a76b-78182923a46a",
-      "name": "Alice",
-      "lastname": "Blue",
-      "personalPoints": 134,
-      "address": "Østerbrogade 45"
+      "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
+      "name": "Kika",
+      "lastname": "Kika",
+      "personalPoints": 140,
+      "address": "Kamjact"
     },
     "assignedTo": {
       "ID": "d7fd46bb-fe9e-441d-972b-07d41dc8d990",
@@ -105,14 +105,14 @@
     "title": "PharmacyAssistant",
     "type": "SERVICE",
     "description": "Handle the pharmacy",
-    "pointCost": 30,
+    "pointCost": 50,
     "status": "AVAILABLE",
     "offerBy": {
-      "ID": "0bef1f10-e8ba-4435-aa78-2f3a7e92babf",
-      "name": "Alice",
-      "lastname": "Blue",
-      "personalPoints": 170,
-      "address": "Østerbrogade 45"
+      "ID": "ae63f79a-8022-4f26-9f65-9371415ac890",
+      "name": "Bob",
+      "lastname": "Green",
+      "personalPoints": 1030,
+      "address": "Billundvej 73"
     },
     "createDate": {
       "day": 11,
@@ -125,14 +125,14 @@
     "title": "helper",
     "type": "SERVICE",
     "description": "hello all",
-    "pointCost": 20,
+    "pointCost": 19,
     "status": "AVAILABLE",
     "offerBy": {
-      "ID": "1a4fb47b-c8d0-4596-a76b-78182923a46a",
-      "name": "Alice",
-      "lastname": "Blue",
-      "personalPoints": 180,
-      "address": "Østerbrogade 45"
+      "ID": "d7fd46bb-fe9e-441d-972b-07d41dc8d990",
+      "name": "Jonh",
+      "lastname": "Jon",
+      "personalPoints": 100,
+      "address": "Fantasyland"
     },
     "createDate": {
       "day": 11,
@@ -185,14 +185,14 @@
     "title": "Manage stuff",
     "type": "SERVICE",
     "description": "",
-    "pointCost": 1000,
+    "pointCost": 30,
     "status": "AVAILABLE",
     "offerBy": {
-      "ID": "ae63f79a-8022-4f26-9f65-9371415ac890",
-      "name": "Bob",
-      "lastname": "Green",
-      "personalPoints": 19000,
-      "address": "Billundvej 73"
+      "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
+      "name": "Kika",
+      "lastname": "Kika",
+      "personalPoints": 110,
+      "address": "Kamjact"
     },
     "createDate": {
       "day": 31,
@@ -205,14 +205,14 @@
     "title": "Hello",
     "type": "SERVICE",
     "description": "Only a test",
-    "pointCost": 1000,
+    "pointCost": 120,
     "status": "AVAILABLE",
     "offerBy": {
-      "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
-      "name": "Kika",
-      "lastname": "Kika",
-      "personalPoints": 110,
-      "address": "Kamjact"
+      "ID": "ae63f79a-8022-4f26-9f65-9371415ac890",
+      "name": "Bob",
+      "lastname": "Green",
+      "personalPoints": 1030,
+      "address": "Billundvej 73"
     },
     "createDate": {
       "day": 16,
@@ -225,21 +225,21 @@
     "title": "Ronaldo",
     "type": "GOOD",
     "description": "haha",
-    "pointCost": 11,
+    "pointCost": 8,
     "status": "AVAILABLE",
     "offerBy": {
       "ID": "ae63f79a-8022-4f26-9f65-9371415ac890",
       "name": "Bob",
       "lastname": "Green",
-      "personalPoints": 18989,
+      "personalPoints": 18992,
       "address": "Billundvej 73"
     },
     "assignedTo": {
-      "ID": "1a4fb47b-c8d0-4596-a76b-78182923a46a",
-      "name": "Alice",
-      "lastname": "Blue",
+      "ID": "d7fd46bb-fe9e-441d-972b-07d41dc8d990",
+      "name": "Jonh",
+      "lastname": "Jon",
       "personalPoints": 100,
-      "address": "Østerbrogade 45"
+      "address": "Fantasyland"
     },
     "createDate": {
       "day": 16,
@@ -263,6 +263,26 @@
     },
     "createDate": {
       "day": 16,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "ID": "4083756c-6342-4dbf-a587-801492fa4830",
+    "title": "test",
+    "type": "GOOD",
+    "description": "test",
+    "pointCost": 10,
+    "status": "AVAILABLE",
+    "offerBy": {
+      "ID": "d7fd46bb-fe9e-441d-972b-07d41dc8d990",
+      "name": "Jonh",
+      "lastname": "Jon",
+      "personalPoints": 100,
+      "address": "Fantasyland"
+    },
+    "createDate": {
+      "day": 17,
       "month": 12,
       "year": 2025
     }

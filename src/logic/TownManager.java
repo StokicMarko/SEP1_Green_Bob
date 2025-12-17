@@ -78,7 +78,10 @@ public class TownManager
       e.printStackTrace();
     }
   }
+  public Resident findResidentById(String id){
+    return residentList.findByID(id);
 
+  }
   public void removeResidentByID(String id)
   {
     residentList.removeByID(id);
@@ -144,6 +147,7 @@ public class TownManager
   {
     tradeOfferList.updateByID(id, newoffer);
     saveTradeOfferToFile();
+    saveResidentsToFile();
   }
 
   public void loadGreenActivities()

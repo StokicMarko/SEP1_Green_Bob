@@ -1,4 +1,5 @@
 package utils;
+import logic.TownManager;
 import model.*;
 
 public class InputValidation
@@ -21,8 +22,12 @@ public class InputValidation
 
     return true;
   }
-  public static String transferPoints(TradeOffer selected, Resident newOfferBy,int newPointCost){
-    Resident oldOfferBy= selected.getOfferBy();
+  public static String transferPoints(TradeOffer selected, Resident newOfferBy,
+      int newPointCost, TownManager manager)
+  {
+    Resident oldOfferBy= manager.findResidentById(selected.getOfferBy().getID());
+    Resident realnewOfferBy= manager.findResidentById(newOfferBy.getID());
+
     int oldPointCost= selected.getPointCost();
 
     if(!(oldOfferBy.getID().equals(newOfferBy.getID()))){
