@@ -1,7 +1,6 @@
 package logic;
 
 import model.*;
-import myEnum.OfferStatus;
 import parser.ParserException;
 import utils.JsonFileHandler;
 
@@ -16,10 +15,10 @@ public class TownManager
   private ActivityList greenActivityList = new ActivityList();
   private ActivityList communalActivityList = new ActivityList();
 
-  private static final String RESIDENTS_JSON = "residents.json";
-  private static final String TRADE_OFFER_JSON = "tradeoffers.json";
-  private static final String GREEN_ACTIVITIES_JSON = "greenactivities.json";
-  private static final String COMMUNAL_ACTIVITIES_JSON = "communalactivities.json";
+  private final String RESIDENTS_JSON = "residents.json";
+  private final String TRADE_OFFER_JSON = "tradeoffers.json";
+  private final String GREEN_ACTIVITIES_JSON = "greenactivities.json";
+  private final String COMMUNAL_ACTIVITIES_JSON = "communalactivities.json";
 
   public TownManager()
   {
@@ -43,7 +42,7 @@ public class TownManager
 
   public ArrayList<Resident> getResidents()
   {
-    return residentList.getAllResidents();
+    return residentList.getAll();
   }
 
   public void createResident(String name, String lastname, int points, String address)
@@ -71,17 +70,14 @@ public class TownManager
     try
     {
       JsonFileHandler.saveResidentsToJson(RESIDENTS_JSON,
-          residentList.getAllResidents());
+          residentList.getAll());
     }
     catch (Exception e)
     {
       e.printStackTrace();
     }
   }
-  public Resident findResidentById(String id){
-    return residentList.findByID(id);
 
-  }
   public void removeResidentByID(String id)
   {
     residentList.removeByID(id);
@@ -89,7 +85,7 @@ public class TownManager
   }
   public void loadTradeOffers(){
     try{
-      ArrayList<TradeOffer> offer= JsonFileHandler.readTradeoffersFromJson("tradeoffers.json");
+      ArrayList<TradeOffer> offer= JsonFileHandler.readTradeoffersFromJson(TRADE_OFFER_JSON);
       for(TradeOffer t:offer){
         tradeOfferList.add(t);
       }
@@ -101,14 +97,14 @@ public class TownManager
   }
   private void saveTradeOfferToFile(){
      try{
-       JsonFileHandler.saveTradeOfferToJson("tradeoffers.json",tradeOfferList.getTradeOffers());
+       JsonFileHandler.saveTradeOfferToJson(TRADE_OFFER_JSON, tradeOfferList.getAll());
      }
      catch(ParserException e){
        System.out.println("Could not save to given file");
      }
   }
   public ArrayList<TradeOffer> getTradeoffers(){
-    return tradeOfferList.getTradeOffers();
+    return tradeOfferList.getAll();
   }
   public void addTradeOffer(TradeOffer o){
       tradeOfferList.add(o);
@@ -119,30 +115,7 @@ public class TownManager
      tradeOfferList.removeByID(id);
      saveTradeOfferToFile();
   }
-  public void changeTradeOfferStatus(String id, OfferStatus status,Resident r){
-     TradeOffer t= tradeOfferList.findByID(id);
-     if(t==null){
-       System.out.println(" Trade offer with given id could not be found ");
-     }
-     switch (status)
-     {
-       case AVAILABLE :
-         t.setStatusToAvailable();
-         break;
-       case TAKEN:
-         t.setStatusToTaken(r);
-         break;
-       case CANCELLED:
-         t.setStatusToCancelled();
-         break;
-       case COMPLETED:
-         t.setStatusToCompleted();
-         break;
-       default:
-         System.out.println("Wrong status");
-      saveTradeOfferToFile();
-     }
-  }
+
   public void updateTradeOffer(String id, TradeOffer newoffer)
   {
     tradeOfferList.updateByID(id, newoffer);
@@ -154,7 +127,7 @@ public class TownManager
   {
   try
   {
-    ArrayList<GreenActivity> loaded = JsonFileHandler.readGreenActivitiesFromJson("greenactivities.json");
+    ArrayList<GreenActivity> loaded = JsonFileHandler.readGreenActivitiesFromJson(GREEN_ACTIVITIES_JSON);
     for(GreenActivity g:loaded)
     {
       greenActivityList.add(g);
@@ -195,7 +168,7 @@ public class TownManager
     saveGreenActivityToFile();
   }
 
-  public void updateActivity(String id, GreenActivity newData)
+  public void updateGreenActivity(String id, GreenActivity newData)
   {
       greenActivityList.updateByID(id, newData);
       saveGreenActivityToFile();
@@ -219,7 +192,6 @@ public class TownManager
 
   public void addCommunalActivity(CommunalActivity communalActivity)
   {
-    System.out.println(communalActivity.toString());
     communalActivityList.add(communalActivity);
     saveCommunalActivitiesToFile();
   }

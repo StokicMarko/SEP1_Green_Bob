@@ -19,7 +19,7 @@ public class ResidentList
     }
   }
 
-  public ArrayList<Resident> getAllResidents()
+  public ArrayList<Resident> getAll()
   {
     return residents;
   }

@@ -40,5 +40,26 @@
     "lastname": "Stokic",
     "personalPoints": 0,
     "address": "Kamj"
+  },
+  {
+    "ID": "2d1875c1-7ca3-4eb1-a311-e29c7985291c",
+    "name": "fsds",
+    "lastname": "gsdgwd",
+    "personalPoints": 234,
+    "address": "Test 1"
+  },
+  {
+    "ID": "0b938eda-7ab0-45f3-a4fb-dedae925b5d0",
+    "name": "Alice",
+    "lastname": "Blue",
+    "personalPoints": 650,
+    "address": "Østerbrogade 45"
+  },
+  {
+    "ID": "75cb4180-f548-4a92-9450-602dd089ecee",
+    "name": "Single",
+    "lastname": "Double",
+    "personalPoints": 0,
+    "address": "Italy 5"
   }
 ]

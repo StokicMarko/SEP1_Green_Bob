@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import myEnum.OfferStatus;
-import model.Resident;
 
 public class TradeOfferList
 {
@@ -35,7 +34,7 @@ public class TradeOfferList
     }
     return Offers;
   }
-  public ArrayList<TradeOffer> getTradeOffers(){
+  public ArrayList<TradeOffer> getAll(){
     return tradeOffers;
   }
 

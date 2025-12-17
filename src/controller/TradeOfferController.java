@@ -128,7 +128,7 @@ public class TradeOfferController {
     TradeOffer selected = tableOffers.getSelectionModel().getSelectedItem();
     if (selected == null || !validateRequiredFields()) return;
      int newPointCost= Integer.parseInt(txtPointCost.getText());
-    String error= transferPoints(selected,comboOfferBy.getValue(),newPointCost,townManager);
+    String error= transferPoints(selected,comboOfferBy.getValue(),newPointCost);
     if(error!=null){
       Alert alert = new Alert(Alert.AlertType.ERROR, error);
       alert.show();

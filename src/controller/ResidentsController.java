@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import logic.TownManager;
 import model.Resident;
+import utils.InputValidation;
 
 public class ResidentsController {
 
@@ -20,8 +21,8 @@ public class ResidentsController {
 
   @FXML private Button btnSave;
   @FXML private Button btnNew;
-  @FXML private Button btnDelete;
   @FXML private Button btnClear;
+  @FXML private Button btnDelete;
   @FXML private Button btnReset;
 
 
@@ -51,10 +52,9 @@ public class ResidentsController {
 
     btnSave.setOnAction(e -> onSave());
     btnNew.setOnAction(e -> onNewResident());
+    btnClear.setOnAction(e -> clearForm());
     btnReset.setOnAction(e -> onReset());
     btnDelete.setOnAction(e -> onDelete());
-    btnClear.setOnAction(e -> onClearSelection());
-
   }
 
   private void setupTable() {
@@ -83,16 +83,25 @@ public class ResidentsController {
 
   @FXML
   private void onSave() {
+    if (!InputValidation.validateResidentInput(
+        txtName.getText(),
+        txtLastname.getText(),
+        txtPoints.getText(),
+        txtAddress.getText()
+    )) {
+      return;
+    }
+
     Resident selected = tableResidents.getSelectionModel().getSelectedItem();
     if (selected == null) return;
 
     townManager.updateResident(
         selected.getID(),
         new Resident(
-            txtName.getText(),
-            txtLastname.getText(),
+            txtName.getText().trim(),
+            txtLastname.getText().trim(),
             Integer.parseInt(txtPoints.getText()),
-            txtAddress.getText()
+            txtAddress.getText().trim()
         )
     );
 
@@ -100,23 +109,27 @@ public class ResidentsController {
     clearForm();
   }
 
+
   @FXML
   private void onNewResident() {
-    townManager.createResident(
+    if (!InputValidation.validateResidentInput(
         txtName.getText(),
         txtLastname.getText(),
-        Integer.parseInt(txtPoints.getText()),
+        txtPoints.getText(),
         txtAddress.getText()
+    )) {
+      return;
+    }
+
+    townManager.createResident(
+        txtName.getText().trim(),
+        txtLastname.getText().trim(),
+        Integer.parseInt(txtPoints.getText()),
+        txtAddress.getText().trim()
     );
 
     refreshTable();
     clearForm();
-  }
-
-  @FXML
-  private void onReload() {
-    townManager.loadResidents();
-    refreshTable();
   }
 
   private void clearForm() {
