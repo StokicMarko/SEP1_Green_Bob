@@ -56,12 +56,12 @@ public class TradeOfferList
   public void updateByID(String id, TradeOffer newOffer) {
     TradeOffer existing = findByID(id);
     if (existing == null) return;
+    OfferStatus oldStatus= existing.getStatus();
 
     existing.setTitle(newOffer.getTitle());
     existing.setType(newOffer.getType());
     existing.setDescription(newOffer.getDescription());
     existing.setPointCost(newOffer.getPointCost());
-    existing.setGeneralStatus(existing,newOffer.getStatus(),newOffer.getAssignedTo());
     existing.setOfferBy(newOffer.getOfferBy());
     existing.setAssignedTo(newOffer.getAssignedTo());
     existing.setCreateDate(newOffer.getCreateDate());

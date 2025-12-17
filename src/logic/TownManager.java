@@ -77,6 +77,9 @@ public class TownManager
       e.printStackTrace();
     }
   }
+  public Resident findResidentById(String id){
+    return residentList.findByID(id);
+  }
 
   public void removeResidentByID(String id)
   {
@@ -118,6 +121,8 @@ public class TownManager
 
   public void updateTradeOffer(String id, TradeOffer newoffer)
   {
+    Resident assigned= findResidentById(newoffer.getAssignedTo().getID());
+    assigned.addPoints(newoffer.getPointCost());
     tradeOfferList.updateByID(id, newoffer);
     saveTradeOfferToFile();
     saveResidentsToFile();

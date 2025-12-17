@@ -79,13 +79,13 @@
     "type": "SERVICE",
     "description": "rrrrrr",
     "pointCost": 10,
-    "status": "TAKEN",
+    "status": "COMPLETED",
     "offerBy": {
-      "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
-      "name": "Kika",
-      "lastname": "Kika",
-      "personalPoints": 140,
-      "address": "Kamjact"
+      "ID": "ae63f79a-8022-4f26-9f65-9371415ac890",
+      "name": "Bob",
+      "lastname": "Green",
+      "personalPoints": 1020,
+      "address": "Billundvej 73"
     },
     "assignedTo": {
       "ID": "d7fd46bb-fe9e-441d-972b-07d41dc8d990",
@@ -108,11 +108,11 @@
     "pointCost": 50,
     "status": "AVAILABLE",
     "offerBy": {
-      "ID": "ae63f79a-8022-4f26-9f65-9371415ac890",
-      "name": "Bob",
-      "lastname": "Green",
-      "personalPoints": 1030,
-      "address": "Billundvej 73"
+      "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
+      "name": "Kika",
+      "lastname": "Kika",
+      "personalPoints": 10,
+      "address": "Kamjact"
     },
     "createDate": {
       "day": 11,
@@ -126,13 +126,20 @@
     "type": "SERVICE",
     "description": "hello all",
     "pointCost": 19,
-    "status": "AVAILABLE",
+    "status": "COMPLETED",
     "offerBy": {
       "ID": "d7fd46bb-fe9e-441d-972b-07d41dc8d990",
       "name": "Jonh",
       "lastname": "Jon",
       "personalPoints": 100,
       "address": "Fantasyland"
+    },
+    "assignedTo": {
+      "ID": "ae63f79a-8022-4f26-9f65-9371415ac890",
+      "name": "Bob",
+      "lastname": "Green",
+      "personalPoints": 1089,
+      "address": "Billundvej 73"
     },
     "createDate": {
       "day": 11,
@@ -145,14 +152,21 @@
     "title": "housecleaning",
     "type": "SERVICE",
     "description": "sonim wants to clean her house",
-    "pointCost": 5,
-    "status": "AVAILABLE",
+    "pointCost": 50,
+    "status": "COMPLETED",
     "offerBy": {
-      "ID": "985829ab-bb18-463e-93a3-e34429f2e553",
-      "name": "Single",
-      "lastname": "Double",
-      "personalPoints": 7,
-      "address": "Italy"
+      "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
+      "name": "Kika",
+      "lastname": "Kika",
+      "personalPoints": 60,
+      "address": "Kamjact"
+    },
+    "assignedTo": {
+      "ID": "ae63f79a-8022-4f26-9f65-9371415ac890",
+      "name": "Bob",
+      "lastname": "Green",
+      "personalPoints": 1120,
+      "address": "Billundvej 73"
     },
     "createDate": {
       "day": 26,
@@ -166,13 +180,20 @@
     "type": "SERVICE",
     "description": "",
     "pointCost": 50,
-    "status": "AVAILABLE",
+    "status": "COMPLETED",
     "offerBy": {
       "ID": "424c6ca5-2e66-4519-b2c6-f4e2b750ea84",
       "name": "Marko",
       "lastname": "Stokic",
       "personalPoints": 50,
       "address": "Kamj"
+    },
+    "assignedTo": {
+      "ID": "0b938eda-7ab0-45f3-a4fb-dedae925b5d0",
+      "name": "Alice",
+      "lastname": "Blue",
+      "personalPoints": 800,
+      "address": "Østerbrogade 45"
     },
     "createDate": {
       "day": 21,
@@ -186,13 +207,20 @@
     "type": "SERVICE",
     "description": "",
     "pointCost": 30,
-    "status": "AVAILABLE",
+    "status": "COMPLETED",
     "offerBy": {
       "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
       "name": "Kika",
       "lastname": "Kika",
       "personalPoints": 110,
       "address": "Kamjact"
+    },
+    "assignedTo": {
+      "ID": "424c6ca5-2e66-4519-b2c6-f4e2b750ea84",
+      "name": "Marko",
+      "lastname": "Stokic",
+      "personalPoints": 150,
+      "address": "Kamj"
     },
     "createDate": {
       "day": 31,
@@ -206,13 +234,20 @@
     "type": "SERVICE",
     "description": "Only a test",
     "pointCost": 120,
-    "status": "AVAILABLE",
+    "status": "COMPLETED",
     "offerBy": {
       "ID": "ae63f79a-8022-4f26-9f65-9371415ac890",
       "name": "Bob",
       "lastname": "Green",
       "personalPoints": 1030,
       "address": "Billundvej 73"
+    },
+    "assignedTo": {
+      "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
+      "name": "Kika",
+      "lastname": "Kika",
+      "personalPoints": 130,
+      "address": "Kamjact"
     },
     "createDate": {
       "day": 16,
@@ -226,7 +261,7 @@
     "type": "GOOD",
     "description": "haha",
     "pointCost": 8,
-    "status": "AVAILABLE",
+    "status": "COMPLETED",
     "offerBy": {
       "ID": "ae63f79a-8022-4f26-9f65-9371415ac890",
       "name": "Bob",
@@ -238,7 +273,7 @@
       "ID": "d7fd46bb-fe9e-441d-972b-07d41dc8d990",
       "name": "Jonh",
       "lastname": "Jon",
-      "personalPoints": 100,
+      "personalPoints": 116,
       "address": "Fantasyland"
     },
     "createDate": {

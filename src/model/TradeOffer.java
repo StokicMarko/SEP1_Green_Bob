@@ -113,25 +113,25 @@ public class TradeOffer
 
   public void setStatusToCompleted()
   {
-    if (assignedTo != null)
-    {
-      assignedTo.addPoints(pointCost);
       status = OfferStatus.COMPLETED;
-    }
   }
-  public void setGeneralStatus(TradeOffer newOffer, OfferStatus status,Resident r){
+  public void setGeneralStatus(OfferStatus oldStatus, OfferStatus status,Resident r){
     switch(status){
       case AVAILABLE :
-        newOffer.setStatusToAvailable();
+        setStatusToAvailable();
         break;
       case TAKEN:
-        newOffer.setStatusToTaken(r);
+        if(r==null)
+          throw new IllegalStateException("Assigned resident is required");
+        setStatusToTaken(r);
         break;
       case CANCELLED:
-        newOffer.setStatusToCancelled();
+        setStatusToCancelled();
         break;
       case COMPLETED:
-        newOffer.setStatusToCompleted();
+        if(oldStatus!=OfferStatus.TAKEN)
+          throw new IllegalStateException("Offer must be taken before completion");
+        setStatusToCompleted();
         break;
       default:
         System.out.println("Wrong status");

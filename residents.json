@@ -3,7 +3,7 @@
     "ID": "d7fd46bb-fe9e-441d-972b-07d41dc8d990",
     "name": "Jonh",
     "lastname": "Jon",
-    "personalPoints": 130,
+    "personalPoints": 140,
     "address": "Fantasyland"
   },
   {
@@ -17,7 +17,7 @@
     "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
     "name": "Kika",
     "lastname": "Kika",
-    "personalPoints": 110,
+    "personalPoints": 130,
     "address": "Kamjact"
   },
   {
@@ -31,21 +31,14 @@
     "ID": "ae63f79a-8022-4f26-9f65-9371415ac890",
     "name": "Bob",
     "lastname": "Green",
-    "personalPoints": 1030,
+    "personalPoints": 1089,
     "address": "Billundvej 73"
   },
   {
     "ID": "424c6ca5-2e66-4519-b2c6-f4e2b750ea84",
     "name": "Marko",
     "lastname": "Stokic",
-    "personalPoints": 0,
+    "personalPoints": 120,
     "address": "Kamj"
-  },
-  {
-    "ID": "0b938eda-7ab0-45f3-a4fb-dedae925b5d0",
-    "name": "Alice",
-    "lastname": "Blue",
-    "personalPoints": 650,
-    "address": "Østerbrogade 45"
   }
 ]

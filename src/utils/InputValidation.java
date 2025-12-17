@@ -1,6 +1,7 @@
 package utils;
 
 import javafx.scene.control.Alert;
+import logic.TownManager;
 import model.*;
 
 import java.time.LocalDate;
@@ -14,8 +15,12 @@ public class InputValidation {
   private static final int POINTS_MAX = 999_999;
 
 
-  public static String transferPoints(TradeOffer selected, Resident newOfferBy, int newPointCost) {
-    Resident oldOfferBy = selected.getOfferBy();
+  public static String transferPoints(TradeOffer selected, Resident newOfferBy, int newPointCost,
+      TownManager manager)
+  {
+    Resident oldOfferBy = manager.findResidentById(selected.getOfferBy().getID());
+    Resident realNewOfferBy= manager.findResidentById(newOfferBy.getID());
+
     int oldPointCost = selected.getPointCost();
 
     if (!oldOfferBy.getID().equals(newOfferBy.getID())) {
