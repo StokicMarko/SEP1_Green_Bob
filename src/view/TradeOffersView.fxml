@@ -62,7 +62,7 @@
                         <Insets bottom="15" left="15" right="15" top="15" />
                     </padding>
 
-                    <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="TradeOffer Editor" />
+                    <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Trade Offer Editor" />
 
                     <VBox spacing="5">
                         <Label text="Title" />
