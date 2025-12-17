@@ -5,6 +5,8 @@ import javafx.scene.control.*;
 import logic.TownManager;
 import model.Date;
 import model.GreenActivity;
+import utils.InputValidation;
+
 import java.time.LocalDate;
 
 public class GreenActivityController
@@ -86,14 +88,22 @@ public class GreenActivityController
     btnClear.setOnAction(e -> onClearSelection());
   }
 
-  private void onSave()
-  {
+  private void onSave() {
     GreenActivity selected = tableGreenActivities.getSelectionModel().getSelectedItem();
-    if (selected == null || !validateRequiredFields()) return;
+    if (selected == null) return;
 
-    selected.setTitle(txtTitle.getText());
+    if (!InputValidation.validateGreenActivityInput(
+        txtTitle.getText(),
+        txtGreenPoints.getText(),
+        datePicker.getValue(),
+        txtDescription.getText()
+    )) {
+      return;
+    }
+
+    selected.setTitle(txtTitle.getText().trim());
+    selected.setDescription(txtDescription.getText() == null ? "" : txtDescription.getText().trim());
     selected.setPoints(Integer.parseInt(txtGreenPoints.getText()));
-    selected.setDescription(txtDescription.getText() == null ? "" : txtDescription.getText());
     selected.setEventDate(new Date(datePicker.getValue()));
 
     townManager.updateGreenActivity(selected.getID(), selected);
@@ -101,38 +111,31 @@ public class GreenActivityController
     clearForm();
   }
 
-  private boolean validateRequiredFields() {
-    if (txtTitle.getText().isEmpty()
-        || Integer.parseInt(txtGreenPoints.getText()) < 0
-        || txtGreenPoints.getText().isEmpty()
-        || datePicker.getValue() == null) {
-      new Alert(Alert.AlertType.ERROR, "Please fill all required fields").show();
-      return false;
-    }
-    return true;
-  }
-
   @FXML
   private void onNewGreenActivity() {
 
-    GreenActivity greenActivity =
-        new GreenActivity(
-          txtTitle.getText(),
-          txtDescription.getText(),
-          Integer.parseInt(txtGreenPoints.getText()),
-          new Date(datePicker.getValue()
-        )
-    );
-
-    if (greenActivity.getTitle().isEmpty() || greenActivity.getPoints() < 0 || greenActivity.getEventDate() == null) {
-      showAlert("Please fill in all fields.");
+    if (!InputValidation.validateGreenActivityInput(
+        txtTitle.getText(),
+        txtGreenPoints.getText(),
+        datePicker.getValue(),
+        txtDescription.getText()
+    )) {
       return;
     }
+
+    GreenActivity greenActivity =
+        new GreenActivity(
+            txtTitle.getText().trim(),
+            txtDescription.getText() == null ? "" : txtDescription.getText().trim(),
+            Integer.parseInt(txtGreenPoints.getText()),
+            new Date(datePicker.getValue())
+        );
 
     townManager.addGreenActivity(greenActivity);
     refreshTable();
     clearForm();
   }
+
 
 
   @FXML

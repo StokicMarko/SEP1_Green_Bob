@@ -1,16 +1,5 @@
 [
   {
-    "ID": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
-    "title": "Eat Vegan for a Week",
-    "description": "Commit to eating only plant-based meals for one week to reduce carbon footprint.",
-    "points": 50,
-    "eventDate": {
-      "day": 1,
-      "month": 12,
-      "year": 2025
-    }
-  },
-  {
     "ID": "9c858901-8a57-4791-81fe-4c455b099bc9",
     "title": "Recycle Household Waste",
     "description": "Separate and recycle plastics, paper, and glass from your home waste for a week.",
@@ -66,17 +55,6 @@
     }
   },
   {
-    "ID": "886313e1-3b8a-5372-9b90-0c9aee199e5d",
-    "title": "Start Composting",
-    "description": "Collect organic kitchen waste and create compost for your garden.",
-    "points": 20,
-    "eventDate": {
-      "day": 2,
-      "month": 12,
-      "year": 2025
-    }
-  },
-  {
     "ID": "123e4567-e89b-12d3-a456-426614174001",
     "title": "Reduce Water Usage",
     "description": "Limit your shower time to 5 minutes and turn off taps when not needed.",
@@ -93,8 +71,8 @@
     "description": "Replace incandescent bulbs with energy-efficient LED bulbs at home.",
     "points": 10,
     "eventDate": {
-      "day": 4,
-      "month": 12,
+      "day": 6,
+      "month": 10,
       "year": 2025
     }
   },
@@ -193,17 +171,6 @@
     "points": 20,
     "eventDate": {
       "day": 1,
-      "month": 12,
-      "year": 2025
-    }
-  },
-  {
-    "ID": "f6204242-1544-4df3-8e9a-89db4bb55080",
-    "title": "Test",
-    "description": "",
-    "points": 90,
-    "eventDate": {
-      "day": 16,
       "month": 12,
       "year": 2025
     }

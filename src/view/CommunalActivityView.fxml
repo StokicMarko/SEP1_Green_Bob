@@ -34,7 +34,7 @@
                 <Insets right="15"/>
             </BorderPane.margin>
 
-            <TableView fx:id="tableCommunalActivities" prefHeight="594.0" prefWidth="920.0">
+            <TableView fx:id="tableCommunalActivities" VBox.vgrow="ALWAYS">
                 <columns>
                     <TableColumn fx:id="colTitle" text="Title"/>
                     <TableColumn fx:id="colDescription" text="Description" prefWidth="200"/>
