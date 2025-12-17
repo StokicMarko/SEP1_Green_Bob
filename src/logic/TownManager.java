@@ -259,4 +259,11 @@ public class TownManager
     saveResidentsToFile();
   }
 
+  public int getTotalGreenPoints() {
+    greenPointsPool =  getGreenActivities()
+        .stream()
+        .mapToInt(GreenActivity::getPoints)
+        .sum();
+    return  greenPointsPool;
+  }
 }

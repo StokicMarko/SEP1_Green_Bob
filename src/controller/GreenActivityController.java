@@ -192,13 +192,9 @@ public class GreenActivityController
   }
 
   private void updateTotalPoints() {
-    int total = townManager.getGreenActivities()
-        .stream()
-        .mapToInt(GreenActivity::getPoints)
-        .sum();
-
-    lblTotalPoints.setText("Total Points: " + total);
+    lblTotalPoints.setText(
+        "Total Points: " + townManager.getTotalGreenPoints()
+    );
   }
-
 }
 
