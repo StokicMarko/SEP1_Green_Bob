@@ -57,12 +57,20 @@ public class CommunalActivityController {
   }
 
   private void setupSelectionListener() {
-    tableCommunalActivities.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
-      boolean hasSelection = newSel != null;
-      btnSave.setDisable(!hasSelection);
-      btnDelete.setDisable(!hasSelection);
-      showCommunalActivity(newSel);
-    });
+    tableCommunalActivities.getSelectionModel().selectedItemProperty()
+        .addListener((obs, oldSel, newSel) -> {
+
+          btnSave.setDisable(newSel == null);
+          btnDelete.setDisable(newSel == null);
+
+          if (newSel == null) {
+            btnAssignPoints.setDisable(true);
+            selectedActivity = null;
+            return;
+          }
+
+          showCommunalActivity(newSel);
+        });
   }
 
   private void setupButtonActions() {
@@ -72,6 +80,7 @@ public class CommunalActivityController {
     btnClear.setOnAction(e -> onClearSelection());
     btnAssignPoints.setOnAction(e -> onAssignPoints());
 
+    btnAssignPoints.setDisable(true);
   }
 
   private void showCommunalActivity(CommunalActivity activity) {
@@ -164,6 +173,7 @@ public class CommunalActivityController {
 
     btnSave.setDisable(true);
     btnDelete.setDisable(true);
+    btnAssignPoints.setDisable(true);
     selectedActivity = null;
   }
 

@@ -196,34 +196,6 @@
     }
   },
   {
-    "participants": [
-      {
-        "ID": "1a4fb47b-c8d0-4596-a76b-78182923a46a",
-        "name": "Alice",
-        "lastname": "Blue",
-        "personalPoints": 0,
-        "address": "Østerbrogade 45"
-      },
-      {
-        "ID": "d7fd46bb-fe9e-441d-972b-07d41dc8d990",
-        "name": "Jonh",
-        "lastname": "Jon",
-        "personalPoints": 200,
-        "address": "Fantasyland"
-      }
-    ],
-    "isPointAssign": true,
-    "ID": "b3be231b-12f0-4431-9ce6-03dc28a152b0",
-    "title": "a",
-    "description": "",
-    "points": 9,
-    "eventDate": {
-      "day": 16,
-      "month": 12,
-      "year": 2025
-    }
-  },
-  {
     "participants": [],
     "isPointAssign": false,
     "ID": "f921aa49-9fd3-4cec-86c3-108414ef5b85",
