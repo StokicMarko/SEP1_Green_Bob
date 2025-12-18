@@ -6,6 +6,7 @@ import logic.TownManager;
 import model.Date;
 import model.GreenActivity;
 import utils.InputValidation;
+import utils.NotificationService;
 
 import java.time.LocalDate;
 
@@ -109,6 +110,7 @@ public class GreenActivityController
     townManager.updateGreenActivity(selected.getID(), selected);
     refreshTable();
     clearForm();
+    NotificationService.success("Green activity updated successfully");
   }
 
   @FXML
@@ -134,6 +136,7 @@ public class GreenActivityController
     townManager.addGreenActivity(greenActivity);
     refreshTable();
     clearForm();
+    NotificationService.success("Green activity added successfully");
   }
 
 
@@ -150,6 +153,7 @@ public class GreenActivityController
     townManager.removeGreenActivity(selected.getID());
     refreshTable();
     clearForm();
+    NotificationService.success("Green activity deleted successfully");
   }
 
   private void clearForm() {

@@ -52,7 +52,7 @@
 
     <!-- RIGHT EDIT PANEL -->
     <right>
-        <VBox fillWidth="false" spacing="10.0" styleClass="editBox">
+        <VBox fillWidth="true" spacing="10.0" styleClass="editBox">
             <padding>
                 <Insets top="15" bottom="15" left="15" right="15"/>
             </padding>
@@ -81,8 +81,8 @@
 
             <!-- BUTTONS -->
             <HBox spacing="10">
-                <Button fx:id="btnSave" text="Save" HBox.hgrow="ALWAYS"/>
-                <Button fx:id="btnNew" text="New" HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnSave" text="Save" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnNew" text="New" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
             </HBox>
 
         </VBox>

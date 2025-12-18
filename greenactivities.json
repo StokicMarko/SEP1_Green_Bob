@@ -80,7 +80,7 @@
     "ID": "9b2e5b3d-7c4b-4b96-9d88-38b55b4d29f2",
     "title": "Donate Old Clothes",
     "description": "Give away clothes you no longer use instead of throwing them away.",
-    "points": 15,
+    "points": 150,
     "eventDate": {
       "day": 5,
       "month": 12,
@@ -160,17 +160,6 @@
     "points": 10,
     "eventDate": {
       "day": 6,
-      "month": 12,
-      "year": 2025
-    }
-  },
-  {
-    "ID": "2f1b8f60-3f50-11eb-adc1-0242ac120002",
-    "title": "Avoid Fast Fashion",
-    "description": "Refrain from buying non-essential clothing from fast-fashion brands this week.",
-    "points": 20,
-    "eventDate": {
-      "day": 1,
       "month": 12,
       "year": 2025
     }
