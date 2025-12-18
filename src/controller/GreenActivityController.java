@@ -149,11 +149,21 @@ public class GreenActivityController
       showAlert("Please select an activity to remove.");
       return;
     }
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Delete Resident");
+    alert.setHeaderText(
+        "Are you sure you want to delete " +
+            selected.getTitle() + "?"
+    );
 
-    townManager.removeGreenActivity(selected.getID());
-    refreshTable();
-    clearForm();
-    NotificationService.success("Green activity deleted successfully");
+    alert.showAndWait().ifPresent(response -> {
+      if (response == ButtonType.OK) {
+        townManager.removeGreenActivity(selected.getID());
+        refreshTable();
+        clearForm();
+        NotificationService.success("Green activity deleted successfully");
+      }
+    });
   }
 
   private void clearForm() {

@@ -7,6 +7,7 @@ import logic.TownManager;
 import model.CommunalActivity;
 import model.Date;
 import model.Resident;
+import utils.NotificationService;
 
 import java.time.LocalDate;
 
@@ -109,6 +110,7 @@ public class CommunalActivityController {
     townManager.updateCommunalActivity(selectedActivity.getID(), selectedActivity);
     refreshTable();
     clearForm();
+    NotificationService.success("Community Activity updated successfully");
   }
 
   private void onCreateNew() {
@@ -126,6 +128,8 @@ public class CommunalActivityController {
     townManager.addCommunalActivity(activity);
     refreshTable();
     clearForm();
+    NotificationService.success("Community Activity added successfully");
+
   }
 
   private boolean validateFields() {
@@ -145,18 +149,31 @@ public class CommunalActivityController {
       townManager.assignPointFromCommunal(selectedActivity);
       refreshTable();
       btnAssignPoints.setDisable(true);
+      NotificationService.success("Points assigned successfully");
     }
   }
 
   private void onDelete() {
     CommunalActivity selected = tableCommunalActivities.getSelectionModel().getSelectedItem();
     if (selected == null) {
-      new Alert(Alert.AlertType.WARNING, "Please select an activity to remove.").show();
+      showAlert("Please select an activity to remove.");
       return;
     }
-    townManager.removeCommunalActivity(selected.getID());
-    refreshTable();
-    clearForm();
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Delete Resident");
+    alert.setHeaderText(
+        "Are you sure you want to delete " +
+            selected.getTitle() + "?"
+    );
+
+    alert.showAndWait().ifPresent(response -> {
+      if (response == ButtonType.OK) {
+        townManager.removeCommunalActivity(selected.getID());
+        refreshTable();
+        clearForm();
+        NotificationService.success("Community Activity deleted successfully");
+      }
+    });
   }
 
   private void onClearSelection() {
@@ -206,5 +223,13 @@ public class CommunalActivityController {
   public void refresh()
   {
     listResidents.getItems().setAll(townManager.getResidents());
+  }
+
+  private void showAlert(String msg) {
+    Alert alert = new Alert(Alert.AlertType.WARNING);
+    alert.setTitle("Input Error");
+    alert.setHeaderText(null);
+    alert.setContentText(msg);
+    alert.showAndWait();
   }
 }

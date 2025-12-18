@@ -22,17 +22,6 @@
     }
   },
   {
-    "ID": "123e4567-e89b-12d3-a456-426614174000",
-    "title": "Plant a Tree",
-    "description": "Plant at least one tree in your garden or local area to help offset carbon emissions.",
-    "points": 40,
-    "eventDate": {
-      "day": 4,
-      "month": 12,
-      "year": 2025
-    }
-  },
-  {
     "ID": "6fa459ea-ee8a-3ca4-894e-db77e160355e",
     "title": "Avoid Single-Use Plastics",
     "description": "Say no to single-use plastic bags, bottles, and straws for one week.",
@@ -88,17 +77,6 @@
     }
   },
   {
-    "ID": "d94f3f01-3b16-4c30-8dfc-6450e0dbb9f1",
-    "title": "Shop Locally",
-    "description": "Buy food and products from local farmers and shops to reduce transportation emissions.",
-    "points": 20,
-    "eventDate": {
-      "day": 6,
-      "month": 12,
-      "year": 2025
-    }
-  },
-  {
     "ID": "0f8fad5b-d9cb-469f-a165-70867728950e",
     "title": "Use Reusable Bags",
     "description": "Use reusable shopping bags for all your purchases this week.",
@@ -116,17 +94,6 @@
     "points": 30,
     "eventDate": {
       "day": 2,
-      "month": 12,
-      "year": 2025
-    }
-  },
-  {
-    "ID": "e4eaaaf2-d142-11e1-b3e4-080027620cdd",
-    "title": "Switch to Eco-Friendly Detergents",
-    "description": "Use biodegradable and eco-friendly cleaning products at home.",
-    "points": 15,
-    "eventDate": {
-      "day": 3,
       "month": 12,
       "year": 2025
     }
