@@ -57,3 +57,64 @@
 .scroll-pane > .viewport {
     -fx-background-color: transparent;
 }
+
+/* =========================
+   TAB PANE CONTAINER
+   ========================= */
+
+.tab-pane {
+    -fx-background-color: transparent;
+}
+
+.tab-pane > .tab-header-area {
+    -fx-padding: 10 10 0 10;
+    -fx-background-color: transparent;
+}
+
+.tab-pane > .tab-header-area > .headers-region {
+    -fx-background-color: transparent;
+}
+
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+
+/* =========================
+   INDIVIDUAL TABS
+   ========================= */
+
+.tab {
+    -fx-background-color: #e9efe6;
+    -fx-background-radius: 12 12 0 0;
+    -fx-padding: 8 18;
+    -fx-border-color: transparent;
+}
+
+.tab:hover {
+    -fx-background-color: #dfe8da;
+}
+
+.tab:selected {
+    -fx-background-color: #d2dcb6;
+    -fx-background-radius: 12 12 0 0;
+    -fx-padding: 11 22;
+    -fx-translate-y: 2;
+    -fx-view-order: -1;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: #2c3e50;
+    -fx-font-weight: bold;
+}
+
+.tab .tab-label {
+    -fx-text-fill: #5f6f64;
+    -fx-font-size: 13px;
+    -fx-font-weight: normal;
+}
+
+.tab-pane:focused .tab:selected {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
