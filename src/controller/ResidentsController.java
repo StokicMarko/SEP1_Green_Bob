@@ -4,7 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import logic.TownManager;
 import model.Resident;
+import utils.InAppToast;
 import utils.InputValidation;
+import utils.NotificationService;
 
 public class ResidentsController {
 
@@ -25,7 +27,6 @@ public class ResidentsController {
   @FXML private Button btnDelete;
   @FXML private Button btnReset;
 
-
   private TownManager townManager;
 
   @FXML
@@ -33,28 +34,11 @@ public class ResidentsController {
     this.townManager = townManager;
 
     setupTable();
+    setupButtonActions();
+    setupSelectionListener();
+
     refreshTable();
-
-    btnSave.setDisable(true);
-    btnDelete.setDisable(true);
-
-    tableResidents.getSelectionModel().selectedItemProperty()
-        .addListener((obs, oldSel, newSel) -> {
-      boolean hasSelection = newSel != null;
-
-      btnSave.setDisable(!hasSelection);
-      btnDelete.setDisable(!hasSelection);
-
-      showResident(newSel);
-    });
-
-    tableResidents.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-    btnSave.setOnAction(e -> onSave());
-    btnNew.setOnAction(e -> onNewResident());
-    btnClear.setOnAction(e -> clearForm());
-    btnReset.setOnAction(e -> onReset());
-    btnDelete.setOnAction(e -> onDelete());
+    clearForm();
   }
 
   private void setupTable() {
@@ -63,9 +47,29 @@ public class ResidentsController {
     colLastname.setCellValueFactory(c ->
         new javafx.beans.property.SimpleStringProperty(c.getValue().getLastname()));
     colPoints.setCellValueFactory(c ->
-        new javafx.beans.property.SimpleIntegerProperty((int)c.getValue().getPersonalPoints()));
+        new javafx.beans.property.SimpleIntegerProperty((int) c.getValue().getPersonalPoints()));
     colAddress.setCellValueFactory(c ->
         new javafx.beans.property.SimpleStringProperty(c.getValue().getAddress()));
+
+    tableResidents.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+  }
+
+  private void setupButtonActions() {
+    btnSave.setOnAction(e -> onSave());
+    btnNew.setOnAction(e -> onNewResident());
+    btnDelete.setOnAction(e -> onDelete());
+    btnClear.setOnAction(e -> onClearSelection());
+    btnReset.setOnAction(e -> onReset());
+  }
+
+  private void setupSelectionListener() {
+    tableResidents.getSelectionModel().selectedItemProperty()
+        .addListener((obs, oldSel, newSel) -> {
+          boolean hasSelection = newSel != null;
+          btnSave.setDisable(!hasSelection);
+          btnDelete.setDisable(!hasSelection);
+          showResident(newSel);
+        });
   }
 
   public void refreshTable() {
@@ -77,12 +81,14 @@ public class ResidentsController {
 
     txtName.setText(resident.getName());
     txtLastname.setText(resident.getLastname());
-    txtPoints.setText("" + (int) resident.getPersonalPoints());
+    txtPoints.setText(String.valueOf((int) resident.getPersonalPoints()));
     txtAddress.setText(resident.getAddress());
   }
 
-  @FXML
   private void onSave() {
+    Resident selected = tableResidents.getSelectionModel().getSelectedItem();
+    if (selected == null) return;
+
     if (!InputValidation.validateResidentInput(
         txtName.getText(),
         txtLastname.getText(),
@@ -91,9 +97,6 @@ public class ResidentsController {
     )) {
       return;
     }
-
-    Resident selected = tableResidents.getSelectionModel().getSelectedItem();
-    if (selected == null) return;
 
     townManager.updateResident(
         selected.getID(),
@@ -107,10 +110,9 @@ public class ResidentsController {
 
     refreshTable();
     clearForm();
+    NotificationService.success("Resident updated successfully");
   }
 
-
-  @FXML
   private void onNewResident() {
     if (!InputValidation.validateResidentInput(
         txtName.getText(),
@@ -130,43 +132,35 @@ public class ResidentsController {
 
     refreshTable();
     clearForm();
+    NotificationService.success("Resident added successfully");
+
   }
 
-  private void clearForm() {
-    txtName.clear();
-    txtLastname.clear();
-    txtPoints.clear();
-    txtAddress.clear();
-    tableResidents.getSelectionModel().clearSelection();
-  }
-
-  private void onDelete()
-  {
-    Resident selectedResident = tableResidents.getSelectionModel().getSelectedItem();
+  private void onDelete() {
+    Resident selected = tableResidents.getSelectionModel().getSelectedItem();
+    if (selected == null) return;
 
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Delete Resident");
-    alert.setHeaderText("Are you sure you want to delete " + selectedResident.getName() + " " + selectedResident.getLastname() + "?");
+    alert.setHeaderText(
+        "Are you sure you want to delete " +
+            selected.getName() + " " + selected.getLastname() + "?"
+    );
 
     alert.showAndWait().ifPresent(response -> {
       if (response == ButtonType.OK) {
-        townManager.removeResidentByID(selectedResident.getID());
+        townManager.removeResidentByID(selected.getID());
         refreshTable();
         clearForm();
+        NotificationService.success("Resident deleted successfully");
+
       }
     });
   }
 
-  @FXML
-  private void onClearSelection() {
-    tableResidents.getSelectionModel().clearSelection();
-    clearForm();
-  }
-
-  private void onReset()
-  {
+  private void onReset() {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-    alert.setTitle("Reset personal points");
+    alert.setTitle("Reset Personal Points");
     alert.setHeaderText("Are you sure you want to reset ALL personal points?");
 
     alert.showAndWait().ifPresent(response -> {
@@ -174,7 +168,26 @@ public class ResidentsController {
         townManager.resetPersonalPoints();
         refreshTable();
         clearForm();
+        NotificationService.success("All personal points have been reset successfully");
+
       }
     });
+  }
+
+  private void clearForm() {
+    txtName.clear();
+    txtLastname.clear();
+    txtPoints.clear();
+    txtAddress.clear();
+
+    tableResidents.getSelectionModel().clearSelection();
+
+    btnSave.setDisable(true);
+    btnDelete.setDisable(true);
+  }
+
+  @FXML
+  private void onClearSelection() {
+    clearForm();
   }
 }

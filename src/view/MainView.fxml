@@ -3,30 +3,41 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.MainViewController"
-            prefWidth="800" prefHeight="600">
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="controller.MainViewController"
+           prefWidth="800" prefHeight="600">
 
-    <center>
-        <TabPane fx:id="mainTabs">
+    <BorderPane>
 
-            <Tab text="Residents" closable="false" fx:id="residentsTab">
-                <fx:include source="ResidentsView.fxml" fx:id="residentsView"/>
-            </Tab>
+        <center>
+            <TabPane fx:id="mainTabs">
 
-            <Tab text="Trade Offers" closable="false" fx:id="tradeOfferTab">
-                <fx:include source="TradeOffersView.fxml" fx:id="tradeOffersView"/>
-            </Tab>
+                <Tab text="Residents" closable="false">
+                    <fx:include source="ResidentsView.fxml" fx:id="residentsView"/>
+                </Tab>
 
-            <Tab text="Green Actions" closable="false" fx:id="greenTab">
-                <fx:include source="GreenActivityView.fxml" fx:id="greenActivityView"/>
-            </Tab>
+                <Tab text="Trade Offers" closable="false">
+                    <fx:include source="TradeOffersView.fxml" fx:id="tradeOffersView"/>
+                </Tab>
 
-            <Tab text="Communal Activities" closable="false" fx:id="communalTab">
-                <fx:include source="CommunalActivityView.fxml" fx:id="communalActivityView"/>
-            </Tab>
+                <Tab text="Green Actions" closable="false">
+                    <fx:include source="GreenActivityView.fxml" fx:id="greenActivityView"/>
+                </Tab>
 
-        </TabPane>
-    </center>
+                <Tab text="Communal Activities" closable="false">
+                    <fx:include source="CommunalActivityView.fxml" fx:id="communalActivityView"/>
+                </Tab>
 
-</BorderPane>
+            </TabPane>
+        </center>
+
+    </BorderPane>
+
+    <VBox fx:id="toastContainer"
+          alignment="TOP_RIGHT"
+          spacing="10"
+          pickOnBounds="false"
+          mouseTransparent="true"
+          style="-fx-padding: 15;" />
+
+</StackPane>

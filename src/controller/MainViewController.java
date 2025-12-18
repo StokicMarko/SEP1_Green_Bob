@@ -3,7 +3,9 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.VBox;
 import logic.TownManager;
+import utils.NotificationService;
 
 public class MainViewController {
 
@@ -16,9 +18,13 @@ public class MainViewController {
   @FXML private Tab communalTab;
   @FXML private Tab residentsTab;
 
+  @FXML private VBox toastContainer;
+
+
   private TownManager townManager;
 
   public void initialize() {
+    NotificationService.init(toastContainer);
     townManager = new TownManager();
 
     residentsViewController.init(townManager);
@@ -34,6 +40,5 @@ public class MainViewController {
         communalActivityViewController.refresh();
       }
     });
-
   }
 }
