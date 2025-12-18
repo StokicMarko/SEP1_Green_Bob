@@ -156,6 +156,8 @@ public class TradeOfferController {
     townManager.updateTradeOffer(selected.getID(), selected);
     refreshTable();
     clearForm();
+
+    NotificationService.success("Trade offer updated successfully");
   }
     catch(IllegalStateException e){
       Alert alert= new Alert(Alert.AlertType.ERROR, e.getMessage());
@@ -181,6 +183,7 @@ public class TradeOfferController {
      comboStatus.setDisable(true);
      refreshTable();
      clearForm();
+     NotificationService.success("Trade offer added successfully");
    } catch(IllegalArgumentException e){
      Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
      alert.show();
@@ -232,6 +235,7 @@ public class TradeOfferController {
         townManager.removeTradeOffer(selectedOffer.getID());
         refreshTable();
         clearForm();
+        NotificationService.success("Trade deleted updated successfully");
       }
     });
   }

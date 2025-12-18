@@ -5,7 +5,7 @@
     "type": "GOOD",
     "description": "I will mmmow your lawn and water plants",
     "pointCost": 50,
-    "status": "COMPLETED",
+    "status": "TAKEN",
     "offerBy": {
       "ID": "09501a08-578e-447c-ab6b-a75b6836b586",
       "name": "Kika",
@@ -313,7 +313,7 @@
       "ID": "d7fd46bb-fe9e-441d-972b-07d41dc8d990",
       "name": "Jonh",
       "lastname": "Jon",
-      "personalPoints": 100,
+      "personalPoints": 90,
       "address": "Fantasyland"
     },
     "createDate": {
