@@ -94,9 +94,21 @@ public class CommunalActivityController {
     datePicker.setValue(activity.getEventDate() != null
         ? LocalDate.of(activity.getEventDate().getYear(), activity.getEventDate().getMonth(), activity.getEventDate().getDay())
         : LocalDate.now());
+
     btnAssignPoints.setDisable(activity.isPointsAssigned());
 
+    listResidents.getSelectionModel().clearSelection();
+
+    for (Resident participant : activity.getParticipants()) {
+      for (int i = 0; i < listResidents.getItems().size(); i++) {
+        Resident residentInList = listResidents.getItems().get(i);
+        if (residentInList.getID().equals(participant.getID())) {
+          listResidents.getSelectionModel().select(i);
+        }
+      }
+    }
   }
+
 
   private void onSave() {
     if (selectedActivity == null || !validateFields()) return;
@@ -192,6 +204,7 @@ public class CommunalActivityController {
     btnDelete.setDisable(true);
     btnAssignPoints.setDisable(true);
     selectedActivity = null;
+    listResidents.getSelectionModel().clearSelection();
   }
 
   private void setupTable() {
