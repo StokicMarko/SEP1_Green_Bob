@@ -49,7 +49,7 @@
 
     <!-- RIGHT EDIT PANEL -->
     <right>
-        <VBox fillWidth="false" spacing="10.0" styleClass="editBox">
+        <VBox prefWidth="260" spacing="10.0" styleClass="editBox">
             <padding>
                 <Insets top="15" bottom="15" left="15" right="15"/>
             </padding>

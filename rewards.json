@@ -1,0 +1,70 @@
+[
+  {
+    "ID": "17fddae8-ce90-451e-8bbe-d6fed5f62f94",
+    "title": "Test",
+    "description": "",
+    "threshold": 100,
+    "createdAt": {
+      "day": 18,
+      "month": 12,
+      "year": 2025
+    },
+    "awardedAt": {
+      "day": 18,
+      "month": 12,
+      "year": 2025
+    },
+    "status": "AWARDED"
+  },
+  {
+    "ID": "da9b633a-07e1-4bc3-80a2-d6e10f52495e",
+    "title": "Pizza party",
+    "description": "",
+    "threshold": 400,
+    "createdAt": {
+      "day": 19,
+      "month": 12,
+      "year": 2025
+    },
+    "awardedAt": {
+      "day": 19,
+      "month": 12,
+      "year": 2025
+    },
+    "status": "AWARDED"
+  },
+  {
+    "ID": "75680287-d75c-421b-a50a-4d0f94de409a",
+    "title": "Pool party",
+    "description": "",
+    "threshold": 400,
+    "createdAt": {
+      "day": 19,
+      "month": 12,
+      "year": 2025
+    },
+    "awardedAt": {
+      "day": 19,
+      "month": 12,
+      "year": 2025
+    },
+    "status": "AWARDED"
+  },
+  {
+    "ID": "e51d02ee-59c9-4d81-9179-49770e24fcc3",
+    "title": "Party",
+    "description": "",
+    "threshold": 360,
+    "createdAt": {
+      "day": 19,
+      "month": 12,
+      "year": 2025
+    },
+    "awardedAt": {
+      "day": 19,
+      "month": 12,
+      "year": 2025
+    },
+    "status": "AWARDED"
+  }
+]

@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import logic.TownManager;
 import model.Date;
 import model.GreenActivity;
+import model.Reward;
 import utils.InputValidation;
 import utils.NotificationService;
 
@@ -25,6 +26,7 @@ public class GreenActivityController
   @FXML private DatePicker datePicker;
 
   @FXML private Label lblTotalPoints;
+  @FXML private Label lblRewardBanner;
 
   @FXML private Button btnSave;
   @FXML private Button btnNew;

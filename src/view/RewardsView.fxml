@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane fx:id="rewardsView" prefHeight="500.0" prefWidth="800.0"
+            xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.RewardsController"
+            stylesheets="@css/rewards.css"
+>
+    <top>
+        <HBox styleClass="top-bar" spacing="10" alignment="CENTER_LEFT">
+            <BorderPane.margin>
+                <Insets bottom="15"/>
+            </BorderPane.margin>
+
+            <Label text="Rewards" styleClass="top-bar-title"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button text="Delete" fx:id="btnDelete"/>
+            <Button text="Clear" fx:id="btnClear"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox styleClass="table-container" spacing="0">
+            <BorderPane.margin>
+                <Insets right="15"/>
+            </BorderPane.margin>
+
+            <TableView fx:id="tableRewards" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colTitle" text="Title"/>
+                    <TableColumn fx:id="colThreshold" text="Threshold"/>
+                    <TableColumn fx:id="colStatus" text="Status"/>
+                    <TableColumn fx:id="colAwardedAt" text="Awarded At"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <right>
+        <VBox spacing="15" styleClass="editBox" prefWidth="260">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+
+            <Label text="Reward Editor"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+        <VBox spacing="5">
+            <Label text="Title"/>
+            <TextField fx:id="txtTitle"/>
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="Description"/>
+            <TextField fx:id="txtDescription"/>
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="Threshold"/>
+            <TextField fx:id="txtThreshold"/>
+        </VBox>
+
+            <HBox spacing="10">
+                <Button fx:id="btnSave" text="Save" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnNew" text="New" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+            </HBox>
+        </VBox>
+    </right>
+</BorderPane>

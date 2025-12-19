@@ -28,6 +28,10 @@
                     <fx:include source="CommunalActivityView.fxml" fx:id="communalActivityView"/>
                 </Tab>
 
+                <Tab text="Rewards" closable="false" fx:id="rewardsTab">
+                    <fx:include source="RewardsView.fxml" fx:id="rewardsView"/>
+                </Tab>
+
             </TabPane>
         </center>
 

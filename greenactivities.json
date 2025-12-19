@@ -66,17 +66,6 @@
     }
   },
   {
-    "ID": "9b2e5b3d-7c4b-4b96-9d88-38b55b4d29f2",
-    "title": "Donate Old Clothes",
-    "description": "Give away clothes you no longer use instead of throwing them away.",
-    "points": 150,
-    "eventDate": {
-      "day": 5,
-      "month": 12,
-      "year": 2025
-    }
-  },
-  {
     "ID": "0f8fad5b-d9cb-469f-a165-70867728950e",
     "title": "Use Reusable Bags",
     "description": "Use reusable shopping bags for all your purchases this week.",
@@ -127,6 +116,39 @@
     "points": 10,
     "eventDate": {
       "day": 6,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "ID": "c65a6a80-eb2d-41a0-80c8-b97e384cb3f2",
+    "title": "Avoid Single-Use Plastics",
+    "description": "Say no to single-use plastic bags, bottles, and straws for one week.",
+    "points": 25,
+    "eventDate": {
+      "day": 6,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "ID": "84524322-1b5d-42be-a70f-825da80db791",
+    "title": "teat",
+    "description": "",
+    "points": 100,
+    "eventDate": {
+      "day": 19,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "ID": "4e6198dc-929b-498a-a094-ea1b2046af37",
+    "title": "Use Reusable Bags",
+    "description": "Use reusable shopping bags for all your purchases this week.",
+    "points": 10,
+    "eventDate": {
+      "day": 1,
       "month": 12,
       "year": 2025
     }

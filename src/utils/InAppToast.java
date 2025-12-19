@@ -4,31 +4,28 @@ import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
 import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 public final class InAppToast {
 
   private InAppToast() {}
 
-  public static void show(VBox toastContainer, String message) {
+  public static void showSuccess(VBox container, String message) {
+    show(container, message, "toast-success");
+  }
+
+  public static void showWarning(VBox container, String message) {
+    show(container, message, "toast-warning");
+  }
+
+  public static void showInfo(VBox container, String message) {
+    show(container, message, "toast-info");
+  }
+
+  private static void show(VBox toastContainer, String message, String styleClass) {
     Label toast = new Label(message);
-
-    toast.setStyle(
-        "-fx-background-color: #8aa883;" +
-            "-fx-background-radius: 12;" +
-            "-fx-padding: 10 20;" +
-            "-fx-font-size: 13px;" +
-            "-fx-font-weight: bold;" +
-            "-fx-text-fill: white;"
-    );
-
-    DropShadow ds = new DropShadow();
-    ds.setColor(Color.rgb(0, 0, 0, 0.25));
-    ds.setRadius(8);
-    toast.setEffect(ds);
+    toast.getStyleClass().addAll("toast", styleClass);
 
     toast.setOpacity(0);
     toastContainer.getChildren().add(toast);

@@ -1,0 +1,20 @@
+.toast {
+  -fx-background-radius: 12;
+  -fx-padding: 10 20;
+  -fx-font-size: 13px;
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 8, 0, 0, 2);
+}
+
+.toast-success {
+  -fx-background-color: #8aa883;
+}
+
+.toast-warning {
+  -fx-background-color: #f0ad4e;
+}
+
+.toast-info {
+  -fx-background-color: #5bc0de;
+}

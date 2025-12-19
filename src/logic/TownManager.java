@@ -1,8 +1,11 @@
 package logic;
 
 import model.*;
+import myEnum.RewardStatus;
 import parser.ParserException;
 import utils.JsonFileHandler;
+import utils.NotificationService;
+import java.time.LocalDate;
 
 import java.util.ArrayList;
 
@@ -14,16 +17,21 @@ public class TownManager
   private TradeOfferList tradeOfferList = new TradeOfferList();
   private ActivityList greenActivityList = new ActivityList();
   private ActivityList communalActivityList = new ActivityList();
+  private RewardList rewardList = new RewardList();
 
   private final String RESIDENTS_JSON = "residents.json";
   private final String TRADE_OFFER_JSON = "tradeoffers.json";
   private final String GREEN_ACTIVITIES_JSON = "greenactivities.json";
   private final String COMMUNAL_ACTIVITIES_JSON = "communalactivities.json";
+  private final String REWARDS_JSON = "rewards.json";
 
   public TownManager()
   {
     loadResidents();
     loadTradeOffers();
+    loadGreenActivities();
+    loadCommunalActivities();
+    loadRewards();
   }
 
   public void loadResidents()
@@ -130,19 +138,20 @@ public class TownManager
 
   public void loadGreenActivities()
   {
-  try
-  {
-    ArrayList<GreenActivity> loaded = JsonFileHandler.readGreenActivitiesFromJson(GREEN_ACTIVITIES_JSON);
-    for(GreenActivity g:loaded)
+    try
     {
-      greenActivityList.add(g);
+      ArrayList<GreenActivity> loaded =
+          JsonFileHandler.readGreenActivitiesFromJson(GREEN_ACTIVITIES_JSON);
+
+      greenActivityList.getAll().clear();
+      greenActivityList.getAll().addAll(loaded);
+    }
+    catch (ParserException e)
+    {
+      greenActivityList.getAll().clear();
     }
   }
-  catch (ParserException e)
-  {
-    System.out.println("Unable to read from json file");
-  }
-}
+
 
   private void saveGreenActivityToFile()
   {
@@ -171,18 +180,21 @@ public class TownManager
   {
     greenActivityList.add(a);
     saveGreenActivityToFile();
+    checkAndAutoAwardRewards();
   }
 
   public void updateGreenActivity(String id, GreenActivity newData)
   {
       greenActivityList.updateByID(id, newData);
       saveGreenActivityToFile();
+      checkAndAutoAwardRewards();
   }
 
   public void removeGreenActivity(String id)
   {
     greenActivityList.removeById(id);
     saveGreenActivityToFile();
+    checkAndAutoAwardRewards();
   }
 
   public ArrayList<CommunalActivity> getCommunalActivities()
@@ -232,6 +244,57 @@ public class TownManager
     catch(Exception e)
     {
       e.printStackTrace();
+    }
+  }
+
+  public void loadRewards() {
+    try {
+      ArrayList<Reward> loaded = JsonFileHandler.readRewardsFromJson(REWARDS_JSON);
+      rewardList.getAll().clear();
+      rewardList.getAll().addAll(loaded);
+    } catch (Exception e) {
+      rewardList.getAll().clear();
+    }
+  }
+
+  private void saveRewardsToFile() {
+    try {
+      JsonFileHandler.saveRewardsToJson(REWARDS_JSON, rewardList.getAll());
+    } catch (ParserException e) {
+      System.out.println("Could not save rewards to given file");
+    }
+  }
+
+  public ArrayList<Reward> getRewards() {
+    return rewardList.getAll();
+  }
+
+  public void addReward(Reward r) {
+    rewardList.add(r);
+    saveRewardsToFile();
+  }
+
+  public void updateReward(String id, Reward newData) {
+    rewardList.updateByID(id, newData);
+    saveRewardsToFile();
+  }
+
+  public void removeReward(String id) {
+    rewardList.removeByID(id);
+    saveRewardsToFile();
+  }
+
+  public void checkAndAutoAwardRewards() {
+    int total = getTotalGreenPoints();
+    for (Reward reward : rewardList.getAll()) {
+      if (reward.getStatus() == RewardStatus.PENDING && total >= reward.getThreshold()) {
+        reward.setStatus(RewardStatus.AWARDED);
+        reward.setAwardedAt(new Date(LocalDate.now()));
+        saveRewardsToFile();
+        NotificationService.warning(
+            "Congratulations! You unlocked the reward: " + reward.getTitle()
+        );
+      }
     }
   }
 

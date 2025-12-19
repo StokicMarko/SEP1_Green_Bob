@@ -62,4 +62,14 @@ public class JsonFileHandler
     parser.toJsonFile(activities, filename);
   }
 
+  // Rewards persistence
+  public static ArrayList<model.Reward> readRewardsFromJson(String filename) throws ParserException {
+    model.Reward[] array = parser.fromJsonFile(filename, model.Reward[].class);
+    return new ArrayList<>(Arrays.asList(array));
+  }
+
+  public static void saveRewardsToJson(String filename, ArrayList<model.Reward> rewards) throws ParserException {
+    parser.toJsonFile(rewards, filename);
+  }
+
 }

@@ -11,6 +11,14 @@ public final class NotificationService {
   }
 
   public static void success(String msg) {
-    InAppToast.show(toastContainer, msg);
+    InAppToast.showSuccess(toastContainer, msg);
+  }
+
+  public static void warning(String msg) {
+    InAppToast.showWarning(toastContainer, msg);
+  }
+
+  public static void info(String msg) {
+    InAppToast.showInfo(toastContainer, msg);
   }
 }

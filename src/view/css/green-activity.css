@@ -17,3 +17,14 @@
     -fx-min-height: 28;
     -fx-alignment: center;
 }
+
+.reward-banner {
+    -fx-background-color: #fffbdd;
+    -fx-background-radius: 6;
+    -fx-padding: 6 10;
+    -fx-font-weight: bold;
+    -fx-text-fill: #b58900;
+    -fx-border-color: #ffe58f;
+    -fx-border-radius: 6;
+}
+

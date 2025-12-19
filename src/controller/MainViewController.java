@@ -13,10 +13,12 @@ public class MainViewController {
   @FXML private TradeOfferController tradeOffersViewController;
   @FXML private GreenActivityController greenActivityViewController;
   @FXML private CommunalActivityController communalActivityViewController;
+  @FXML private RewardsController rewardsViewController;
 
   @FXML private TabPane mainTabs;
   @FXML private Tab communalTab;
   @FXML private Tab residentsTab;
+  @FXML private Tab rewardsTab;
 
   @FXML private VBox toastContainer;
 
@@ -31,13 +33,19 @@ public class MainViewController {
     tradeOffersViewController.init(townManager);
     greenActivityViewController.init(townManager);
     communalActivityViewController.init(townManager);
+    rewardsViewController.init(townManager);
 
     mainTabs.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
       if (newTab == residentsTab) {
         residentsViewController.refreshTable();
       }
-      else if (newTab == communalTab) {
+      else if (newTab == communalTab)
+      {
         communalActivityViewController.refresh();
+      }
+      else if (newTab == rewardsTab)
+      {
+        rewardsViewController.refreshTable();
       }
     });
   }
