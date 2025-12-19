@@ -20,6 +20,11 @@
 
             <Region HBox.hgrow="ALWAYS"/>
 
+            <Label fx:id="lblTotalPoints"
+                   text="Total Points: 0"
+                   alignment="CENTER"
+                   styleClass="points-pill"/>
+
             <Button text="Delete" fx:id="btnDelete"/>
             <Button text="Clear" fx:id="btnClear"/>
         </HBox>

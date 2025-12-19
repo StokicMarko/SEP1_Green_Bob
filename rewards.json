@@ -66,5 +66,39 @@
       "year": 2025
     },
     "status": "AWARDED"
+  },
+  {
+    "ID": "f80f8c9e-510b-4346-941b-4668e2e2cf8d",
+    "title": "Party",
+    "description": "",
+    "threshold": 360,
+    "createdAt": {
+      "day": 19,
+      "month": 12,
+      "year": 2025
+    },
+    "awardedAt": {
+      "day": 19,
+      "month": 12,
+      "year": 2025
+    },
+    "status": "AWARDED"
+  },
+  {
+    "ID": "04a49a28-0adc-43a0-9990-d4a257203b7f",
+    "title": "Party",
+    "description": "",
+    "threshold": 450,
+    "createdAt": {
+      "day": 19,
+      "month": 12,
+      "year": 2025
+    },
+    "awardedAt": {
+      "day": 19,
+      "month": 12,
+      "year": 2025
+    },
+    "status": "AWARDED"
   }
 ]

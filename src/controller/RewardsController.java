@@ -22,6 +22,8 @@ public class RewardsController {
   @FXML private TextField txtDescription;
   @FXML private TextField txtThreshold;
 
+  @FXML private Label lblTotalPoints;
+
   @FXML private Button btnSave;
   @FXML private Button btnNew;
   @FXML private Button btnDelete;
@@ -53,6 +55,7 @@ public class RewardsController {
 
   public void refreshTable() {
     tableRewards.getItems().setAll(townManager.getRewards());
+    updateTotalPoints();
   }
 
   private void showReward(Reward r) {
@@ -121,5 +124,11 @@ public class RewardsController {
 
     btnSave.setDisable(true);
     btnDelete.setDisable(true);
+  }
+
+  private void updateTotalPoints() {
+    lblTotalPoints.setText(
+        "Total Points: " + townManager.getTotalGreenPoints()
+    );
   }
 }

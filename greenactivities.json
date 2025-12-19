@@ -33,17 +33,6 @@
     }
   },
   {
-    "ID": "16fd2706-8baf-433b-82eb-8c7fada847da",
-    "title": "Bike to Work or School",
-    "description": "Use a bicycle instead of motorized transport for commuting this week.",
-    "points": 35,
-    "eventDate": {
-      "day": 1,
-      "month": 12,
-      "year": 2025
-    }
-  },
-  {
     "ID": "123e4567-e89b-12d3-a456-426614174001",
     "title": "Reduce Water Usage",
     "description": "Limit your shower time to 5 minutes and turn off taps when not needed.",
@@ -149,6 +138,17 @@
     "points": 10,
     "eventDate": {
       "day": 1,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "ID": "93641c1b-5f5a-4596-a033-baa58bda8c23",
+    "title": "Avoid Single-Use Plastics",
+    "description": "Say no to single-use plastic bags, bottles, and straws for one week.",
+    "points": 25,
+    "eventDate": {
+      "day": 6,
       "month": 12,
       "year": 2025
     }
